@@ -44,8 +44,8 @@ public class Recipe {
         return listOfIngredients;
     }
 
-    public void setListOfBooks(List<String> listOfBooks) {
-        this.listOfIngredients = listOfBooks;
+    public void setListOfBooks(List<String> listOfIngredients) {
+        this.listOfIngredients = listOfIngredients;
     }
 
     public double getTime() {
