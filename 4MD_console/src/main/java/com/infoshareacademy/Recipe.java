@@ -10,7 +10,10 @@ public class Recipe {
     private String difficulty;
     private int kcal;
     private int cost;
-
+    public Recipe(String name,int kcal){
+        setName(name);
+        setKcal(kcal);
+    }
     public int getId() {
         return id;
     }
