@@ -11,7 +11,7 @@ public class RecipePicker {
         this.recipes = recipes;
     }
     public Recipe activate() {
-        int nameMaxLenght = getLongestRecipeNameLenght();
+        int nameMaxLenght = getLongestLenght(this.recipes.stream().map(Recipe::getName).toArray());
         for (Recipe recipe:recipes) {
             System.out.println(describeRecipe(recipe,nameMaxLenght));
         }
@@ -33,10 +33,9 @@ public class RecipePicker {
         System.out.print(prompt);
         return scanner.nextLine();
     }
-    private int getLongestRecipeNameLenght(){
-        Object[] recipeNames = this.recipes.stream().map(Recipe::getName).toArray();
+    private int getLongestLenght(Object[] strings){
         int recipeNameMaxLenght = 0;
-        for (Object x : recipeNames) {
+        for (Object x : strings) {
             String xStr = (String)x;
             recipeNameMaxLenght = Math.max(recipeNameMaxLenght, xStr.length());
         }
