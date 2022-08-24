@@ -1,19 +1,29 @@
 package com.infoshareacademy;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Recipe {
     private int id;
     private String name;
-    private List<String> ListOfIngrediens;
-    private int time;
-    private String difficulty;
+    private List<String> listOfIngredients =new ArrayList<String>();
+    private double time;
+    private int difficulty;
     private int kcal;
-    private int cost;
-    public Recipe(String name,int kcal){
-        setName(name);
-        setKcal(kcal);
+    private double cost;
+    private String typeOfFood;
+
+    public Recipe(int id, String name, List<String> listOfIngredients, double time, int difficulty, int kcal, double cost, String typeOfFood) {
+        this.id = id;
+        this.name = name;
+        this.listOfIngredients = listOfIngredients;
+        this.time = time;
+        this.difficulty = difficulty;
+        this.kcal = kcal;
+        this.cost = cost;
+        this.typeOfFood = typeOfFood;
     }
+
     public int getId() {
         return id;
     }
@@ -30,27 +40,27 @@ public class Recipe {
         this.name = name;
     }
 
-    public List<String> getListOfIngrediens() {
-        return ListOfIngrediens;
+    public List<String> getListOfBooks() {
+        return listOfIngredients;
     }
 
-    public void setListOfIngrediens(List<String> listOfIngrediens) {
-        ListOfIngrediens = listOfIngrediens;
+    public void setListOfBooks(List<String> listOfIngredients) {
+        this.listOfIngredients = listOfIngredients;
     }
 
-    public int getTime() {
+    public double getTime() {
         return time;
     }
 
-    public void setTime(int time) {
+    public void setTime(double time) {
         this.time = time;
     }
 
-    public String getDifficulty() {
+    public int getDifficulty() {
         return difficulty;
     }
 
-    public void setDifficulty(String difficulty) {
+    public void setDifficulty(int difficulty) {
         this.difficulty = difficulty;
     }
 
@@ -62,11 +72,19 @@ public class Recipe {
         this.kcal = kcal;
     }
 
-    public int getCost() {
+    public double getCost() {
         return cost;
     }
 
-    public void setCost(int cost) {
+    public void setCost(double cost) {
         this.cost = cost;
+    }
+
+    public String getTypeOfFood() {
+        return typeOfFood;
+    }
+
+    public void setTypeOfFood(String typeOfFood) {
+        this.typeOfFood = typeOfFood;
     }
 }
