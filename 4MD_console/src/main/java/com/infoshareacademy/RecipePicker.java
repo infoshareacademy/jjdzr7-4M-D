@@ -12,8 +12,10 @@ public class RecipePicker {
     }
     public Recipe activate() {
         int nameMaxLenght = getLongestLenght(this.recipes.stream().map(Recipe::getName).toArray());
+        int foodTypeMaxLenght = getLongestLenght(this.recipes.stream().map(Recipe::getTypeOfFood).toArray());
+
         for (Recipe recipe:recipes) {
-            System.out.println(describeRecipe(recipe,nameMaxLenght));
+            System.out.println(describeRecipe(recipe,nameMaxLenght,foodTypeMaxLenght));
         }
         while(true){
             String input = getString("Enter recipe name: ");
@@ -21,8 +23,10 @@ public class RecipePicker {
             if(matches.length == 1) return (Recipe) matches[0];
         }
     }
-    private String describeRecipe(Recipe recipe,int nameMaxLenght){
-        return String.format("%s kcal:%d",spaceOutString(recipe.getName(),nameMaxLenght),recipe.getKcal());
+    private String describeRecipe(Recipe recipe, int nameMaxLenght, int foodTypeMaxLenght){
+        String fName = spaceOutString(recipe.getName(),nameMaxLenght);
+        String fType = spaceOutString(recipe.getTypeOfFood(),foodTypeMaxLenght);
+        return String.format("%s type:%s kcal:%d",fName,fType,recipe.getKcal());
     }
     private String spaceOutString(String text,int exceptedLenght){
         int spacesRequired = exceptedLenght-text.length();
