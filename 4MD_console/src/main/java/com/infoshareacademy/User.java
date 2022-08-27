@@ -5,14 +5,22 @@ import java.util.List;
 public class User {
     private String firstName;
     private String secondName;
-    private List<Recipe> listOfRecipes;
-    private List<Score> listOfScore;
+    private List<Recipe> userRecipes;
+    private List<Score> userScores;
 
-    public User(String firstName, String secondName, List<Recipe> listOfRecipes, List<Score> listOfScore) {
+    public User(String firstName, String secondName, List<Recipe> userRecipes, List<Score> userScores) {
         this.firstName = firstName;
         this.secondName = secondName;
-        this.listOfRecipes = listOfRecipes;
-        this.listOfScore = listOfScore;
+        this.userRecipes = userRecipes;
+        this.userScores = userScores;
+    }
+
+    public void addRecipeToUserRecipes(Recipe recipe) {
+        userRecipes.add(recipe);
+    }
+
+    public void deleteRecipeFromUserRecipes(Recipe recipe) {
+        userRecipes.remove(recipe);
     }
 
     public String getFirstName() {
@@ -31,19 +39,19 @@ public class User {
         this.secondName = secondName;
     }
 
-    public List<Recipe> getListOfRecipes() {
-        return listOfRecipes;
+    public List<Recipe> getUserRecipes() {
+        return userRecipes;
     }
 
-    public void setListOfRecipes(List<Recipe> listOfRecipes) {
-        this.listOfRecipes = listOfRecipes;
+    public void setUserRecipes(List<Recipe> userRecipes) {
+        this.userRecipes = userRecipes;
     }
 
-    public List<Score> getListOfScore() {
-        return listOfScore;
+    public List<Score> getUserScores() {
+        return userScores;
     }
 
-    public void setListOfScore(List<Score> listOfScore) {
-        this.listOfScore = listOfScore;
+    public void setUserScores(List<Score> userScores) {
+        this.userScores = userScores;
     }
 }
