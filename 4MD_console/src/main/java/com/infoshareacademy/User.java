@@ -5,10 +5,10 @@ import java.util.List;
 public class User {
     private String firstName;
     private String secondName;
-    private List<String> listOfRecipes;
-    private List<String> listOfScore;
+    private List<Recipe> listOfRecipes;
+    private List<Score> listOfScore;
 
-    public User(String firstName, String secondName, List<String> listOfRecipes, List<String> listOfScore) {
+    public User(String firstName, String secondName, List<Recipe> listOfRecipes, List<Score> listOfScore) {
         this.firstName = firstName;
         this.secondName = secondName;
         this.listOfRecipes = listOfRecipes;
@@ -31,19 +31,19 @@ public class User {
         this.secondName = secondName;
     }
 
-    public List<String> getListOfRecipes() {
+    public List<Recipe> getListOfRecipes() {
         return listOfRecipes;
     }
 
-    public void setListOfRecipes(List<String> listOfRecipes) {
+    public void setListOfRecipes(List<Recipe> listOfRecipes) {
         this.listOfRecipes = listOfRecipes;
     }
 
-    public List<String> getListOfScore() {
+    public List<Score> getListOfScore() {
         return listOfScore;
     }
 
-    public void setListOfScore(List<String> listOfScore) {
+    public void setListOfScore(List<Score> listOfScore) {
         this.listOfScore = listOfScore;
     }
 }

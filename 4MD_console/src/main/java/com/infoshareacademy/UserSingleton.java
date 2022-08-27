@@ -6,19 +6,19 @@ public class UserSingleton {
 
     private String firstName;
     private String secondName;
-    private List<String> listOfRecipes;
+    private List<Recipe> listOfRecipes;
 
-    private List<String> listOfScore;
+    private List<Score> listOfScore;
     private static volatile UserSingleton instance;
 
-    public UserSingleton(String firstName, String secondName, List<String> listOfRecipes, List<String> listOfScores) {
+    public UserSingleton(String firstName, String secondName, List<Recipe> listOfRecipes, List<Score> listOfScores) {
         this.firstName = firstName;
         this.secondName = secondName;
         this.listOfRecipes = listOfRecipes;
         this.listOfScore = listOfScores;
     }
 
-    public static UserSingleton getInstance(String firstName, String secondName, List<String> listOfRecipes, List<String> listOfScores) {
+    public static UserSingleton getInstance(String firstName, String secondName, List<Recipe> listOfRecipes, List<Score> listOfScores) {
         UserSingleton result = instance;
         if (result == null) {
             synchronized (UserSingleton.class) {
@@ -39,11 +39,11 @@ public class UserSingleton {
         return secondName;
     }
 
-    public List<String> getListOfRecipes() {
+    public List<Recipe> getListOfRecipes() {
         return listOfRecipes;
     }
 
-    public List<String> getListOfScore() {
+    public List<Score> getListOfScore() {
         return listOfScore;
     }
 
@@ -55,11 +55,11 @@ public class UserSingleton {
         this.secondName = secondName;
     }
 
-    public void setListOfRecipes(List<String> listOfRecipes) {
+    public void setListOfRecipes(List<Recipe> listOfRecipes) {
         this.listOfRecipes = listOfRecipes;
     }
 
-    public void setListOfScore(List<String> listOfScore) {
+    public void setListOfScore(List<Score> listOfScore) {
         this.listOfScore = listOfScore;
     }
 }
