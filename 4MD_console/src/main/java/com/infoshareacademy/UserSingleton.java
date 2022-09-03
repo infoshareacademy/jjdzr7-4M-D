@@ -7,11 +7,10 @@ public class UserSingleton {
     private String firstName;
     private String secondName;
     private List<Recipe> userRecipes;
-
     private List<Score> userScores;
-    private static volatile UserSingleton instance;
+    private static UserSingleton instance;
 
-    public UserSingleton(String firstName, String secondName, List<Recipe> listOfRecipes, List<Score> listOfScores) {
+    private UserSingleton(String firstName, String secondName, List<Recipe> listOfRecipes, List<Score> listOfScores) {
         this.firstName = firstName;
         this.secondName = secondName;
         this.userRecipes = listOfRecipes;
@@ -19,16 +18,10 @@ public class UserSingleton {
     }
 
     public static UserSingleton getInstance(String firstName, String secondName, List<Recipe> listOfRecipes, List<Score> listOfScores) {
-        UserSingleton result = instance;
-        if (result == null) {
-            synchronized (UserSingleton.class) {
-                result = instance;
-                if (result == null) {
-                    instance = result = new UserSingleton(firstName, secondName, listOfRecipes, listOfScores);
-                }
-            }
+        if (instance == null) {
+            instance = new UserSingleton(firstName, secondName, listOfRecipes, listOfScores);
         }
-        return result;
+        return instance;
     }
 
     public String getFirstName() {

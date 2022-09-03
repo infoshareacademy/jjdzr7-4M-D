@@ -9,18 +9,12 @@ public class UserRecipeManager {
         this.userRecipes = userRecipes;
     }
 
-    public void loadUserRecipes(List<Recipe> userRecipes){
-        for (Recipe r:userRecipes) {
-            userRecipes.add(r);
-        }
-    }
-
     public void addRecipeToUserRecipes(Recipe recipe) {
-        userRecipes.add(recipe);
+        this.userRecipes.add(recipe);
     }
 
     public void deleteRecipeFromUserRecipes(Recipe recipe) {
-        userRecipes.remove(recipe);
+        this.userRecipes.remove(recipe);
     }
 
     public List<Recipe> getUserRecipes() {
