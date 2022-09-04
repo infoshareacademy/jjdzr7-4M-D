@@ -9,9 +9,7 @@ public class Main {
         System.out.println("Hello World!");
         List<Recipe> list = new ArrayList<>();
         List<Score> list2 = new ArrayList<>();
-        Recipe recipe = new Recipe();
-        Recipe recipe2 = new Recipe();
-        Recipe recipe3 = new Recipe();
+        
 
         UserSingleton userSingleton = UserSingleton.getInstance("Robert", "Maklowicz", list, list2);
         UserSingleton userSingleton1 = UserSingleton.getInstance("Mietek", "Maklowicz", list, list2);
