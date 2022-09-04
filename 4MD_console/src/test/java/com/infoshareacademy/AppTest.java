@@ -10,5 +10,6 @@ class AppTest {
     void shouldAnswerWithTrue()
     {
         assertTrue( true );
+        System.out.println("test");
     }
 }
