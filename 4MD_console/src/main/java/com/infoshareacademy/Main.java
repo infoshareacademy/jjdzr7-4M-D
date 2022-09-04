@@ -7,8 +7,7 @@ public class Main {
     public static void main(String[] args) {
 
         System.out.println("Hello World!");
-        List<Recipe> list = new ArrayList<>();
-        List<Score> list2 = new ArrayList<>();
+
         
 
         UserSingleton userSingleton = UserSingleton.getInstance("Robert", "Maklowicz", list, list2);
