@@ -6,6 +6,8 @@ import java.util.Scanner;
 public class RecipePicker {
     private final List<Recipe> recipes;
 
+    Scanner input = new Scanner(System.in);
+
     public RecipePicker(List<Recipe> recipes){
 
         this.recipes = recipes;
@@ -33,9 +35,9 @@ public class RecipePicker {
         return text + " ".repeat(spacesRequired);
     }
     private String getString(String prompt){
-        Scanner scanner = new Scanner(System.in);
+
         System.out.print(prompt);
-        return scanner.nextLine();
+        return input.nextLine();
     }
     private int getLongestLenght(Object[] strings){
         int recipeNameMaxLenght = 0;
@@ -44,5 +46,8 @@ public class RecipePicker {
             recipeNameMaxLenght = Math.max(recipeNameMaxLenght, xStr.length());
         }
         return recipeNameMaxLenght;
+    }
+    public void setInput(Scanner input) {
+        this.input = input;
     }
 }
