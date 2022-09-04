@@ -40,11 +40,11 @@ public class Recipe {
         this.name = name;
     }
 
-    public List<String> getListOfBooks() {
+    public List<String> getListOfIngredients() {
         return listOfIngredients;
     }
 
-    public void setListOfBooks(List<String> listOfIngredients) {
+    public void setListOfIngredients(List<String> listOfIngredients) {
         this.listOfIngredients = listOfIngredients;
     }
 
