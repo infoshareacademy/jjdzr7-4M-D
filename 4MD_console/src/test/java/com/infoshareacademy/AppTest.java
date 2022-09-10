@@ -1,5 +1,6 @@
 package com.infoshareacademy;
 
+import com.infoshareacademy.recipeUiTools.RecipePicker;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
