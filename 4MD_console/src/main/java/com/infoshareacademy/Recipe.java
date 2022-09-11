@@ -43,7 +43,7 @@ public class Recipe {
         return listOfIngredients;
     }
 
-    public void setListOfIngredients(ArrayList<String> listOfIngredients) {
+    public void setListOfIngredients(List<String> listOfIngredients) {
         this.listOfIngredients = listOfIngredients;
     }
 
