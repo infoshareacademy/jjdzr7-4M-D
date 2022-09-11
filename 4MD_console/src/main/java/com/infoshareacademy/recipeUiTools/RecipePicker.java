@@ -9,32 +9,35 @@ public class RecipePicker {
     private final List<Recipe> recipes;
     Scanner input = new Scanner(System.in);
 
-    public RecipePicker(List<Recipe> recipes){
+    public RecipePicker(List<Recipe> recipes) {
 
         this.recipes = recipes;
     }
-    public Recipe activate() {
-        TableBuilder builder = new TableBuilder(3);
 
-        for (Recipe recipe:recipes) {
+    public Recipe activate() {
+        TableBuilder builder = new TableBuilder(5);
+
+        for (Recipe recipe : recipes) {
             builder.AddRow(new String[]{
                     recipe.getName(),
-                    "type:"+recipe.getTypeOfFood(),
-                    "kcal:"+recipe.getKcal()
+                    "Rodzaj:", recipe.getTypeOfFood(),
+                    "Kcal:", String.valueOf(recipe.getKcal())
             });
         }
-        builder.printTable();
-        while(true){
-            String input = getString("Enter recipe name: ");
+        System.out.print(builder.build());
+        while (true) {
+            String input = getRecipeNameFromScanner();
             Object[] matches = recipes.stream().filter(recipe -> recipe.getName().equals(input)).toArray();
-            if(matches.length == 1) return (Recipe) matches[0];
+            if (matches.length == 1) return (Recipe) matches[0];
         }
     }
-    private String getString(String prompt){
 
-        System.out.print(prompt);
+    private String getRecipeNameFromScanner() {
+
+        System.out.print("Wpisz nazwę receptury: ");
         return input.nextLine();
     }
+
     public void setInput(Scanner input) {
         this.input = input;
     }
