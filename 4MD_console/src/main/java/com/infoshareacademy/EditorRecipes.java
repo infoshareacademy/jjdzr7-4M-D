@@ -37,18 +37,11 @@ public class EditorRecipes {
     }
 
     public void menu() {
-        System.out.print("Wybierz co edytować:\n1. Nazwę\n2. Ocenę\n" +
-                "3. Anuluj\nTwój wybór to: ");
-    }
-
-    public void newName() {
-        System.out.println("Podaj nową nazwę przepisu:");
-    }
-
-    public String addNewName() {
-        Scanner scanner = new Scanner(System.in);
-        String name = scanner.nextLine();
-        return name;
+        System.out.print("Wybierz co edytować:\n" +
+                "1. Nazwę\n" +
+                //"2. Ocenę\n" +
+                //"3. Anuluj\n" +
+                "Twój wybór to: ");
     }
 
     public void decisionMenu() {
@@ -59,14 +52,23 @@ public class EditorRecipes {
             changeName();
             showCurrentName();
         } else if (choice() == 2) {
-            recipeId();
-            choice();
+            //!!!!!
         } else if (choice() == 3) {
             //!!!!!!!!!!!!!!!!!!!!!!
-            System.out.println("");
+
         }
         else
             System.out.println("Powinieneś wybrać jeszcze raz.");
+    }
+
+    public void newName() {
+        System.out.println("Podaj nową nazwę przepisu:");
+    }
+
+    public String addNewName() {
+        Scanner scanner = new Scanner(System.in);
+        String name = scanner.nextLine();
+        return name;
     }
 
     public void recipeId() {
@@ -82,14 +84,15 @@ public class EditorRecipes {
     public String  showCurrentName() {
         RecipesProvider recipesProvider = new RecipesProvider();
         List<Recipe> list = recipesProvider.getRecipes();
-        return list.get(choice() - 1).getName();
+        int index = choice() - 1;
+        return list.get(index).getName();
     }
 
     public void changeName() {
         RecipesProvider recipesProvider1 = new RecipesProvider();
         List<Recipe> list = recipesProvider1.getRecipes();
         int index = list.indexOf(showCurrentName());
-        //list.set(index, addNewName());
+        list.set(index, addNewName());
     }
 
 }
