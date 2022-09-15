@@ -14,9 +14,9 @@ public class TableCreatorTest {
     @Test
     public void testTableFormat() {
         TableBuilder testedCreator = new TableBuilder(2);
-        testedCreator.AddRow(List.of("name:", "InfoShare"))
-                .AddRow(List.of("age:", "15"))
-                .AddRow(List.of("x:", "xyz"));
+        testedCreator.AddRow(new String[]{"name:", "InfoShare"})
+                .AddRow(new String[]{"age:", "15"})
+                .AddRow(new String[]{"x:", "xyz"});
         //
         String excepted_output = "name: InfoShare \n" +
                 "age:  15        \n" +
@@ -29,9 +29,9 @@ public class TableCreatorTest {
     @Test
     public void testIncorrectTableInsertion() {
         TableBuilder testedCreator = new TableBuilder(2);
-        testedCreator.AddRow(List.of("name:", "InfoShare"));
+        testedCreator.AddRow(new String[]{"name:", "InfoShare"});
         Assertions.assertThrows(RuntimeException.class,
-                () -> testedCreator.AddRow(List.of("age:", "15", "xd")));
+                () -> testedCreator.AddRow(new String[]{"age:", "15", "xd"}));
 
     }
 

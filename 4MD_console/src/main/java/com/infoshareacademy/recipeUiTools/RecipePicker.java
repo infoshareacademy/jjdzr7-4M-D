@@ -18,11 +18,11 @@ public class RecipePicker {
         TableBuilder builder = new TableBuilder(5);
 
         for (Recipe recipe : recipes) {
-            builder.AddRow(List.of(
+            builder.AddRow(new String[]{
                     recipe.getName(),
                     "Rodzaj:", recipe.getTypeOfFood(),
                     "Kcal:", String.valueOf(recipe.getKcal())
-            ));
+            });
         }
         System.out.print(builder.build());
         while (true) {
