@@ -40,25 +40,26 @@ public class EditorRecipes {
         System.out.print("Wybierz co edytować:\n" +
                 "1. Nazwę\n" +
                 //"2. Ocenę\n" +
-                //"3. Anuluj\n" +
+                "3. Anuluj\n" +
                 "Twój wybór to: ");
     }
 
     public void decisionMenu() {
-        if (choice() == 1) {
-            recipeId();
-            showCurrentName();
-            newName();
-            changeName();
-            showCurrentName();
-        } else if (choice() == 2) {
-            //!!!!!
-        } else if (choice() == 3) {
-            //!!!!!!!!!!!!!!!!!!!!!!
+        while (true) {
+            if (choice() == 1) {
+                recipeId();
+                showCurrentName();
+                newName();
+                changeName();
+                showCurrentName();
+            } else if (choice() == 2) {
+                //!!!!!
+            } else if (choice() == 3) {
+                break;
 
+            } else
+                System.out.println("Powinieneś wybrać jeszcze raz.");
         }
-        else
-            System.out.println("Powinieneś wybrać jeszcze raz.");
     }
 
     public void newName() {
