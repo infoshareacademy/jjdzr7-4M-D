@@ -9,11 +9,6 @@ public class Score {
         this.recipe = recipe;
     }
 
-    public Score() {
-        score = 0;
-        recipe = getRecipe();
-    }
-
     public int getScore() {
         return score;
     }
