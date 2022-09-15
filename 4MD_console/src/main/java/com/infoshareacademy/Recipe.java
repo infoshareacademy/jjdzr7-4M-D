@@ -6,7 +6,7 @@ import java.util.List;
 public class Recipe {
     private int id;
     private String name;
-    private List<String> listOfIngredients =new ArrayList<String>();
+    private List<String> listOfIngredients;
     private double time;
     private int difficulty;
     private int kcal;
@@ -23,7 +23,6 @@ public class Recipe {
         this.cost = cost;
         this.typeOfFood = typeOfFood;
     }
-
     public int getId() {
         return id;
     }
