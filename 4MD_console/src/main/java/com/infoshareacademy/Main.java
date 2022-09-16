@@ -1,6 +1,6 @@
 package com.infoshareacademy;
 
-import com.infoshareacademy.input.UserInputHandler;
+import com.infoshareacademy.menu.UserInputHandler;
 
 import java.util.List;
 

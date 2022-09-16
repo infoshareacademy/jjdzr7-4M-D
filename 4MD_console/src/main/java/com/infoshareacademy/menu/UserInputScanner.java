@@ -1,4 +1,4 @@
-package com.infoshareacademy.input;
+package com.infoshareacademy.menu;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

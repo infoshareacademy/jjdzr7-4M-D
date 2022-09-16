@@ -1,4 +1,4 @@
-package com.infoshareacademy.input;
+package com.infoshareacademy.menu;
 
 enum UserInputEnum {
     EXIT(0, "Exit"),
