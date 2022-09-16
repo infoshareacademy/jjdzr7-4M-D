@@ -3,27 +3,27 @@ package com.infoshareacademy.menu;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-class UserInputScanner {
+class UserMenuInputScanner {
 
     private static final int MIN_USER_INPUT = 0;
-    private static final int MAX_USER_INPUT = UserInputEnum.values().length;
-    private static UserInputScanner instance;
+    private static final int MAX_USER_INPUT = UserMenuOptionsEnum.values().length;
+    private static UserMenuInputScanner instance;
     private final Scanner scanner;
 
-    public static UserInputScanner getInstance() {
+    public static UserMenuInputScanner getInstance() {
         if (instance == null) {
-            instance = new UserInputScanner();
+            instance = new UserMenuInputScanner();
         }
         return instance;
     }
 
-    private UserInputScanner() {
+    private UserMenuInputScanner() {
         this.scanner = new Scanner(System.in);
     }
 
-    public UserInputEnum getUserInputEnum() {
+    public UserMenuOptionsEnum getUserInputEnum() {
         int userInput = readInputFromUser();
-        return UserInputEnum.values()[userInput];
+        return UserMenuOptionsEnum.values()[userInput];
     }
 
     private int readInputFromUser() {

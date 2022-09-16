@@ -2,22 +2,22 @@ package com.infoshareacademy.menu;
 
 import com.infoshareacademy.UserSingleton;
 
-public class UserInputHandler {
+public class UserMenuInputHandler {
 
-    private final UserInputScanner userInputScanner;
+    private final UserMenuInputScanner userMenuInputScanner;
     private final UserSingleton user;
 
     private boolean isRunning = true;
 
-    public UserInputHandler(UserSingleton user) {
-        this.userInputScanner = UserInputScanner.getInstance();
+    public UserMenuInputHandler(UserSingleton user) {
+        this.userMenuInputScanner = UserMenuInputScanner.getInstance();
         this.user = user;
     }
 
     public void run() {
         while (isRunning) {
-            UserInputEnum.printMenu();
-            UserInputEnum input = userInputScanner.getUserInputEnum();
+            UserMenuOptionsEnum.printMenu();
+            UserMenuOptionsEnum input = userMenuInputScanner.getUserInputEnum();
             switch (input) {
                 case EXIT -> {
                     System.out.println("EXIT");

@@ -1,6 +1,6 @@
 package com.infoshareacademy.menu;
 
-enum UserInputEnum {
+enum UserMenuOptionsEnum {
     EXIT(0, "Exit"),
     SEARCH_RECIPE(1, "Search recipe"),
     ADD_RECIPE(2, "Add recipe"),
@@ -10,7 +10,7 @@ enum UserInputEnum {
     private final int value;
     private final String description;
 
-    UserInputEnum(int value, String description) {
+    UserMenuOptionsEnum(int value, String description) {
         this.value = value;
         this.description = description;
     }
@@ -24,8 +24,8 @@ enum UserInputEnum {
     }
 
     public static void printMenu() {
-        for (UserInputEnum userInputEnum : UserInputEnum.values()) {
-            System.out.println(userInputEnum);
+        for (UserMenuOptionsEnum userMenuOptionsEnum : UserMenuOptionsEnum.values()) {
+            System.out.println(userMenuOptionsEnum);
         }
     }
 
