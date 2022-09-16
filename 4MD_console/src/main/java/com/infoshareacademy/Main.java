@@ -1,8 +1,13 @@
 package com.infoshareacademy;
 
+import com.infoshareacademy.input.UserInputHandler;
+
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
-
-        System.out.println("Hello World!");
+        UserSingleton user = UserSingleton.getInstance("Jan", "Kowalski", List.of(), List.of());
+        UserInputHandler userInputHandler = new UserInputHandler(user);
+        userInputHandler.run();
     }
 }
