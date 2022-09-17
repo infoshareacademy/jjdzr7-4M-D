@@ -1,6 +1,6 @@
 package com.infoshareacademy;
 
-import org.json.JSONObject;
+import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
@@ -8,10 +8,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class JsonRecipeManager {
     protected String RECIPES_PATH = "./recipes/";
+    private final Gson gson = new Gson();
 
     public JsonRecipeManager() throws IOException {
         try{
@@ -24,21 +24,27 @@ public class JsonRecipeManager {
 
     }
     public void save(Recipe recipe) throws IOException {
-        String value = JSONObject.valueToString(recipe);
+        String value = gson.toJson(recipe);
         Files.writeString(Path.of(RECIPES_PATH+recipe.getId()+".json"),value);
     }
     public Recipe loadJsonFile(int recipeId) throws IOException {
         String file = Files.readString(Path.of(RECIPES_PATH+recipeId+".json"));
-        return (Recipe) JSONObject.stringToValue(file);
+        return gson.fromJson(file, Recipe.class);
     }
     //Pls load this to cache
     public List<Recipe> loadAll() throws IOException {
         List<Recipe> out = new ArrayList<>();
-        Stream<Path> files = Files.list(Path.of(RECIPES_PATH));
-        for (Object file : files.filter(path -> path.getFileName().endsWith(".json")).toArray()) {
+        // I don't care about try-with-resources
+        //noinspection resource
+        Object[] files = Files.list(Path.of(RECIPES_PATH)).toArray();
+
+        for (Object file : files) {
             Path path = (Path) file;
-            String id = path.getFileName().toString().split("\\.")[0];
-            out.add(loadJsonFile(Integer.getInteger(id)));
+            String filename = path.getFileName().toString();
+            if(filename.endsWith(".json")){
+                String id = filename.split("\\.")[0];
+                out.add(loadJsonFile(Integer.parseInt(id)));
+            }
         }
         return out;
     }
