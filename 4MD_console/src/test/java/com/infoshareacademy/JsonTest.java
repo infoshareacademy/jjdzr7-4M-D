@@ -39,7 +39,33 @@ public class JsonTest {
             Assertions.assertEquals(recipe.getKcal(), jsonRecipe.getKcal());
         }
     }
+    @Test
+    public void TestRecipeModification() throws IOException {
+        testedManager.save(recipes.get(0));
+        testedManager.save(recipes.get(1));
+        List<Recipe> jsonRecipes = testedManager.loadAll();
+        Recipe modRecipe = testedManager.loadJsonFile(1);
+        //
+        Assertions.assertEquals(2, jsonRecipes.size());
+        modRecipe.setName("Modified name");
+        testedManager.save(modRecipe);
+        Recipe updatedRecipe = testedManager.loadJsonFile(1);
+        Assertions.assertEquals(modRecipe.getName(),updatedRecipe.getName());
 
+    }
+    @Test
+    public void TestRecipeRemoval() throws IOException {
+        testedManager.save(recipes.get(0));
+        testedManager.save(recipes.get(1));
+
+        List<Recipe> jsonRecipes = testedManager.loadAll();
+        Assertions.assertEquals(2, jsonRecipes.size());
+        testedManager.remove(0);
+
+        List<Recipe> updatedJsonRecipes = testedManager.loadAll();
+        Assertions.assertEquals(1, updatedJsonRecipes.size());
+        Assertions.assertEquals(recipes.get(1).getName(),updatedJsonRecipes.get(0).getName());
+    }
     class JsonTestSubject extends JsonRecipeManager {
 
 
@@ -48,5 +74,6 @@ public class JsonTest {
             System.out.println("Test dir is located at: "+RECIPES_PATH);
             Files.createDirectory(Path.of(RECIPES_PATH));
         }
+
     }
 }

@@ -27,6 +27,9 @@ public class JsonRecipeManager {
         String value = gson.toJson(recipe);
         Files.writeString(Path.of(RECIPES_PATH+recipe.getId()+".json"),value);
     }
+    public void remove(int recipeId) throws IOException {
+        Files.delete(Path.of(RECIPES_PATH+recipeId+".json"));
+    }
     public Recipe loadJsonFile(int recipeId) throws IOException {
         String file = Files.readString(Path.of(RECIPES_PATH+recipeId+".json"));
         return gson.fromJson(file, Recipe.class);
