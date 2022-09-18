@@ -35,6 +35,15 @@ public class UserMenuInputHandler {
                 case SEARCH_RECIPE -> {
                     System.out.println("SEARCH_RECIPE");
                 }
+                case ADD_RECIPE_TO_PLANNER -> {
+                    System.out.println("ADD_RECIPE_TO_PLANNER");
+                }
+                case REMOVE_RECIPE_FROM_PLANNER -> {
+                    System.out.println("REMOVE_RECIPE_FROM_PLANNER");
+                }
+                case SHOW_PLANNER -> {
+                    System.out.println("SHOW_PLANNER");
+                }
                 default -> {
                     isRunning = false;
                 }
