@@ -115,7 +115,7 @@ public class EditorRecipes {
     public void changeName() {
         new RecipesProvider();
         List<Recipe> list = RecipesProvider.getRecipes();
-        //list.set(searchName(), addNewName());
+        list.set(choice() - 1, recipe.setName(addNewName()));
     }
 
 }
