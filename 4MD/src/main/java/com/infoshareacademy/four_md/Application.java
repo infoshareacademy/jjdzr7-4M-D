@@ -1,5 +1,6 @@
 package com.infoshareacademy.four_md;
 
+import com.infoshareacademy.four_md.domain.Ingredients;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

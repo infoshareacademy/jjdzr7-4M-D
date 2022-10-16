@@ -1,0 +1,47 @@
+package com.infoshareacademy.four_md.domain;
+
+public class Ingredients {
+    private String name;
+    private double quantity;
+    private Unit unit;
+    private double price;
+
+    public Ingredients(String name, double quantity, Unit unit, double price) {
+        this.name = name;
+        this.quantity = quantity;
+        this.unit = unit;
+        this.price = price;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(double quantity) {
+        this.quantity = quantity;
+    }
+
+    public Unit getUnit() {
+        return unit;
+    }
+
+    public void setUnit(Unit unit) {
+        this.unit = unit;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+}
