@@ -122,14 +122,31 @@ public class Recipe {
         return Math.toIntExact(Math.round(averageRating()));
     }
 
-    public List<Ingredients> ingredientsListByPortion(int numberOfPortions) {
+//    public List<Ingredients> ingredientsListByPortion(int numberOfPortions) {
+//        List<Ingredients> list = new ArrayList<>();
+//        for (Ingredients el : ingredientsList) {
+//            Ingredients ingredients = new Ingredients();
+//            ingredients.copyIngredients(el);
+//            list.add(ingredients);
+//        }
+//        list.forEach(n->n.setQuantity(n.getQuantity()*numberOfPortions));
+//        return list;
+//    }
+
+    public List<Ingredients> ingredientListsCopy() {
         List<Ingredients> list = new ArrayList<>();
         for (Ingredients el : ingredientsList) {
             Ingredients ingredients = new Ingredients();
             ingredients.copyIngredients(el);
             list.add(ingredients);
         }
-        list.forEach(n->n.setQuantity(n.getQuantity()*numberOfPortions));
+        return list;
+    }
+
+    public List<Ingredients> ingredientsListByPortion(int numberOfPortions) {
+        List<Ingredients> list = new ArrayList<>(ingredientListsCopy());
+        list.forEach(n -> n.setQuantity(n.getQuantity() * numberOfPortions));
+        list.forEach(n -> n.setPrice(n.getPrice() * numberOfPortions));
         return list;
     }
 

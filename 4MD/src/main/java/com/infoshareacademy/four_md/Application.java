@@ -20,10 +20,10 @@ public class Application {
         Recipe recipe = new Recipe(1,"name", list, 5, 2000, List.of(1,3,2,3), Difficulty.LOW, DishType.DESSERT);
         String answer = recipe.toString();
         System.out.println(answer);
-        System.out.println(recipe.ingredientsListByPortion(3));
-        System.out.println(recipe);
-
-
+//        System.out.println(recipe.ingredientsListByPortion(3));
+        recipe.ingredientsListByPortion(4);
+        recipe.ingredientsListByPortion(5);
+        System.out.println(recipe.ingredientsListByPortion(5));
     }
 
 }
