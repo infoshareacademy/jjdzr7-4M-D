@@ -13,6 +13,9 @@ public class Ingredients {
         this.price = price;
     }
 
+    public Ingredients() {
+    }
+
     public String getName() {
         return name;
     }
@@ -53,5 +56,12 @@ public class Ingredients {
                 ", unit=" + unit +
                 ", price=" + price + " zł" +
                 '}';
+    }
+
+    public void copyIngredients(Ingredients ingredients) {
+        name = ingredients.getName();
+        quantity = ingredients.getQuantity();
+        unit = ingredients.getUnit();
+        price = ingredients.getPrice();
     }
 }

@@ -1,5 +1,6 @@
 package com.infoshareacademy.four_md.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Recipe {
@@ -9,18 +10,18 @@ public class Recipe {
     private int estimatedCookingTime;
     private int calories;
     private final double cost;
-    private double rating;
+    private List<Integer> ratings;
     private Difficulty difficulty;
     private DishType dishType;
 
-    public Recipe(int id, String name, List<Ingredients> ingredientsList, int estimatedCookingTime, int calories, double rating, Difficulty difficulty, DishType dishType) {
+    public Recipe(int id, String name, List<Ingredients> ingredientsList, int estimatedCookingTime, int calories, List<Integer> ratings, Difficulty difficulty, DishType dishType) {
         this.id = id;
         this.name = name;
         this.ingredientsList = ingredientsList;
         this.estimatedCookingTime = estimatedCookingTime;
         this.calories = calories;
         this.cost = costCalculator();
-        this.rating = rating;
+        this.ratings = ratings;
         this.difficulty = difficulty;
         this.dishType = dishType;
     }
@@ -73,12 +74,12 @@ public class Recipe {
         return ingredientsList.stream().mapToDouble(Ingredients::getPrice).sum();
     }
 
-    public double getRating() {
-        return rating;
+    public List<Integer> getRatings() {
+        return ratings;
     }
 
-    public void setRating(double rating) {
-        this.rating = rating;
+    public void setRatings(List<Integer> ratings) {
+        this.ratings = ratings;
     }
 
     public Difficulty getDifficulty() {
@@ -106,10 +107,30 @@ public class Recipe {
                 ", estimatedCookingTime=" + estimatedCookingTime +
                 ", calories=" + calories + " kcal" +
                 ", cost=" + cost + " zł" +
-                ", rating=" + rating +
+                ", rating=" + ratings +
                 ", difficulty=" + difficulty +
                 ", dishType=" + dishType +
                 '}';
+    }
+
+    private double averageRating() {
+        double sum = ratings.stream().mapToDouble(n -> n).sum();
+        return sum / (ratings.size());
+    }
+
+    public Integer roundAverageRating() {
+        return Math.toIntExact(Math.round(averageRating()));
+    }
+
+    public List<Ingredients> ingredientsListByPortion(int numberOfPortions) {
+        List<Ingredients> list = new ArrayList<>();
+        for (Ingredients el : ingredientsList) {
+            Ingredients ingredients = new Ingredients();
+            ingredients.copyIngredients(el);
+            list.add(ingredients);
+        }
+        list.forEach(n->n.setQuantity(n.getQuantity()*numberOfPortions));
+        return list;
     }
 
 }

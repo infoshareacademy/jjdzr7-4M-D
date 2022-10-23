@@ -14,15 +14,16 @@ public class Application {
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
-        Ingredients ingredients = new Ingredients("cos", 1, Unit.GRAM, 5);
-        Ingredients ingredients2 = new Ingredients("cos", 1, Unit.GRAM, 5);
+        Ingredients ingredients = new Ingredients("cukier", 10, Unit.GRAM, 5);
+        Ingredients ingredients2 = new Ingredients("sol", 15, Unit.GRAM, 5);
         List<Ingredients> list = new ArrayList<>(List.of(ingredients, ingredients2));
-        Recipe recipe = new Recipe(1,"name", list, 5, 2000, 5.0, Difficulty.LOW, DishType.DESSERT);
-        System.out.println("koszt" + recipe.getCost());
+        Recipe recipe = new Recipe(1,"name", list, 5, 2000, List.of(1,3,2,3), Difficulty.LOW, DishType.DESSERT);
         String answer = recipe.toString();
         System.out.println(answer);
-        ValueRange range = ValueRange.of(1, 5);
-        System.out.println(range.isValidIntValue(5));
+        System.out.println(recipe.ingredientsListByPortion(3));
+        System.out.println(recipe);
+
+
     }
 
 }
