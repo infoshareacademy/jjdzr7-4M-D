@@ -1,7 +1,7 @@
 package com.infoshareacademy.four_md;
 
 import com.infoshareacademy.four_md.models.Recipe;
-import com.infoshareacademy.four_md.service.FileJsonHandler;
+import com.infoshareacademy.four_md.service.RecipeFileHandler;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -68,7 +68,7 @@ public class FileJsonHandlerTests {
         Assertions.assertEquals(1, updatedJsonRecipes.size());
         Assertions.assertEquals(recipes.get(1).getName(),updatedJsonRecipes.get(0).getName());
     }
-    class JsonTestSubject extends FileJsonHandler {
+    static class JsonTestSubject extends RecipeFileHandler {
 
 
         public JsonTestSubject() throws IOException {

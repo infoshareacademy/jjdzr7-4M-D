@@ -2,7 +2,8 @@ package com.infoshareacademy.four_md.service;
 
 import com.google.gson.Gson;
 import com.infoshareacademy.four_md.models.Recipe;
-import com.infoshareacademy.four_md.service.interfaces.FileHandler;
+import com.infoshareacademy.four_md.service.interfaces.RecipeProvider;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
@@ -10,12 +11,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-
-public class FileJsonHandler implements FileHandler {
+@Component
+public class RecipeFileHandler implements RecipeProvider {
     protected String RECIPES_PATH = "./recipes/";
     private final Gson gson = new Gson();
 
-    public FileJsonHandler() throws IOException {
+    public RecipeFileHandler() throws IOException {
         try{
 
             Files.createDirectory(Path.of(RECIPES_PATH));
