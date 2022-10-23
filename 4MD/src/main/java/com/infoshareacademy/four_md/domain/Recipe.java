@@ -8,10 +8,12 @@ public class Recipe {
     private List<Ingredients> ingredientsList;
     private int estimatedCookingTime;
     private int calories;
-    private double cost;
+    private final double cost;
     private double rating;
+    private Difficulty difficulty;
+    private DishType dishType;
 
-    public Recipe(int id, String name, List<Ingredients> ingredientsList, int estimatedCookingTime, int calories, double cost, double rating) {
+    public Recipe(int id, String name, List<Ingredients> ingredientsList, int estimatedCookingTime, int calories, double rating, Difficulty difficulty, DishType dishType) {
         this.id = id;
         this.name = name;
         this.ingredientsList = ingredientsList;
@@ -19,6 +21,8 @@ public class Recipe {
         this.calories = calories;
         this.cost = costCalculator();
         this.rating = rating;
+        this.difficulty = difficulty;
+        this.dishType = dishType;
     }
 
     public int getId() {
@@ -65,8 +69,8 @@ public class Recipe {
         return cost;
     }
 
-    public void setCost(double cost) {
-        this.cost = cost;
+    private double costCalculator() {
+        return ingredientsList.stream().mapToDouble(Ingredients::getPrice).sum();
     }
 
     public double getRating() {
@@ -77,9 +81,35 @@ public class Recipe {
         this.rating = rating;
     }
 
-    private double costCalculator() {
-        return ingredientsList.stream().mapToDouble(Ingredients::getPrice).sum();
+    public Difficulty getDifficulty() {
+        return difficulty;
     }
 
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public DishType getDishType() {
+        return dishType;
+    }
+
+    public void setDishType(DishType dishType) {
+        this.dishType = dishType;
+    }
+
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", ingredientsList=" + ingredientsList +
+                ", estimatedCookingTime=" + estimatedCookingTime +
+                ", calories=" + calories + " kcal" +
+                ", cost=" + cost + " zł" +
+                ", rating=" + rating +
+                ", difficulty=" + difficulty +
+                ", dishType=" + dishType +
+                '}';
+    }
 
 }

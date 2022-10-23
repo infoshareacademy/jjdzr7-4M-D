@@ -4,5 +4,5 @@ public enum DishType {
     SOUP,
     DESSERT,
     MAIN_COURSE,
-    CAKE
+    SNACK
 }

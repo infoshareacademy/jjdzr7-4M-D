@@ -44,4 +44,14 @@ public class Ingredients {
     public void setPrice(double price) {
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return "Ingredients{" +
+                "name='" + name + '\'' +
+                ", quantity=" + quantity +
+                ", unit=" + unit +
+                ", price=" + price + " zł" +
+                '}';
+    }
 }
