@@ -21,7 +21,7 @@ public class Recipe {
         this.estimatedCookingTime = estimatedCookingTime;
         this.calories = calories;
         this.cost = costCalculator();
-        this.ratings = ratings;
+        checkPoints(ratings);
         this.difficulty = difficulty;
         this.dishType = dishType;
     }
@@ -79,7 +79,23 @@ public class Recipe {
     }
 
     public void setRatings(List<Integer> ratings) {
+        checkPoints(ratings);
         this.ratings = ratings;
+    }
+
+    private void checkPoints(List<Integer> ratings) {
+        try {
+            for (Integer el : ratings) {
+                if (!el.equals(0) && !el.equals(1) && !el.equals(2) && !el.equals(3) && !el.equals(4) && !el.equals(5)) {
+                    System.out.println("Incorrect rating value in constructor or setter: " + el);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        this.ratings = ratings;
+
+
     }
 
     public Difficulty getDifficulty() {
