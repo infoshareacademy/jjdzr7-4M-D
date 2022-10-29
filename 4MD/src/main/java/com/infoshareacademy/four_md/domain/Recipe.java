@@ -80,7 +80,6 @@ public class Recipe {
 
     public void setRatings(List<Integer> ratings) {
         checkPoints(ratings);
-        this.ratings = ratings;
     }
 
     private void checkPoints(List<Integer> ratings) {
@@ -94,8 +93,6 @@ public class Recipe {
             System.out.println(e.getMessage());
         }
         this.ratings = ratings;
-
-
     }
 
     public Difficulty getDifficulty() {
