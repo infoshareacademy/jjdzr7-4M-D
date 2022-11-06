@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootApplication
-@SpringBootConfiguration
 public class Application {
 
     public static void main(String[] args) {

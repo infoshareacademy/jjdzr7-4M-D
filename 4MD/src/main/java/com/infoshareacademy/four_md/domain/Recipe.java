@@ -11,17 +11,18 @@ public class Recipe {
     private int calories;
     private final double cost;
     private List<Integer> ratings;
+    private List<Ratings> ratingsList;
     private Difficulty difficulty;
     private DishType dishType;
 
-    public Recipe(int id, String name, List<Ingredients> ingredientsList, int estimatedCookingTime, int calories, List<Integer> ratings, Difficulty difficulty, DishType dishType) {
+    public Recipe(int id, String name, List<Ingredients> ingredientsList, int estimatedCookingTime, int calories, List<Ratings> ratingsList, Difficulty difficulty, DishType dishType) {
         this.id = id;
         this.name = name;
         this.ingredientsList = ingredientsList;
         this.estimatedCookingTime = estimatedCookingTime;
         this.calories = calories;
         this.cost = costCalculator();
-        checkPoints(ratings);
+        this.ratingsList = ratingsList;
         this.difficulty = difficulty;
         this.dishType = dishType;
     }
@@ -78,23 +79,6 @@ public class Recipe {
         return ratings;
     }
 
-    public void setRatings(List<Integer> ratings) {
-        checkPoints(ratings);
-    }
-
-    private void checkPoints(List<Integer> ratings) {
-        try {
-            for (Integer el : ratings) {
-                if (!el.equals(0) && !el.equals(1) && !el.equals(2) && !el.equals(3) && !el.equals(4) && !el.equals(5)) {
-                    System.out.println("Incorrect rating value in constructor or setter: " + el);
-                }
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        this.ratings = ratings;
-    }
-
     public Difficulty getDifficulty() {
         return difficulty;
     }
@@ -127,8 +111,8 @@ public class Recipe {
     }
 
     private double averageRating() {
-        double sum = ratings.stream().mapToDouble(n -> n).sum();
-        return sum / (ratings.size());
+        double sum = ratingsList.stream().mapToDouble(Ratings::getNumVal).sum();
+        return sum / (ratingsList.size());
     }
 
     public Integer roundAverageRating() {
