@@ -8,6 +8,13 @@ public class User {
     private String surname;
     private List<Recipe> listOfRecipes;
 
+    public User(String id, String name, String surname, List<Recipe> listOfRecipes) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.listOfRecipes = listOfRecipes;
+    }
+
     public String getId() {
         return id;
     }
