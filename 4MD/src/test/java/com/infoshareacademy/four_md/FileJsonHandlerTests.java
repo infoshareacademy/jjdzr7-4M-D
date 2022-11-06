@@ -1,6 +1,7 @@
 package com.infoshareacademy.four_md;
 
 import com.infoshareacademy.four_md.models.Recipe;
+import com.infoshareacademy.four_md.service.FileHandler;
 import com.infoshareacademy.four_md.service.RecipeFileHandler;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -27,7 +28,7 @@ public class FileJsonHandlerTests {
     @Test
     public void TestWriteback() throws IOException {
         for (Recipe recipe : recipes) {
-            testedManager.save(recipe);
+            testedManager.save(recipe,recipe.getId());
         }
         List<Recipe> jsonRecipes = testedManager.getAll();
         Assertions.assertEquals(recipes.size(), jsonRecipes.size());
@@ -43,22 +44,22 @@ public class FileJsonHandlerTests {
     }
     @Test
     public void TestRecipeModification() throws IOException {
-        testedManager.save(recipes.get(0));
-        testedManager.save(recipes.get(1));
+        testedManager.save(recipes.get(0),0);
+        testedManager.save(recipes.get(1),1);
         List<Recipe> jsonRecipes = testedManager.getAll();
         Recipe modRecipe = testedManager.get(1);
         //
         Assertions.assertEquals(2, jsonRecipes.size());
         modRecipe.setName("Modified name");
-        testedManager.save(modRecipe);
+        testedManager.save(modRecipe,modRecipe.getId());
         Recipe updatedRecipe = testedManager.get(1);
         Assertions.assertEquals(modRecipe.getName(),updatedRecipe.getName());
 
     }
     @Test
     public void TestRecipeRemoval() throws IOException {
-        testedManager.save(recipes.get(0));
-        testedManager.save(recipes.get(1));
+        testedManager.save(recipes.get(0),0);
+        testedManager.save(recipes.get(1),1);
 
         List<Recipe> jsonRecipes = testedManager.getAll();
         Assertions.assertEquals(2, jsonRecipes.size());
@@ -68,13 +69,11 @@ public class FileJsonHandlerTests {
         Assertions.assertEquals(1, updatedJsonRecipes.size());
         Assertions.assertEquals(recipes.get(1).getName(),updatedJsonRecipes.get(0).getName());
     }
-    static class JsonTestSubject extends RecipeFileHandler {
+    static class JsonTestSubject extends FileHandler<Recipe> {
 
 
         public JsonTestSubject() throws IOException {
-            RECIPES_PATH = "/tmp/" + new Random().nextInt() + "/";
-            System.out.println("Test dir is located at: "+RECIPES_PATH);
-            Files.createDirectory(Path.of(RECIPES_PATH));
+            super("/tmp/" + new Random().nextInt() + "/", Recipe.class);
         }
 
     }
