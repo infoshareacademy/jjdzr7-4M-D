@@ -1,4 +1,4 @@
-package com.infoshareacademy.four_md.domain;
+package com.infoshareacademy.four_md.model;
 
 import java.util.ArrayList;
 import java.util.List;

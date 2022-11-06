@@ -1,4 +1,4 @@
-package com.infoshareacademy.four_md.domain;
+package com.infoshareacademy.four_md.model;
 
 public enum DishType {
     SOUP,
