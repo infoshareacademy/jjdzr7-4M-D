@@ -3,12 +3,16 @@ package com.infoshareacademy.four_md.models;
 public class User {
     private int userId;
     private String name;
-    private String surname;
+    private String username;
+    private String email;
+    private String city;
 
-    public User(int userId, String name, String surname) {
+    public User(int userId, String name, String username, String email, String city) {
         this.userId = userId;
         this.name = name;
-        this.surname = surname;
+        this.username = username;
+        this.email = email;
+        this.city = city;
     }
 
     public int getId() {
@@ -27,11 +31,27 @@ public class User {
         this.name = name;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getUsername() {
+        return username;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setSurname(String username) {
+        this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }
