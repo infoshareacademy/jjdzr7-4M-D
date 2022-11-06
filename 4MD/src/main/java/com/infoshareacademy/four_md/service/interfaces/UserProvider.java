@@ -7,4 +7,5 @@ import java.io.IOException;
 public interface UserProvider {
     User get(int userId) throws IOException;
     void save(User user) throws IOException;
+    void remove(int userId) throws IOException;
 }
