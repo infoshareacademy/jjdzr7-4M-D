@@ -1,6 +1,7 @@
 package com.infoshareacademy.four_md.service;
 
 import com.google.gson.Gson;
+import com.infoshareacademy.four_md.models.Recipe;
 import com.infoshareacademy.four_md.models.User;
 import com.infoshareacademy.four_md.service.interfaces.UserProvider;
 import org.springframework.stereotype.Component;
@@ -29,11 +30,13 @@ public class UserFileHandler implements UserProvider {
 
     @Override
     public User get(int userId) throws IOException {
-        return null;
+        String file = Files.readString(Path.of(USERS_PATH+userId+".json"));
+        return gson.fromJson(file, User.class);
     }
 
     @Override
     public void save(User user) throws IOException {
-
+        String value = gson.toJson(user);
+        Files.writeString(Path.of(USERS_PATH+user.getId()+".json"),value);
     }
 }
