@@ -24,7 +24,6 @@ public class RecipeFileHandler implements RecipeProvider {
         catch (FileAlreadyExistsException x){
             // Great, who asked?
         }
-
     }
     @Override
     public void save(Recipe recipe) throws IOException {

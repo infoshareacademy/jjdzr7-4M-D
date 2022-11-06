@@ -22,7 +22,9 @@ public class Recipe {
         this.cost = cost;
         this.typeOfFood = typeOfFood;
     }
-
+    public Recipe() {
+        //! important for spring deserialization 
+    }
     public int getId() {
         return id;
     }
