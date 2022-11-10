@@ -1,11 +1,8 @@
 package com.infoshareacademy.four_md.service;
 
 import com.google.gson.Gson;
-import com.infoshareacademy.four_md.models.Recipe;
-import com.infoshareacademy.four_md.service.interfaces.RecipeProvider;
-import org.springframework.stereotype.Component;
+import com.infoshareacademy.four_md.service.interfaces.ObjectWithId;
 
-import java.awt.Window.Type;
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
@@ -13,7 +10,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileHandler<T> {
+public class FileHandler<T extends ObjectWithId> {
     private String databasePath;
     private final Gson gson = new Gson();
     private Class<T> clazz;
@@ -29,9 +26,9 @@ public class FileHandler<T> {
             // Great, who asked?
         }
     }
-    public void save(T obj, int Id) throws IOException {
+    public void save(T obj) throws IOException {
         String value = gson.toJson(obj);
-        Files.writeString(Path.of(databasePath+Id+".json"),value);
+        Files.writeString(Path.of(databasePath+obj.getId()+".json"),value);
     }
     public void remove(int Id) throws IOException {
         Files.delete(Path.of(databasePath+Id+".json"));

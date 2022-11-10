@@ -1,14 +1,14 @@
 package com.infoshareacademy.four_md;
 
-import com.infoshareacademy.four_md.models.Recipe;
+import com.infoshareacademy.four_md.model.Difficulty;
+import com.infoshareacademy.four_md.model.DishType;
+import com.infoshareacademy.four_md.model.Ratings;
+import com.infoshareacademy.four_md.model.Recipe;
 import com.infoshareacademy.four_md.service.FileHandler;
-import com.infoshareacademy.four_md.service.RecipeFileHandler;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -19,16 +19,15 @@ public class FileJsonHandlerTests {
 
     public FileJsonHandlerTests() throws IOException {
         testedManager = new JsonTestSubject();
-        recipes.add(new Recipe(0, "minecraft", new ArrayList<>(), 0, 0, 660, 10, "gra"));
-        recipes.add(new Recipe(1, "kawa", List.of("kawa","uśmiech"), 0, 0, 60, 10, "jedzenie"));
-        recipes.add(new Recipe(2, "spagetti", new ArrayList<>(), 0, 0, 1000, 10, "Test_food"));
-        recipes.add(new Recipe(3, "asdxczefr2efefefwwq", new ArrayList<>(), 0, 0, 200, 10, "Test_food"));
+        recipes.add(new Recipe(0, "minecraft", new ArrayList<>(), 0, 100, List.of(Ratings.R3), Difficulty.MEDIUM, DishType.MAIN_COURSE));
+        recipes.add(new Recipe(1, "kawa", new ArrayList<>(), 0, -5, List.of(Ratings.R3),Difficulty.MEDIUM,DishType.DESSERT));
+
     }
 
     @Test
     public void TestWriteback() throws IOException {
         for (Recipe recipe : recipes) {
-            testedManager.save(recipe,recipe.getId());
+            testedManager.save(recipe);
         }
         List<Recipe> jsonRecipes = testedManager.getAll();
         Assertions.assertEquals(recipes.size(), jsonRecipes.size());
@@ -38,28 +37,28 @@ public class FileJsonHandlerTests {
                     jsonRecipes.stream().filter(recipe1 -> recipe1.getId() == recipe.getId()).toArray()[0];
             //
             Assertions.assertEquals(recipe.getName(), jsonRecipe.getName());
-            Assertions.assertEquals(recipe.getTypeOfFood(), jsonRecipe.getTypeOfFood());
-            Assertions.assertEquals(recipe.getKcal(), jsonRecipe.getKcal());
+            Assertions.assertEquals(recipe.getDishType(), jsonRecipe.getDishType());
+            Assertions.assertEquals(recipe.getCalories(), jsonRecipe.getCalories());
         }
     }
     @Test
     public void TestRecipeModification() throws IOException {
-        testedManager.save(recipes.get(0),0);
-        testedManager.save(recipes.get(1),1);
+        testedManager.save(recipes.get(0));
+        testedManager.save(recipes.get(1));
         List<Recipe> jsonRecipes = testedManager.getAll();
         Recipe modRecipe = testedManager.get(1);
         //
         Assertions.assertEquals(2, jsonRecipes.size());
         modRecipe.setName("Modified name");
-        testedManager.save(modRecipe,modRecipe.getId());
+        testedManager.save(modRecipe);
         Recipe updatedRecipe = testedManager.get(1);
         Assertions.assertEquals(modRecipe.getName(),updatedRecipe.getName());
 
     }
     @Test
     public void TestRecipeRemoval() throws IOException {
-        testedManager.save(recipes.get(0),0);
-        testedManager.save(recipes.get(1),1);
+        testedManager.save(recipes.get(0));
+        testedManager.save(recipes.get(1));
 
         List<Recipe> jsonRecipes = testedManager.getAll();
         Assertions.assertEquals(2, jsonRecipes.size());

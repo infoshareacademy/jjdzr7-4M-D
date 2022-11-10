@@ -3,7 +3,7 @@ package com.infoshareacademy.four_md.service.interfaces;
 import java.io.IOException;
 import java.util.List;
 
-import com.infoshareacademy.four_md.models.Planner;
+import com.infoshareacademy.four_md.model.Planner;
 
 public interface PlannerProvider {
     void save(Planner planner) throws IOException;

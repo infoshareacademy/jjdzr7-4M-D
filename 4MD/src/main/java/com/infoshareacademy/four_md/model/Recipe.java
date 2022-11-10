@@ -1,15 +1,17 @@
 package com.infoshareacademy.four_md.model;
 
+import com.infoshareacademy.four_md.service.interfaces.ObjectWithId;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Recipe {
+public class Recipe implements ObjectWithId {
     private int id;
     private String name;
     private List<Ingredients> ingredientsList;
     private int estimatedCookingTime;
     private int calories;
-    private final double cost;
+    private double cost;
     private List<Integer> ratings;
     private List<Ratings> ratingsList;
     private Difficulty difficulty;
@@ -26,7 +28,9 @@ public class Recipe {
         this.difficulty = difficulty;
         this.dishType = dishType;
     }
-
+    public Recipe() {
+        //! important for spring deserialization 
+    }
     public int getId() {
         return id;
     }
