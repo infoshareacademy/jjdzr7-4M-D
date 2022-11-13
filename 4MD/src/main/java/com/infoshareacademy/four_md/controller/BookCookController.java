@@ -1,4 +1,4 @@
-package com.infoshareacademy.four_md.controllers;
+package com.infoshareacademy.four_md.controller;
 
 import com.infoshareacademy.four_md.model.Recipe;
 import com.infoshareacademy.four_md.service.interfaces.RecipeProvider;

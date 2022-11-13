@@ -1,4 +1,4 @@
-package com.infoshareacademy.four_md.models;
+package com.infoshareacademy.four_md.model;
 
 public class User {
     private int userId;
