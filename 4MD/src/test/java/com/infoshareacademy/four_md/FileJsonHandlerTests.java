@@ -1,13 +1,14 @@
 package com.infoshareacademy.four_md;
 
-import com.infoshareacademy.four_md.models.Recipe;
-import com.infoshareacademy.four_md.service.RecipeFileHandler;
+import com.infoshareacademy.four_md.model.Difficulty;
+import com.infoshareacademy.four_md.model.DishType;
+import com.infoshareacademy.four_md.model.Ratings;
+import com.infoshareacademy.four_md.model.Recipe;
+import com.infoshareacademy.four_md.service.FileHandler;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -18,10 +19,9 @@ public class FileJsonHandlerTests {
 
     public FileJsonHandlerTests() throws IOException {
         testedManager = new JsonTestSubject();
-        recipes.add(new Recipe(0, "minecraft", new ArrayList<>(), 0, 0, 660, 10, "gra"));
-        recipes.add(new Recipe(1, "kawa", List.of("kawa","uśmiech"), 0, 0, 60, 10, "jedzenie"));
-        recipes.add(new Recipe(2, "spagetti", new ArrayList<>(), 0, 0, 1000, 10, "Test_food"));
-        recipes.add(new Recipe(3, "asdxczefr2efefefwwq", new ArrayList<>(), 0, 0, 200, 10, "Test_food"));
+        recipes.add(new Recipe(0, "minecraft", new ArrayList<>(), 0, 100, List.of(Ratings.R3), Difficulty.MEDIUM, DishType.MAIN_COURSE));
+        recipes.add(new Recipe(1, "kawa", new ArrayList<>(), 0, -5, List.of(Ratings.R3),Difficulty.MEDIUM,DishType.DESSERT));
+
     }
 
     @Test
@@ -37,8 +37,8 @@ public class FileJsonHandlerTests {
                     jsonRecipes.stream().filter(recipe1 -> recipe1.getId() == recipe.getId()).toArray()[0];
             //
             Assertions.assertEquals(recipe.getName(), jsonRecipe.getName());
-            Assertions.assertEquals(recipe.getTypeOfFood(), jsonRecipe.getTypeOfFood());
-            Assertions.assertEquals(recipe.getKcal(), jsonRecipe.getKcal());
+            Assertions.assertEquals(recipe.getDishType(), jsonRecipe.getDishType());
+            Assertions.assertEquals(recipe.getCalories(), jsonRecipe.getCalories());
         }
     }
     @Test
@@ -68,13 +68,11 @@ public class FileJsonHandlerTests {
         Assertions.assertEquals(1, updatedJsonRecipes.size());
         Assertions.assertEquals(recipes.get(1).getName(),updatedJsonRecipes.get(0).getName());
     }
-    static class JsonTestSubject extends RecipeFileHandler {
+    static class JsonTestSubject extends FileHandler<Recipe> {
 
 
         public JsonTestSubject() throws IOException {
-            RECIPES_PATH = "/tmp/" + new Random().nextInt() + "/";
-            System.out.println("Test dir is located at: "+RECIPES_PATH);
-            Files.createDirectory(Path.of(RECIPES_PATH));
+            super("/tmp/" + new Random().nextInt() + "/", Recipe.class);
         }
 
     }
