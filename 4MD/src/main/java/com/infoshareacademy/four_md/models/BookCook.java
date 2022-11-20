@@ -4,11 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookCook {
-    private User user;
 
     List<Recipe> recipes;
-
-    List<Object> dataUser = new ArrayList<>();
 
     public void deleteRecipe(int i) {
         recipes.remove(i);
@@ -22,7 +19,8 @@ public class BookCook {
         return recipes;
     }
 
-    public List<Object> displayDataUser() {
+    public List<Object> displayDataUser(User user) {
+        List<Object> dataUser = new ArrayList<>();
         dataUser.add(user.getId());
         dataUser.add(user.getName());
         dataUser.add(user.getSurname());
