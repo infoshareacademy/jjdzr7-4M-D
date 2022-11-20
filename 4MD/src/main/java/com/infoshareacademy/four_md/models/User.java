@@ -1,6 +1,8 @@
 package com.infoshareacademy.four_md.models;
 
-public class User {
+import com.infoshareacademy.four_md.service.interfaces.ObjectWithId;
+
+public class User implements ObjectWithId {
     private int userId;
     private String name;
     private String username;
@@ -53,5 +55,16 @@ public class User {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", name='" + name + '\'' +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", city='" + city + '\'' +
+                '}';
     }
 }
