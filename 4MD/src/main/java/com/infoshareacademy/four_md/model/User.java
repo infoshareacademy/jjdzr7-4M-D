@@ -1,6 +1,8 @@
 package com.infoshareacademy.four_md.model;
 
-public class User {
+import com.infoshareacademy.four_md.service.interfaces.ObjectWithId;
+
+public class User implements ObjectWithId {
     private int userId;
     private String name;
     private String username;

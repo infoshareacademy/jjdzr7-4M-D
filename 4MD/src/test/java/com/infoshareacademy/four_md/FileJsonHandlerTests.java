@@ -5,6 +5,8 @@ import com.infoshareacademy.four_md.model.DishType;
 import com.infoshareacademy.four_md.model.Ratings;
 import com.infoshareacademy.four_md.model.Recipe;
 import com.infoshareacademy.four_md.service.FileHandler;
+import com.infoshareacademy.four_md.service.IdManager;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -19,8 +21,8 @@ public class FileJsonHandlerTests {
 
     public FileJsonHandlerTests() throws IOException {
         testedManager = new JsonTestSubject();
-        recipes.add(new Recipe(0, "minecraft", new ArrayList<>(), 0, 100, List.of(Ratings.R3), Difficulty.MEDIUM, DishType.MAIN_COURSE));
-        recipes.add(new Recipe(1, "kawa", new ArrayList<>(), 0, -5, List.of(Ratings.R3),Difficulty.MEDIUM,DishType.DESSERT));
+        recipes.add(new Recipe(IdManager.NO_ID, "minecraft", new ArrayList<>(), 0, 100, List.of(Ratings.R3), Difficulty.MEDIUM, DishType.MAIN_COURSE));
+        recipes.add(new Recipe(IdManager.NO_ID, "kawa", new ArrayList<>(), 0, -5, List.of(Ratings.R3),Difficulty.MEDIUM,DishType.DESSERT));
 
     }
 
