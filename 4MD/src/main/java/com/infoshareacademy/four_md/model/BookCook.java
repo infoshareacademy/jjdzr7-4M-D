@@ -1,4 +1,6 @@
-package com.infoshareacademy.four_md.models;
+package com.infoshareacademy.four_md.model;
+
+import com.infoshareacademy.four_md.models.User;
 
 import java.util.ArrayList;
 import java.util.List;
