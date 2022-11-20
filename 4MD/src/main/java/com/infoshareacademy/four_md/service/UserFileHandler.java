@@ -1,7 +1,7 @@
 package com.infoshareacademy.four_md.service;
 
 import com.google.gson.Gson;
-import com.infoshareacademy.four_md.models.User;
+import com.infoshareacademy.four_md.model.User;
 import com.infoshareacademy.four_md.service.interfaces.UserProvider;
 import org.springframework.stereotype.Component;
 
