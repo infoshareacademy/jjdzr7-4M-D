@@ -1,16 +1,15 @@
 package com.infoshareacademy.four_md.model;
 import java.util.List;
+import com.infoshareacademy.four_md.service.interfaces.ObjectWithId;
 
-public class User {
-
-    private static int idCache = 0;
+public class User implements ObjectWithId {
     private int id;
     private String name;
     private String surname;
     private List<Recipe> listOfRecipes;
 
     public User(int id, String name, String surname, List<Recipe> listOfRecipes) {
-        this.id = idCache++;
+        this.id = id;
         this.name = name;
         this.surname = surname;
         this.listOfRecipes = listOfRecipes;
@@ -18,6 +17,10 @@ public class User {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
