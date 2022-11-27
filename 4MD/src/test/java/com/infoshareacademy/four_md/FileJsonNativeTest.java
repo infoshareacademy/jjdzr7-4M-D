@@ -8,6 +8,7 @@ import com.infoshareacademy.four_md.service.IdManager;
 import com.infoshareacademy.four_md.service.RecipeFileHandler;
 import com.infoshareacademy.four_md.service.interfaces.RecipeProvider;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -16,6 +17,7 @@ import java.util.List;
 
 public class FileJsonNativeTest {
     @Test
+    @Disabled
     public void TestWriteback() throws IOException {
         List<Recipe> recipes = new ArrayList<>();
         recipes.add(new Recipe(IdManager.NO_ID, "minecraft", new ArrayList<>(), 0, 100, List.of(Ratings.R3),Difficulty.MEDIUM,DishType.MAIN_COURSE));
