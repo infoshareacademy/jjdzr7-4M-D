@@ -1,26 +1,26 @@
 package com.infoshareacademy.four_md.model;
+import java.util.List;
+import com.infoshareacademy.four_md.service.interfaces.ObjectWithId;
 
 public class User {
     private int userId;
     private String name;
-    private String username;
-    private String email;
-    private String city;
+    private String surname;
+    private List<Recipe> listOfRecipes;
 
-    public User(int userId, String name, String username, String email, String city) {
-        this.userId = userId;
+    public User(int id, String name, String surname, List<Recipe> listOfRecipes) {
+        this.id = id;
         this.name = name;
-        this.username = username;
-        this.email = email;
-        this.city = city;
+        this.surname = surname;
+        this.listOfRecipes = listOfRecipes;
     }
 
     public int getId() {
-        return userId;
+        return id;
     }
 
     public void setId(int id) {
-        this.userId = id;
+        this.id = id;
     }
 
     public String getName() {
@@ -31,27 +31,27 @@ public class User {
         this.name = name;
     }
 
-    public String getUsername() {
-        return username;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setSurname(String username) {
-        this.username = username;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
-    public String getEmail() {
-        return email;
+    public List<Recipe> getListOfRecipes() {
+        return listOfRecipes;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void addRecipe(Recipe recipe) {
+        getListOfRecipes().add(recipe);
     }
 
-    public String getCity() {
-        return city;
+    public void deleteRecipe(int i) {
+        getListOfRecipes().remove(i);
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setListOfRecipes(List<Recipe> listOfRecipes) {
+        this.listOfRecipes = listOfRecipes;
     }
 }
