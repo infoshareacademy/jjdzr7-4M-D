@@ -30,7 +30,7 @@ public class FileHandler<T extends ObjectWithId> {
         this.idManager = new IdManager(databasePath+"id.index");
     }
     public void save(T obj) throws IOException {
-        if(obj.getId() == IdManager.NO_ID){
+        if(obj.getId() == ObjectWithId.NO_ID){
             obj.setId(idManager.read());
         }
 

@@ -10,7 +10,7 @@ import java.io.IOException;
 public class UserFileHandler extends FileHandler<User> implements UserProvider {
 
     public UserFileHandler() throws IOException {
-        super("./users/", User.class);
+        super("./src/main/resources/users/", User.class);
     }
 
 }

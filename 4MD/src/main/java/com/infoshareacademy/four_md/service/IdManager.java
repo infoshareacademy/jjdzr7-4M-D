@@ -6,7 +6,6 @@ import java.nio.file.Path;
 
 public class IdManager {
     private String filePath;
-    public static final int NO_ID = -1;
     public IdManager(String filePath) throws IOException {
         this.filePath = filePath;
         if(!Files.exists(Path.of(filePath))){
