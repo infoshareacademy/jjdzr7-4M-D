@@ -9,6 +9,6 @@ import java.io.IOException;
 public class RecipeFileHandler extends FileHandler<Recipe> implements RecipeProvider {
 
     public RecipeFileHandler() throws IOException {
-        super("./recipes/", Recipe.class);
+        super("./src/main/resources/recipes/", Recipe.class);
     }
 }

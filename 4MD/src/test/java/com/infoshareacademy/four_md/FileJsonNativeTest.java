@@ -5,8 +5,10 @@ import com.infoshareacademy.four_md.model.DishType;
 import com.infoshareacademy.four_md.model.Ratings;
 import com.infoshareacademy.four_md.model.Recipe;
 import com.infoshareacademy.four_md.service.RecipeFileHandler;
+import com.infoshareacademy.four_md.service.interfaces.ObjectWithId;
 import com.infoshareacademy.four_md.service.interfaces.RecipeProvider;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -15,11 +17,12 @@ import java.util.List;
 
 public class FileJsonNativeTest {
     @Test
+    @Disabled 
     public void TestWriteback() throws IOException {
         List<Recipe> recipes = new ArrayList<>();
-        recipes.add(new Recipe(0, "minecraft", new ArrayList<>(), 0, 100, List.of(Ratings.R3),Difficulty.MEDIUM,DishType.MAIN_COURSE));
-        recipes.add(new Recipe(1, "kawa", new ArrayList<>(), 0, -5, List.of(Ratings.R3),Difficulty.MEDIUM,DishType.DESSERT));
-        recipes.add(new Recipe(2, "spagetti", new ArrayList<>(), 0, 0, List.of(Ratings.R3),Difficulty.HARD,DishType.SOUP));
+        recipes.add(new Recipe(ObjectWithId.NO_ID, "minecraft", new ArrayList<>(), 0, 100, List.of(Ratings.R3),Difficulty.MEDIUM,DishType.MAIN_COURSE));
+        recipes.add(new Recipe(ObjectWithId.NO_ID, "kawa", new ArrayList<>(), 0, -5, List.of(Ratings.R3),Difficulty.MEDIUM,DishType.DESSERT));
+        recipes.add(new Recipe(ObjectWithId.NO_ID, "spagetti", new ArrayList<>(), 0, 0, List.of(Ratings.R3),Difficulty.HARD,DishType.SOUP));
         RecipeProvider db = new RecipeFileHandler();
 
         for (Recipe recipe : recipes) {

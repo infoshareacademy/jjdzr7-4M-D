@@ -11,9 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileHandler<T extends ObjectWithId> {
+    
     private String databasePath;
     private final Gson gson = new Gson();
     private Class<T> clazz;
+    private IdManager idManager;
 
     public FileHandler(String databasePath,Class<T> clazz) throws IOException {
         this.databasePath = databasePath;
@@ -23,12 +25,19 @@ public class FileHandler<T extends ObjectWithId> {
             Files.createDirectory(Path.of(databasePath));
         }
         catch (FileAlreadyExistsException x){
-            // Great, who asked?
+            // Great, who asked? 
         }
+        this.idManager = new IdManager(databasePath+"id.index");
     }
     public void save(T obj) throws IOException {
+        if(obj.getId() == ObjectWithId.NO_ID){
+            obj.setId(idManager.read());
+        }
+
         String value = gson.toJson(obj);
         Files.writeString(Path.of(databasePath+obj.getId()+".json"),value);
+
+        idManager.next();
     }
     public void remove(int Id) throws IOException {
         Files.delete(Path.of(databasePath+Id+".json"));
