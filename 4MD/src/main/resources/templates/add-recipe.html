@@ -20,10 +20,39 @@
             <input class="form-control" type="text" placeholder="Name" th:field="*{name}">
             <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"/>
         </div>
-        <div>
-            <label class="form-label">Ingredient name</label>
-            <input class="form-control" type="text" placeholder="Ingredients" th:field="*{ingredientsList}">
+<!--        <div>-->
+<!--            <label class="form-label">Ingredient name</label>-->
+<!--            <input class="form-control" type="text" placeholder="Ingredients" th:field="*{ingredientsList}">-->
+<!--        </div>-->
+        <div th:object="${ingredients}">
+            <div>
+                <label class="form-label">Name</label>
+                <input class="form-control" type="text" placeholder="Name" th:field="*{name}">
+                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"/>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Quantity</label>
+                <input type="number" step="any" class="form-control" th:placeholder="'Cost'" th:field="*{quantity}"><span
+                    th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"/>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Unit</label>
+                <select class="form-select" required th:field="*{unit}">
+                    <option selected disabled value="">Choose...</option>
+                    <option th:each="enumName : ${T(com.infoshareacademy.four_md.model.Unit).values()}" th:value="${enumName}" , th:text="${enumName}"></option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Price</label>
+                <div class="input-group">
+                    <input type="number" step="any" class="form-control" th:placeholder="'Cost'" th:field="*{price}"><span
+                        th:if="${#fields.hasErrors('price')}" th:errors="*{price}"/>
+                    <span class="input-group-text">PLN</span>
+                </div>
+            </div>
         </div>
+
+
         <div class="col-md-4">
             <label class="form-label">Estimated Cooking Time</label>
             <div class="input-group">
@@ -42,14 +71,6 @@
             </div>
         </div>
         <div class="col-md-4">
-            <label class="form-label">Cost</label>
-            <div class="input-group">
-                <input type="number" step="any" class="form-control" th:placeholder="'Cost'" th:field="*{cost}"><span
-                    th:if="${#fields.hasErrors('cost')}" th:errors="*{cost}"/>
-                <span class="input-group-text">PLN</span>
-            </div>
-        </div>
-        <div class="col-md-4">
             <label class="form-label">Dish Type</label>
             <select class="form-select" required th:field="*{dishType}">
                 <option selected disabled value="">Choose...</option>
@@ -57,26 +78,54 @@
             </select>
         </div>
 
-        <div class="col-md-4">
-            <label class="form-label">Difficulty2</label>
+        <div class="col-md-6">
+            <label class="form-label">Difficulty</label>
             <select class="form-select" required th:field="*{difficulty}">
                 <option selected disabled value="">Choose...</option>
               <option th:each="enumName : ${T(com.infoshareacademy.four_md.model.Difficulty).values()}" th:value="${enumName}" , th:text="${enumName}"></option>
             </select>
         </div>
-        <div class="col-md-4">
-            <label class="form-label">Your rating</label>
-<!--            jak dodac kolejna liste ?-->
-            <select class="form-select" required th:field="${ratings}">
-                <option selected disabled value="">Choose...</option>
-                <option th:each="enumName : ${T(com.infoshareacademy.four_md.model.Ratings).values()}" th:value="${enumName}" , th:text="${enumName.getNumVal()}"></option>
-            </select>
-        </div>
+<!--        <div class="col-md-6">-->
+<!--            <label class="form-label">Your rating</label>-->
+<!--&lt;!&ndash;            jak dodac kolejna liste ?&ndash;&gt;-->
+<!--            <select class="form-select" required th:field="${ratings}">-->
+<!--                <option selected disabled value="">Choose...</option>-->
+<!--                <option th:each="enumName : ${T(com.infoshareacademy.four_md.model.Ratings).values()}" th:value="${enumName}" , th:text="${enumName.getNumVal()}"></option>-->
+<!--            </select>-->
+<!--        </div>-->
 
         <div>
             <button class="btn btn-primary" type="submit">Submit form</button>
         </div>
     </form>
+
+<!--    <form class="row g-3 m-3" th:action="@{/saveRecipe}" th:object="${ingredients}" method="post">-->
+<!--        <div>-->
+<!--            <label class="form-label">Name</label>-->
+<!--            <input class="form-control" type="text" placeholder="Name" th:field="*{name}">-->
+<!--            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"/>-->
+<!--        </div>-->
+<!--        <div class="col-md-4">-->
+<!--            <label class="form-label">Quantity</label>-->
+<!--                <input type="number" step="any" class="form-control" th:placeholder="'Cost'" th:field="*{quantity}"><span-->
+<!--                    th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"/>-->
+<!--        </div>-->
+<!--        <div class="col-md-4">-->
+<!--            <label class="form-label">Unit</label>-->
+<!--            <select class="form-select" required th:field="*{unit}">-->
+<!--                <option selected disabled value="">Choose...</option>-->
+<!--                <option th:each="enumName : ${T(com.infoshareacademy.four_md.model.Unit).values()}" th:value="${enumName}" , th:text="${enumName}"></option>-->
+<!--            </select>-->
+<!--        </div>-->
+<!--        <div class="col-md-4">-->
+<!--            <label class="form-label">Price</label>-->
+<!--            <div class="input-group">-->
+<!--                <input type="number" step="any" class="form-control" th:placeholder="'Cost'" th:field="*{price}"><span-->
+<!--                    th:if="${#fields.hasErrors('price')}" th:errors="*{price}"/>-->
+<!--                <span class="input-group-text">PLN</span>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </form>-->
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
