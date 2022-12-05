@@ -106,7 +106,7 @@ public class Recipe implements ObjectWithId {
                 ", name='" + name + '\'' +
                 ", ingredientsList=" + ingredientsList +
                 ", estimatedCookingTime=" + estimatedCookingTime +
-                ", calories=" + calories + " kcal" +
+                ", calories=" + calories + " cal" +
                 ", cost=" + cost + " zł" +
                 ", rating=" + ratings +
                 ", difficulty=" + difficulty +
