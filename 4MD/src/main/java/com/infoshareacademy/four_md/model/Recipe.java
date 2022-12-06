@@ -12,7 +12,6 @@ public class Recipe implements ObjectWithId {
     private int estimatedCookingTime;
     private int calories;
     private double cost;
-    private List<Integer> ratings;
     private List<Ratings> ratingsList;
     private Difficulty difficulty;
     private DishType dishType;
@@ -79,9 +78,6 @@ public class Recipe implements ObjectWithId {
         return ingredientsList.stream().mapToDouble(Ingredients::getPrice).sum();
     }
 
-    public List<Integer> getRatings() {
-        return ratings;
-    }
 
     public Difficulty getDifficulty() {
         return difficulty;
@@ -99,6 +95,14 @@ public class Recipe implements ObjectWithId {
         this.dishType = dishType;
     }
 
+    public List<Ratings> getRatingsList() {
+        return ratingsList;
+    }
+
+    public void setRatingsList(List<Ratings> ratingsList) {
+        this.ratingsList = ratingsList;
+    }
+
     @Override
     public String toString() {
         return "Recipe{" +
@@ -106,9 +110,9 @@ public class Recipe implements ObjectWithId {
                 ", name='" + name + '\'' +
                 ", ingredientsList=" + ingredientsList +
                 ", estimatedCookingTime=" + estimatedCookingTime +
-                ", calories=" + calories + " cal" +
-                ", cost=" + cost + " zł" +
-                ", rating=" + ratings +
+                ", calories=" + calories +
+                ", cost=" + cost +
+                ", ratingsList=" + ratingsList +
                 ", difficulty=" + difficulty +
                 ", dishType=" + dishType +
                 '}';

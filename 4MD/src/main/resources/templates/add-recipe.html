@@ -28,7 +28,8 @@
                     <input type="number" step="any" class="form-control" th:placeholder="'Estimated Cooking Time'"
                            th:field="*{estimatedCookingTime}">
                     <span
-                        th:if="${#fields.hasErrors('estimatedCookingTime')}" th:errors="${recipe.estimatedCookingTime}"/>
+                            th:if="${#fields.hasErrors('estimatedCookingTime')}"
+                            th:errors="${recipe.estimatedCookingTime}"/>
                     <span class="input-group-text">minutes</span>
                 </div>
             </div>
@@ -39,7 +40,7 @@
                     <input type="number" step="any" class="form-control" th:placeholder="'Calories'"
                            th:field="*{calories}" name="calories">
                     <span
-                        th:if="${#fields.hasErrors('calories')}" th:errors="${recipe.calories}"/>
+                            th:if="${#fields.hasErrors('calories')}" th:errors="${recipe.calories}"/>
                     <span class="input-group-text">calories</span>
                 </div>
             </div>
@@ -60,33 +61,36 @@
                             th:value="${enumName}" , th:text="${enumName}"></option>
                 </select>
             </div>
-            <!--        <div class="col-md-6">-->
-            <!--            <label class="form-label">Your rating</label>-->
-            <!--&lt;!&ndash;            jak dodac kolejna liste ?&ndash;&gt;-->
-            <!--            <select class="form-select" required th:field="${ratings}">-->
-            <!--                <option selected disabled value="">Choose...</option>-->
-            <!--                <option th:each="enumName : ${T(com.infoshareacademy.four_md.model.Ratings).values()}" th:value="${enumName}" , th:text="${enumName.getNumVal()}"></option>-->
-            <!--            </select>-->
-            <!--        </div>-->
+
+            <!--            <div>-->
+            <!--                <label class="form-label">Ratings</label>-->
+            <!--                <select class="form-select" required th:field="*{ratingsList}">-->
+            <!--                    <option selected disabled value="">Choose...</option>-->
+            <!--                    <option th:each="enumName : ${T(com.infoshareacademy.four_md.model.Ratings).values()}"-->
+            <!--                            th:value="${enumName}" , th:text="${enumName}"></option>-->
+            <!--                </select>-->
+            <!--            </div>-->
 
             <div class="border border-dark rounded-4 border-3">
-                <div class="mt-3" id="source">
-                    <h4 class="text-center">Ingredient</h4>
+
+                <div class="d-none" id="hidden" th:each="i : ${#numbers.sequence( 0, 19)}">
+                    <h4 class="text-center mt-3">Ingredient</h4>
                     <div>
                         <label class="form-label">Name</label>
-                        <input class="form-control" type="text" placeholder="Name" th:field="*{ingredientsList[0].name}">
-<!--                        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"/>-->
+                        <input class="form-control" type="text" placeholder="Name"
+                               th:field="*{ingredientsList[__${i}__].name}">
+                        <!--                        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"/>-->
                     </div>
                     <div>
                         <label class="form-label">Quantity</label>
                         <input type="number" step="any" class="form-control" th:placeholder="'Cost'"
-                               th:field="*{ingredientsList[0].quantity}">
-<!--                        <span-->
-<!--                            th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"/>-->
+                               th:field="*{ingredientsList[__${i}__].quantity}">
+                        <!--                        <span-->
+                        <!--                            th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"/>-->
                     </div>
                     <div>
                         <label class="form-label">Unit</label>
-                        <select class="form-select" required th:field="*{ingredientsList[0].unit}">
+                        <select class="form-select" required th:field="*{ingredientsList[__${i}__].unit}">
                             <option selected disabled value="">Choose...</option>
                             <option th:each="enumName : ${T(com.infoshareacademy.four_md.model.Unit).values()}"
                                     th:value="${enumName}" , th:text="${enumName}"></option>
@@ -96,57 +100,25 @@
                         <label class="form-label">Price</label>
                         <div class="input-group">
                             <input type="number" step="any" class="form-control" th:placeholder="'Cost'"
-                                   th:field="*{ingredientsList[0].price}" name="price">
-<!--                            <span-->
-<!--                                th:if="${#fields.hasErrors('price')}" th:errors="*{price}"/>-->
+                                   th:field="*{ingredientsList[__${i}__].price}" name="price">
+                            <!--                            <span-->
+                            <!--                                th:if="${#fields.hasErrors('price')}" th:errors="*{price}"/>-->
                             <span class="input-group-text">PLN</span>
                         </div>
                     </div>
                 </div>
-                <div id="destination"></div>
+
+
                 <div class="d-grid mt-3 mb-3 col-5">
-                    <a class="btn btn-outline-primary" role="button" onclick="cloneElement()">+ Add new Ingredient</a>
+                    <a class="btn btn-outline-primary" role="button" onclick="show()">+ Add new Ingredient</a>
                 </div>
             </div>
 
-            <div class="d-grid gap-2 col-8 mx-auto">
+            <div class="d-grid gap-2 col-8 mx-auto mb-2">
                 <button class="btn btn-primary" type="submit">Submit form</button>
             </div>
-
         </form>
     </div>
-
-
-<!--        <form class="row g-3 m-3" th:action="@{/saveRecipe}" th:object="${recipe}" method="post">-->
-<!--            <div>-->
-<!--                <label class="form-label">Name</label>-->
-<!--                <input class="form-control" type="text" placeholder="Name" th:field="*{ingredientsList[0].name}">-->
-<!--                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"/>-->
-<!--            </div>-->
-<!--            <div class="col-md-4">-->
-<!--                <label class="form-label">Quantity</label>-->
-<!--                    <input type="number" step="any" class="form-control" th:placeholder="'Cost'" th:field="*{quantity}"><span-->
-<!--                        th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"/>-->
-<!--            </div>-->
-<!--            <div class="col-md-4">-->
-<!--                <label class="form-label">Unit</label>-->
-<!--                <select class="form-select" required th:field="*{unit}">-->
-<!--                    <option selected disabled value="">Choose...</option>-->
-<!--                    <option th:each="enumName : ${T(com.infoshareacademy.four_md.model.Unit).values()}" th:value="${enumName}" , th:text="${enumName}"></option>-->
-<!--                </select>-->
-<!--            </div>-->
-<!--            <div class="col-md-4">-->
-<!--                <label class="form-label">Price</label>-->
-<!--                <div class="input-group">-->
-<!--                    <input type="number" step="any" class="form-control" th:placeholder="'Cost'" th:field="*{price}"><span-->
-<!--                        th:if="${#fields.hasErrors('price')}" th:errors="*{price}"/>-->
-<!--                    <span class="input-group-text">PLN</span>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--                        <div class="d-grid gap-2 col-8 mx-auto">-->
-<!--                            <button class="btn btn-primary" type="submit">Submit form</button>-->
-<!--                        </div>-->
-<!--        </form>-->
 </div>
 
 
@@ -155,14 +127,10 @@
         crossorigin="anonymous">
 </script>
 <script>
-    var source = document.getElementById("source"),
-        destination = document.getElementById("destination");
-
-    function cloneElement() {
-        let evilclone = source.cloneNode(true);
-        evilclone.removeAttribute("id");
-        destination.appendChild(evilclone);
-        window.scrollTo(0,document.body.scrollHeight);
+    function show() {
+        document.getElementById('hidden').classList.remove('d-none');
+        document.getElementById("hidden").removeAttribute('id');
+        window.scrollTo(0, document.body.scrollHeight);
     }
 </script>
 

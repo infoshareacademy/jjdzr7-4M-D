@@ -28,9 +28,7 @@ public class AddRecipe {
     @GetMapping("/add-recipe")
     public String newRecipe(Model model) {
         Recipe recipe = new Recipe();
-        List<Ratings> ratings = new ArrayList<>();
         model.addAttribute("recipe", recipe);
-        model.addAttribute("ratings", ratings);
         return "add-recipe";
     }
 
