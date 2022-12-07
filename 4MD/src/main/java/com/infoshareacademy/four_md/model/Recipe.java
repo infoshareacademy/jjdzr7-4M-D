@@ -1,17 +1,32 @@
 package com.infoshareacademy.four_md.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.infoshareacademy.four_md.service.interfaces.ObjectWithId;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Recipe implements ObjectWithId {
     private int id;
+    @NotNull(message = "{validation.empty}")
+    @NotEmpty(message = "{validation.empty}")
     private String name;
+    @NotNull
+    @Valid
     private List<Ingredients> ingredientsList;
+    @NotNull(message = "{validation.empty}")
+    @Min(value = 0, message = "{validation.number}")
     private int estimatedCookingTime;
+    @NotNull(message = "{validation.empty}")
+    @Min(value = 0, message = "{validation.number}")
     private int calories;
     private double cost;
+
     private List<Ratings> ratingsList;
     private Difficulty difficulty;
     private DishType dishType;

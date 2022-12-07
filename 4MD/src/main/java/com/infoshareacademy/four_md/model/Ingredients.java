@@ -1,9 +1,23 @@
 package com.infoshareacademy.four_md.model;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 public class Ingredients {
+    @Valid
+    @NotNull(message = "{validation.empty}")
+    @NotEmpty(message = "{validation.empty}")
     private String name;
+    @Valid
+    @NotNull(message = "{validation.empty}")
+    @Min(value = 0, message = "{validation.number}")
     private double quantity;
     private Unit unit;
+    @Valid
+    @NotNull(message = "{validation.empty}")
+    @Min(value = 0, message = "{validation.number}")
     private double price;
 
     public Ingredients(String name, double quantity, Unit unit, double price) {

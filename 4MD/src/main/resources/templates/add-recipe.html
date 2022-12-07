@@ -12,14 +12,14 @@
 
 <body>
 
-<h1 class="text-center">ADD NEW RECIPE</h1>
-<div class="container mt-1 d-flex justify-content-center">
+<h1 class="text-center text-white py-3 bg-primary bg-gradient">ADD NEW RECIPE</h1>
+<div class="container d-flex justify-content-center ">
     <div style="max-width: 500px;">
         <form class="row g-3" th:action="@{/saveRecipe}" th:object="${recipe}" method="post">
             <div>
                 <label class="form-label">Name</label>
                 <input class="form-control" type="text" placeholder="Name" th:field="*{name}">
-                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"/>
+                <span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"/>
             </div>
 
             <div>
@@ -27,11 +27,11 @@
                 <div class="input-group">
                     <input type="number" step="any" class="form-control" th:placeholder="'Estimated Cooking Time'"
                            th:field="*{estimatedCookingTime}">
-                    <span
-                            th:if="${#fields.hasErrors('estimatedCookingTime')}"
-                            th:errors="${recipe.estimatedCookingTime}"/>
                     <span class="input-group-text">minutes</span>
                 </div>
+                <span class="text-danger"
+                      th:if="${#fields.hasErrors('estimatedCookingTime')}"
+                      th:errors="*{estimatedCookingTime}"/>
             </div>
 
             <div>
@@ -39,10 +39,10 @@
                 <div class="input-group">
                     <input type="number" step="any" class="form-control" th:placeholder="'Calories'"
                            th:field="*{calories}" name="calories">
-                    <span
-                            th:if="${#fields.hasErrors('calories')}" th:errors="${recipe.calories}"/>
                     <span class="input-group-text">calories</span>
                 </div>
+                <span class="text-danger"
+                      th:if="${#fields.hasErrors('calories')}" th:errors="${recipe.calories}"/>
             </div>
             <div>
                 <label class="form-label">Dish Type</label>
@@ -71,22 +71,23 @@
             <!--                </select>-->
             <!--            </div>-->
 
-            <div class="border border-dark rounded-4 border-3">
+            <div class="shadow p-3 bg-body rounded">
                 <h4 class="text-center mt-3">Ingredient</h4>
-                <div>
+                <div class="mb-3">
                     <label class="form-label">Name</label>
                     <input class="form-control" type="text" placeholder="Name"
                            th:field="*{ingredientsList[0].name}">
-                    <!--                        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"/>-->
+                    <!--                                            <span th:if="${#fields.hasErrors('ingredientList[0].name')}"  th:errors="*{ingredientsList[0].name}"/>-->
                 </div>
-                <div>
+                <div class="mb-3">
                     <label class="form-label">Quantity</label>
                     <input type="number" step="any" class="form-control" th:placeholder="'Cost'"
                            th:field="*{ingredientsList[0].quantity}">
-                    <!--                        <span-->
-                    <!--                            th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"/>-->
+                    <span class="text-danger"
+                          th:if="${#fields.hasErrors('ingredientsList[0].quantity')}" th:errorclass="error"
+                          th:errors="*{ingredientsList[0].quantity}"/>
                 </div>
-                <div>
+                <div class="mb-3">
                     <label class="form-label">Unit</label>
                     <select class="form-select" required th:field="*{ingredientsList[0].unit}">
                         <option selected disabled value="">Choose...</option>
@@ -94,33 +95,35 @@
                                 th:value="${enumName}" , th:text="${enumName}"></option>
                     </select>
                 </div>
-                <div>
+                <div class="mb-3">
                     <label class="form-label">Price</label>
                     <div class="input-group">
                         <input type="number" step="any" class="form-control" th:placeholder="'Cost'"
                                th:field="*{ingredientsList[0].price}" name="price">
-                        <!--                            <span-->
-                        <!--                                th:if="${#fields.hasErrors('price')}" th:errors="*{price}"/>-->
                         <span class="input-group-text">PLN</span>
                     </div>
+                    <span class="text-danger"
+                          th:if="${#fields.hasErrors('ingredientsList[0].price')}"
+                          th:errors="*{ingredientsList[0].price}"/>
                 </div>
 
                 <div class="d-none" id="hidden" th:each="i : ${#numbers.sequence( 1, 19)}">
                     <h4 class="text-center mt-3">Ingredient</h4>
-                    <div>
+                    <div class="mb-3">
                         <label class="form-label">Name</label>
                         <input class="form-control" type="text" placeholder="Name"
                                th:field="*{ingredientsList[__${i}__].name}">
                         <!--                        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"/>-->
                     </div>
-                    <div>
+                    <div class="mb-3">
                         <label class="form-label">Quantity</label>
                         <input type="number" step="any" class="form-control" th:placeholder="'Cost'"
                                th:field="*{ingredientsList[__${i}__].quantity}">
-                        <!--                        <span-->
-                        <!--                            th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"/>-->
+                        <span class="text-danger"
+                              th:if="${#fields.hasErrors('ingredientsList[__${i}__].quantity')}" th:errorclass="error"
+                              th:errors="*{ingredientsList[__${i}__].quantity}"/>
                     </div>
-                    <div>
+                    <div class="mb-3">
                         <label class="form-label">Unit</label>
                         <select class="form-select" required th:field="*{ingredientsList[__${i}__].unit}">
                             <option selected disabled value="">Choose...</option>
@@ -128,19 +131,18 @@
                                     th:value="${enumName}" , th:text="${enumName}"></option>
                         </select>
                     </div>
-                    <div>
+                    <div class="mb-3">
                         <label class="form-label">Price</label>
                         <div class="input-group">
                             <input type="number" step="any" class="form-control" th:placeholder="'Cost'"
                                    th:field="*{ingredientsList[__${i}__].price}" name="price">
-                            <!--                            <span-->
-                            <!--                                th:if="${#fields.hasErrors('price')}" th:errors="*{price}"/>-->
                             <span class="input-group-text">PLN</span>
                         </div>
+                        <span class="text-danger"
+                              th:if="${#fields.hasErrors('ingredientsList[__${i}__].price')}"
+                              th:errors="*{ingredientsList[__${i}__].price}"/>
                     </div>
                 </div>
-
-
                 <div class="d-grid mt-3 mb-3 col-5">
                     <a class="btn btn-outline-primary" role="button" onclick="show()">+ Add new Ingredient</a>
                 </div>
