@@ -1,9 +1,6 @@
 package com.infoshareacademy.four_md.controller;
 
-import com.infoshareacademy.four_md.model.Ingredients;
-import com.infoshareacademy.four_md.model.Ratings;
 import com.infoshareacademy.four_md.model.Recipe;
-import com.infoshareacademy.four_md.repository.Recipes;
 import com.infoshareacademy.four_md.service.RecipeFileHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,16 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class AddRecipe {
-    private final Recipes recipes;
-
-    public AddRecipe(Recipes recipes) {
-        this.recipes = recipes;
-    }
 
     @GetMapping("/add-recipe")
     public String newRecipe(Model model) {
@@ -33,15 +23,20 @@ public class AddRecipe {
     }
 
     @PostMapping("/saveRecipe")
-    public String saveTask(@Valid @ModelAttribute Recipe recipe, BindingResult bindResult, Model model) {
+    public String saveTask(@Valid @ModelAttribute Recipe recipe, BindingResult bindResult, Model model) throws IOException {
 
         if (bindResult.hasErrors()) {
             return "add-recipe";
         }
-        recipes.getRecipes().add(recipe);
+        deleteBlankIngredients(recipe);
+        RecipeFileHandler recipeFileHandler = new RecipeFileHandler();
+        recipeFileHandler.save(recipe);
         model.addAttribute("recipe", recipe);
-        System.out.println(recipe);
         return "confirmation";
+    }
+
+    private void deleteBlankIngredients(Recipe recipe) {
+        recipe.getIngredientsList().removeIf(ingredients -> ingredients.getName().equals(""));
     }
 
 }

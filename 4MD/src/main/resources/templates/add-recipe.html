@@ -72,8 +72,40 @@
             <!--            </div>-->
 
             <div class="border border-dark rounded-4 border-3">
+                <h4 class="text-center mt-3">Ingredient</h4>
+                <div>
+                    <label class="form-label">Name</label>
+                    <input class="form-control" type="text" placeholder="Name"
+                           th:field="*{ingredientsList[0].name}">
+                    <!--                        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"/>-->
+                </div>
+                <div>
+                    <label class="form-label">Quantity</label>
+                    <input type="number" step="any" class="form-control" th:placeholder="'Cost'"
+                           th:field="*{ingredientsList[0].quantity}">
+                    <!--                        <span-->
+                    <!--                            th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"/>-->
+                </div>
+                <div>
+                    <label class="form-label">Unit</label>
+                    <select class="form-select" required th:field="*{ingredientsList[0].unit}">
+                        <option selected disabled value="">Choose...</option>
+                        <option th:each="enumName : ${T(com.infoshareacademy.four_md.model.Unit).values()}"
+                                th:value="${enumName}" , th:text="${enumName}"></option>
+                    </select>
+                </div>
+                <div>
+                    <label class="form-label">Price</label>
+                    <div class="input-group">
+                        <input type="number" step="any" class="form-control" th:placeholder="'Cost'"
+                               th:field="*{ingredientsList[0].price}" name="price">
+                        <!--                            <span-->
+                        <!--                                th:if="${#fields.hasErrors('price')}" th:errors="*{price}"/>-->
+                        <span class="input-group-text">PLN</span>
+                    </div>
+                </div>
 
-                <div class="d-none" id="hidden" th:each="i : ${#numbers.sequence( 0, 19)}">
+                <div class="d-none" id="hidden" th:each="i : ${#numbers.sequence( 1, 19)}">
                     <h4 class="text-center mt-3">Ingredient</h4>
                     <div>
                         <label class="form-label">Name</label>
