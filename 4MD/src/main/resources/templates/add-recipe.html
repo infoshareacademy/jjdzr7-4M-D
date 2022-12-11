@@ -24,7 +24,7 @@
 
             <div>
                 <label class="form-label">Method</label>
-                <textarea class="form-control" type="text" placeholder="Preparation method" th:field="*{method}"> </textarea>
+                <textarea class="form-control" type="text" rows="4" placeholder="Preparation method" th:field="*{method}"> </textarea>
                 <span class="text-danger" th:if="${#fields.hasErrors('method')}" th:errors="*{method}"/>
             </div>
 
