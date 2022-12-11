@@ -1,13 +1,11 @@
 package com.infoshareacademy.four_md.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.infoshareacademy.four_md.service.interfaces.ObjectWithId;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +14,9 @@ public class Recipe implements ObjectWithId {
     @NotNull(message = "{validation.empty}")
     @NotEmpty(message = "{validation.empty}")
     private String name;
+    @NotNull(message = "{validation.empty}")
+    @NotEmpty(message = "{validation.empty}")
+    private String method;
     @NotNull
     @Valid
     private List<Ingredients> ingredientsList;
@@ -42,9 +43,11 @@ public class Recipe implements ObjectWithId {
         this.difficulty = difficulty;
         this.dishType = dishType;
     }
+
     public Recipe() {
         //! important for spring deserialization 
     }
+
     public int getId() {
         return id;
     }
@@ -59,6 +62,14 @@ public class Recipe implements ObjectWithId {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getMethod() {
+        return method;
+    }
+
+    public void setMethod(String method) {
+        this.method = method;
     }
 
     public List<Ingredients> getIngredientsList() {

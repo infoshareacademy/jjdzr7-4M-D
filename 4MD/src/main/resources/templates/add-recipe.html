@@ -23,6 +23,12 @@
             </div>
 
             <div>
+                <label class="form-label">Method</label>
+                <textarea class="form-control" type="text" placeholder="Preparation method" th:field="*{method}"> </textarea>
+                <span class="text-danger" th:if="${#fields.hasErrors('method')}" th:errors="*{method}"/>
+            </div>
+
+            <div>
                 <label class="form-label">Estimated Cooking Time</label>
                 <div class="input-group">
                     <input type="number" step="any" class="form-control" th:placeholder="'Estimated Cooking Time'"
@@ -62,22 +68,13 @@
                 </select>
             </div>
 
-            <!--            <div>-->
-            <!--                <label class="form-label">Ratings</label>-->
-            <!--                <select class="form-select" required th:field="*{ratingsList}">-->
-            <!--                    <option selected disabled value="">Choose...</option>-->
-            <!--                    <option th:each="enumName : ${T(com.infoshareacademy.four_md.model.Ratings).values()}"-->
-            <!--                            th:value="${enumName}" , th:text="${enumName}"></option>-->
-            <!--                </select>-->
-            <!--            </div>-->
-
             <div class="shadow p-3 bg-body rounded">
                 <h4 class="text-center mt-3">Ingredient</h4>
                 <div class="mb-3">
                     <label class="form-label">Name</label>
                     <input class="form-control" type="text" placeholder="Name"
                            th:field="*{ingredientsList[0].name}">
-                    <!--                                            <span th:if="${#fields.hasErrors('ingredientList[0].name')}"  th:errors="*{ingredientsList[0].name}"/>-->
+
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Quantity</label>
@@ -113,7 +110,6 @@
                         <label class="form-label">Name</label>
                         <input class="form-control" type="text" placeholder="Name"
                                th:field="*{ingredientsList[__${i}__].name}">
-                        <!--                        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"/>-->
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Quantity</label>

@@ -1,6 +1,8 @@
 package com.infoshareacademy.four_md.model;
-import java.util.List;
+
 import com.infoshareacademy.four_md.service.interfaces.ObjectWithId;
+
+import java.util.List;
 
 public class User implements ObjectWithId {
     private int id;
