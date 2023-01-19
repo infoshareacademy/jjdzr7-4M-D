@@ -6,18 +6,18 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 public class Ingredients {
-    @Valid
-    @NotNull(message = "{validation.empty}")
-    @NotEmpty(message = "{validation.empty}")
+//    @Valid
+//    @NotNull(message = "{validation.empty}")
+//    @NotEmpty(message = "{validation.empty}")
     private String name;
-    @Valid
-    @NotNull(message = "{validation.empty}")
-    @Min(value = 0, message = "{validation.number}")
+//    @Valid
+//    @NotNull(message = "{validation.empty}")
+//    @Min(value = 0, message = "{validation.number}")
     private double quantity;
     private Unit unit;
-    @Valid
-    @NotNull(message = "{validation.empty}")
-    @Min(value = 0, message = "{validation.number}")
+//    @Valid
+//    @NotNull(message = "{validation.empty}")
+//    @Min(value = 0, message = "{validation.number}")
     private double price;
 
     public Ingredients(String name, double quantity, Unit unit, double price) {
