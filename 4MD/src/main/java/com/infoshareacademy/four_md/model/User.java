@@ -5,9 +5,6 @@ import com.infoshareacademy.four_md.service.interfaces.ObjectWithId;
 import java.util.List;
 
 public class User implements ObjectWithId {
-import java.util.List;
-
-public class User {
     private int id;
     private String name;
     private String surname;
