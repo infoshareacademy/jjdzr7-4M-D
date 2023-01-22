@@ -21,12 +21,14 @@ public class BookCook {
         return recipes;
     }
 
-    public List<Object> displayDataUser(User user) {
-        List<Object> dataUser = new ArrayList<>();
-        dataUser.add(user.getId());
-        dataUser.add(user.getName());
-        dataUser.add(user.getSurname());
-        dataUser.add(user.getListOfRecipes());
-        return dataUser;
+    public BookCook(List<Recipe> recipes) {
+        this.recipes = recipes;
+    }
+
+    @Override
+    public String toString() {
+        return "BookCook{" +
+                "recipes=" + recipes +
+                '}';
     }
 }
