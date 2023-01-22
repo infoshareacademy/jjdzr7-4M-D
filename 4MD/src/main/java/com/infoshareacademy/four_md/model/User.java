@@ -1,16 +1,13 @@
 package com.infoshareacademy.four_md.model;
 
-<<<<<<< HEAD
 import com.infoshareacademy.four_md.service.interfaces.ObjectWithId;
 
 import java.util.List;
 
 public class User implements ObjectWithId {
-=======
 import java.util.List;
 
 public class User {
->>>>>>> 34e1cf3713d20f365a332cc4e5bd95699980b505
     private int id;
     private String name;
     private String surname;
