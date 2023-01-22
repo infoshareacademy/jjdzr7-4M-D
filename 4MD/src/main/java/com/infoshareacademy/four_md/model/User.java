@@ -2,7 +2,7 @@ package com.infoshareacademy.four_md.model;
 
 import java.util.List;
 
-public class User {
+public class User implements ObjectWithId {
     private int id;
     private String name;
     private String surname;
