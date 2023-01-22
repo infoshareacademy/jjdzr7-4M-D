@@ -13,7 +13,7 @@ import javax.validation.Valid;
 import java.io.IOException;
 
 @Controller
-public class AddRecipe {
+public class RecipeController {
 
     @GetMapping("/add-recipe")
     public String newRecipe(Model model) {
