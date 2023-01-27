@@ -1,5 +1,7 @@
 package com.infoshareacademy.four_md.model;
 
+import com.infoshareacademy.four_md.model.entitiy.Recipe;
+
 import java.time.LocalDate;
 import java.util.Map;
 

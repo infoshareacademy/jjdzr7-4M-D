@@ -1,6 +1,6 @@
 package com.infoshareacademy.four_md.service.interfaces;
 
-import com.infoshareacademy.four_md.model.Recipe;
+import com.infoshareacademy.four_md.model.entitiy.Recipe;
 
 import java.io.IOException;
 import java.util.List;

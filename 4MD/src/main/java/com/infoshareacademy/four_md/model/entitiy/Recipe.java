@@ -1,20 +1,41 @@
-package com.infoshareacademy.four_md.model;
+package com.infoshareacademy.four_md.model.entitiy;
 
-import com.infoshareacademy.four_md.service.interfaces.ObjectWithId;
+import com.infoshareacademy.four_md.model.Difficulty;
+import com.infoshareacademy.four_md.model.DishType;
+import com.infoshareacademy.four_md.model.Ratings;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
-public class Recipe implements ObjectWithId {
+@Entity
+@Table(name = "Recipes")
+@Getter
+@Setter
+@NoArgsConstructor
+public class Recipe {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator ="Recipe_seq" )
+    @SequenceGenerator(name = "Recipe_seq",allocationSize = 1,sequenceName = "Recipe_seq")
     private int id;
+
     private String name;
+    @OneToMany
+    @JoinColumn
     private List<Ingredients> ingredientsList;
+
     private int estimatedCookingTime;
+
     private int calories;
-    private double cost;
-    private List<Integer> ratings;
+
+    @Enumerated(EnumType.ORDINAL)
+    @ElementCollection(targetClass = Ratings.class)
     private List<Ratings> ratingsList;
+
     private Difficulty difficulty;
+
     private DishType dishType;
 
     public Recipe(int id, String name, List<Ingredients> ingredientsList, int estimatedCookingTime, int calories, List<Ratings> ratingsList, Difficulty difficulty, DishType dishType) {
@@ -23,82 +44,10 @@ public class Recipe implements ObjectWithId {
         this.ingredientsList = ingredientsList;
         this.estimatedCookingTime = estimatedCookingTime;
         this.calories = calories;
-        this.cost = costCalculator();
         this.ratingsList = ratingsList;
         this.difficulty = difficulty;
         this.dishType = dishType;
     }
-    public Recipe() {
-        //! important for spring deserialization 
-    }
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Ingredients> getIngredientsList() {
-        return ingredientsList;
-    }
-
-    public void setIngredientsList(List<Ingredients> ingredientsList) {
-        this.ingredientsList = ingredientsList;
-    }
-
-    public int getEstimatedCookingTime() {
-        return estimatedCookingTime;
-    }
-
-    public void setEstimatedCookingTime(int estimatedCookingTime) {
-        this.estimatedCookingTime = estimatedCookingTime;
-    }
-
-    public int getCalories() {
-        return calories;
-    }
-
-    public void setCalories(int calories) {
-        this.calories = calories;
-    }
-
-    public double getCost() {
-        return cost;
-    }
-
-    private double costCalculator() {
-        return ingredientsList.stream().mapToDouble(Ingredients::getPrice).sum();
-    }
-
-    public List<Integer> getRatings() {
-        return ratings;
-    }
-
-    public Difficulty getDifficulty() {
-        return difficulty;
-    }
-
-    public void setDifficulty(Difficulty difficulty) {
-        this.difficulty = difficulty;
-    }
-
-    public DishType getDishType() {
-        return dishType;
-    }
-
-    public void setDishType(DishType dishType) {
-        this.dishType = dishType;
-    }
-
     @Override
     public String toString() {
         return "Recipe{" +
@@ -107,13 +56,15 @@ public class Recipe implements ObjectWithId {
                 ", ingredientsList=" + ingredientsList +
                 ", estimatedCookingTime=" + estimatedCookingTime +
                 ", calories=" + calories + " kcal" +
-                ", cost=" + cost + " zł" +
-                ", rating=" + ratings +
+                ", cost=" + getCost() + " zł" +
+                ", rating=" + ratingsList +
                 ", difficulty=" + difficulty +
                 ", dishType=" + dishType +
                 '}';
     }
-
+    public double getCost() {
+        return ingredientsList.stream().mapToDouble(Ingredients::getPrice).sum();
+    }
     private double averageRating() {
         double sum = ratingsList.stream().mapToDouble(Ratings::getNumVal).sum();
         return sum / (ratingsList.size());
