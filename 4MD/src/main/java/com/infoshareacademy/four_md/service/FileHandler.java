@@ -12,10 +12,10 @@ import java.util.List;
 
 public class FileHandler<T extends ObjectWithId> {
     
-    private String databasePath;
+    private final String databasePath;
     private final Gson gson = new Gson();
-    private Class<T> clazz;
-    private IdManager idManager;
+    private final Class<T> clazz;
+    private final IdManager idManager;
 
     public FileHandler(String databasePath,Class<T> clazz) throws IOException {
         this.databasePath = databasePath;

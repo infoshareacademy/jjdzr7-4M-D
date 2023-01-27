@@ -5,11 +5,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class IdManager {
-    private String filePath;
+    private final String filePath;
     public IdManager(String filePath) throws IOException {
         this.filePath = filePath;
-        if(!Files.exists(Path.of(filePath))){
-            Files.writeString(Path.of(filePath),"0");
+        Path path = Path.of(filePath);
+        if(!Files.exists(path)){
+            Files.writeString(path,"0");
         }
     }
     public int read() throws IOException{

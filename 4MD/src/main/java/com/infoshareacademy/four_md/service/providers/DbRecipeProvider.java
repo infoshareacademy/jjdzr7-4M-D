@@ -45,6 +45,7 @@ public class DbRecipeProvider implements RecipeProvider {
 
     @Override
     public Recipe get(int recipeId) throws IOException {
+        //noinspection OptionalGetWithoutIsPresent
         return StaticDtoMappers.toDto(recipes.findById(recipeId).get());
     }
 }

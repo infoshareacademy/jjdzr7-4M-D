@@ -29,7 +29,6 @@ public class SQLUserHandlerTests {
         user.setSurname("Kowalski");
 
         users.save(user);
-        //noinspection OptionalGetWithoutIsPresent
         User userFromDb = users.get(user.getId());
 
         Assertions.assertEquals(user.getName(),userFromDb.getName());
@@ -48,7 +47,6 @@ public class SQLUserHandlerTests {
 
 
         users.save(user);
-        //noinspection OptionalGetWithoutIsPresent
         User userFromDb = users.get(user.getId());
 
         assertThat(userFromDb.getListOfRecipes().stream().anyMatch(s -> s.getName().equals("Koktail"))).isTrue();
@@ -67,7 +65,6 @@ public class SQLUserHandlerTests {
 
 
         users.save(user);
-        //noinspection OptionalGetWithoutIsPresent
         User userFromDb = users.get(user.getId());
 
         assertThat(userFromDb.getListOfRecipes()).allMatch(s -> s.getRatingsList().get(0) == Ratings.R3);
@@ -87,7 +84,6 @@ public class SQLUserHandlerTests {
                 )));
 
         users.save(user);
-        //noinspection OptionalGetWithoutIsPresent
         User userFromDb = users.get(user.getId());
 
         assertThat(userFromDb.getListOfRecipes().get(0).getIngredientsList()).isNotEmpty();

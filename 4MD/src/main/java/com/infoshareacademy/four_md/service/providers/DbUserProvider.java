@@ -22,6 +22,7 @@ public class DbUserProvider implements UserProvider {
     }
     @Override
     public User get(int userId) throws IOException {
+        //noinspection OptionalGetWithoutIsPresent
         return StaticDtoMappers.toDto(userRepo.findById(userId).get());
     }
 
