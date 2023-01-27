@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <title>Ex 8</title>
 </head>
 
@@ -24,7 +25,8 @@
 
             <div>
                 <label class="form-label">Method</label>
-                <textarea class="form-control" type="text" rows="4" placeholder="Preparation method" th:field="*{method}"> </textarea>
+                <textarea class="form-control" type="text" rows="4" placeholder="Preparation method"
+                          th:field="*{method}"> </textarea>
                 <span class="text-danger" th:if="${#fields.hasErrors('method')}" th:errors="*{method}"/>
             </div>
 
@@ -68,13 +70,12 @@
                 </select>
             </div>
 
-            <div class="shadow p-3 bg-body rounded">
+            <div class="shadow p-3 bg-body rounded" id="ingredientToCopy">
                 <h4 class="text-center mt-3">Ingredient</h4>
                 <div class="mb-3">
                     <label class="form-label">Name</label>
                     <input class="form-control" type="text" placeholder="Name"
                            th:field="*{ingredientsList[0].name}">
-
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Quantity</label>
@@ -104,50 +105,56 @@
                           th:errors="*{ingredientsList[0].price}"/>
                 </div>
 
-                <div class="d-none" id="hidden" th:each="i : ${#numbers.sequence( 1, 19)}">
-                    <h4 class="text-center mt-3">Ingredient</h4>
-                    <div class="mb-3">
-                        <label class="form-label">Name</label>
-                        <input class="form-control" type="text" placeholder="Name"
-                               th:field="*{ingredientsList[__${i}__].name}">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Quantity</label>
-                        <input type="number" step="any" class="form-control" th:placeholder="'Cost'"
-                               th:field="*{ingredientsList[__${i}__].quantity}">
-                        <span class="text-danger"
-                              th:if="${#fields.hasErrors('ingredientsList[__${i}__].quantity')}" th:errorclass="error"
-                              th:errors="*{ingredientsList[__${i}__].quantity}"/>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Unit</label>
-                        <select class="form-select" required th:field="*{ingredientsList[__${i}__].unit}">
-                            <option selected disabled value="">Choose...</option>
-                            <option th:each="enumName : ${T(com.infoshareacademy.four_md.model.Unit).values()}"
-                                    th:value="${enumName}" , th:text="${enumName}"></option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Price</label>
-                        <div class="input-group">
-                            <input type="number" step="any" class="form-control" th:placeholder="'Cost'"
-                                   th:field="*{ingredientsList[__${i}__].price}" name="price">
-                            <span class="input-group-text">PLN</span>
-                        </div>
-                        <span class="text-danger"
-                              th:if="${#fields.hasErrors('ingredientsList[__${i}__].price')}"
-                              th:errors="*{ingredientsList[__${i}__].price}"/>
-                    </div>
-                </div>
-                <div class="d-grid mt-3 mb-3 col-5">
-                    <a class="btn btn-outline-primary" role="button" onclick="show()">+ Add new Ingredient</a>
-                </div>
+
+<!--                <div class="d-none" id="hidden" th:each="i : ${#numbers.sequence( 1, 19)}">-->
+<!--                    <h4 class="text-center mt-3">Ingredient</h4>-->
+<!--                    <div class="mb-3">-->
+<!--                        <label class="form-label">Name</label>-->
+<!--                        <input class="form-control" type="text" placeholder="Name"-->
+<!--                               th:field="*{ingredientsList[__${i}__].name}">-->
+<!--                    </div>-->
+<!--                    <div class="mb-3">-->
+<!--                        <label class="form-label">Quantity</label>-->
+<!--                        <input type="number" step="any" class="form-control" th:placeholder="'Cost'"-->
+<!--                               th:field="*{ingredientsList[__${i}__].quantity}">-->
+<!--                        <span class="text-danger"-->
+<!--                              th:if="${#fields.hasErrors('ingredientsList[__${i}__].quantity')}" th:errorclass="error"-->
+<!--                              th:errors="*{ingredientsList[__${i}__].quantity}"/>-->
+<!--                    </div>-->
+<!--                    <div class="mb-3">-->
+<!--                        <label class="form-label">Unit</label>-->
+<!--                        <select class="form-select" required th:field="*{ingredientsList[__${i}__].unit}">-->
+<!--                            <option selected disabled value="">Choose...</option>-->
+<!--                            <option th:each="enumName : ${T(com.infoshareacademy.four_md.model.Unit).values()}"-->
+<!--                                    th:value="${enumName}" , th:text="${enumName}"></option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+<!--                    <div class="mb-3">-->
+<!--                        <label class="form-label">Price</label>-->
+<!--                        <div class="input-group">-->
+<!--                            <input type="number" step="any" class="form-control" th:placeholder="'Cost'"-->
+<!--                                   th:field="*{ingredientsList[__${i}__].price}" name="price">-->
+<!--                            <span class="input-group-text">PLN</span>-->
+<!--                        </div>-->
+<!--                        <span class="text-danger"-->
+<!--                              th:if="${#fields.hasErrors('ingredientsList[__${i}__].price')}"-->
+<!--                              th:errors="*{ingredientsList[__${i}__].price}"/>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="d-grid mt-3 mb-3 col-5">-->
+<!--                    <a class="btn btn-outline-primary" role="button" onclick="show()">+ Add new Ingredient</a>-->
+<!--                </div>-->
+
             </div>
+                    <div class="d-grid mt-3 mb-3 col-5">
+                        <a class="btn btn-outline-primary" role="button" id="btn2">+ test</a>
+                    </div>
 
             <div class="d-grid gap-2 col-8 mx-auto mb-2">
                 <button class="btn btn-primary" type="submit">Submit form</button>
             </div>
         </form>
+
     </div>
 </div>
 
@@ -162,6 +169,70 @@
         document.getElementById("hidden").removeAttribute('id');
         window.scrollTo(0, document.body.scrollHeight);
     }
+    function reloadCss()
+    {
+        var links = document.getElementsByTagName("link");
+        for (var cl in links)
+        {
+            var link = links[cl];
+            if (link.rel === "stylesheet")
+                link.href += "";
+        }
+    }
+
+
+    $(document).ready(function () {
+        var counter = 0;
+        $("#btn2").click(function (event) {
+            event.preventDefault();
+            counter++;
+            var newRow = jQuery(
+               '<div className="mb-3">' +
+                '<label className="form-label">Name</label>'  +
+                 // '   <input className="form-control" type="text" placeholder="Name" id="ingredientsList'+counter+'.name" name="ingredientsList['+counter+'].name">'   +
+                '</div>' +
+                '            <div class="shadow p-3 bg-body rounded" id="ingredientToCopy">\n' +
+                '                <h4 class="text-center mt-3">Ingredient</h4>\n' +
+                '                <div class="mb-3">\n' +
+                '                    <label class="form-label">Name</label>\n' +
+                '                    <input class="form-control" type="text" placeholder="Name"\n' +
+                '                           name="ingredientsList['+counter+'].name" id="ingredientsList'+counter+'.name">\n' +
+                '                </div>\n' +
+                '                <div class="mb-3">\n' +
+                '                    <label class="form-label">Quantity</label>\n' +
+                '                    <input type="number" step="any" class="form-control" th:placeholder="\'Cost\'"\n' +
+                '                           th:field="*{ingredientsList[0].quantity}">\n' +
+                '                    <span class="text-danger"\n' +
+                '                          th:if="${#fields.hasErrors(\'ingredientsList[0].quantity\')}" th:errorclass="error"\n' +
+                '                          th:errors="*{ingredientsList[0].quantity}"/>\n' +
+                '                </div>\n' +
+                '                <div class="mb-3">\n' +
+                '                    <label class="form-label">Unit</label>\n' +
+                '                    <select class="form-select" required th:field="*{ingredientsList[0].unit}">\n' +
+                '                        <option selected disabled value="">Choose...</option>\n' +
+                '                        <option th:each="enumName : ${T(com.infoshareacademy.four_md.model.Unit).values()}"\n' +
+                '                                th:value="${enumName}" , th:text="${enumName}"></option>\n' +
+                '                    </select>\n' +
+                '                </div>\n' +
+                '                <div class="mb-3">\n' +
+                '                    <label class="form-label">Price</label>\n' +
+                '                    <div class="input-group">\n' +
+                '                        <input type="number" step="any" class="form-control" th:placeholder="\'Cost\'"\n' +
+                '                               th:field="*{ingredientsList[0].price}" name="price">\n' +
+                '                        <span class="input-group-text">PLN</span>\n' +
+                '                    </div>\n' +
+                '                    <span class="text-danger"\n' +
+                '                          th:if="${#fields.hasErrors(\'ingredientsList[0].price\')}"\n' +
+                '                          th:errors="*{ingredientsList[0].price}"/>\n' +
+                '                </div>\n' +
+                '</div>'
+
+               );
+            jQuery('#ingredientToCopy').append(newRow);
+
+        });
+    });
+
 </script>
 
 </body>
