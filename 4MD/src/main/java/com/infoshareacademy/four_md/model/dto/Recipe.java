@@ -1,53 +1,38 @@
-package com.infoshareacademy.four_md.model.entitiy;
+package com.infoshareacademy.four_md.model.dto;
 
 import com.infoshareacademy.four_md.model.Difficulty;
 import com.infoshareacademy.four_md.model.DishType;
 import com.infoshareacademy.four_md.model.Ratings;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-@Entity
-@Table(name = "Recipes")
+
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Recipe {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator ="Recipe_seq" )
-    @SequenceGenerator(name = "Recipe_seq",allocationSize = 1,sequenceName = "Recipe_seq")
+
     private int id;
 
     private String name;
-    @OneToMany
-    @JoinColumn
-    private List<Ingredients> ingredientsList;
+
+    private List<Ingredients> ingredientsList = new ArrayList<>();
 
     private int estimatedCookingTime;
 
     private int calories;
 
-    @Enumerated(EnumType.ORDINAL)
-    @ElementCollection(targetClass = Ratings.class)
-    private List<Ratings> ratingsList;
+
+    private List<Ratings> ratingsList = new ArrayList<>();
 
     private Difficulty difficulty;
 
     private DishType dishType;
-
-    public Recipe(int id, String name, List<Ingredients> ingredientsList, int estimatedCookingTime, int calories, List<Ratings> ratingsList, Difficulty difficulty, DishType dishType) {
-        this.id = id;
-        this.name = name;
-        this.ingredientsList = ingredientsList;
-        this.estimatedCookingTime = estimatedCookingTime;
-        this.calories = calories;
-        this.ratingsList = ratingsList;
-        this.difficulty = difficulty;
-        this.dishType = dishType;
-    }
     @Override
     public String toString() {
         return "Recipe{" +

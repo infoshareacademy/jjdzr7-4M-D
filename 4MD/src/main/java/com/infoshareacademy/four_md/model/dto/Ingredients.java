@@ -1,21 +1,15 @@
-package com.infoshareacademy.four_md.model.entitiy;
+package com.infoshareacademy.four_md.model.dto;
 
 import com.infoshareacademy.four_md.model.Unit;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
-
 @Getter
 @Setter
 @NoArgsConstructor
-@Entity
-@Table(name = "Ingredients")
 public class Ingredients {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator ="Ingredients_seq" )
-    @SequenceGenerator(name = "Ingredients_seq",allocationSize = 1,sequenceName = "Ingredients_seq")
+
     private int id;
     private String name;
     private double quantity;

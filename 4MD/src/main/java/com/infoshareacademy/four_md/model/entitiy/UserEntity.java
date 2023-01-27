@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -14,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "Users")
-public class User  {
+public class UserEntity  {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator ="Users_seq" )
     @SequenceGenerator(name = "Users_seq",allocationSize = 1,sequenceName = "Users_seq")
@@ -25,5 +26,5 @@ public class User  {
     private String surname;
     @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn
-    private List<Recipe> listOfRecipes;
+    private List<RecipeEntity> listOfRecipes = new ArrayList<>();
 }

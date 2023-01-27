@@ -1,7 +1,8 @@
 package com.infoshareacademy.four_md.service.providers;
 
-import com.infoshareacademy.four_md.model.entitiy.Recipe;
-import com.infoshareacademy.four_md.model.entitiy.User;
+import com.infoshareacademy.four_md.model.dto.User;
+import com.infoshareacademy.four_md.model.entitiy.RecipeEntity;
+import com.infoshareacademy.four_md.service.StaticDtoMappers;
 import com.infoshareacademy.four_md.service.interfaces.UserProvider;
 import com.infoshareacademy.four_md.service.jpaRepos.UserRepository;
 import org.springframework.stereotype.Component;
@@ -21,19 +22,22 @@ public class DbUserProvider implements UserProvider {
     }
     @Override
     public User get(int userId) throws IOException {
-        return userRepo.findById(userId).get();
+        return StaticDtoMappers.toDto(userRepo.findById(userId).get());
     }
 
     @Override
     public void save(User user) throws IOException {
-        userRepo.save(user);
-        for (Recipe recipe : user.getListOfRecipes()) {
+        var entity = StaticDtoMappers.toEntity(user);
+        for (RecipeEntity recipe : entity.getListOfRecipes()) {
             recipeProvider.save(recipe);
         }
+        userRepo.saveAndFlush(entity);
+        user.setId(entity.getId());
     }
 
     @Override
     public void remove(int userId) throws IOException {
         userRepo.deleteById(userId);
+        userRepo.flush();
     }
 }
