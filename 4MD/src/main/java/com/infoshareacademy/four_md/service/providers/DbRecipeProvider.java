@@ -13,7 +13,6 @@ import java.io.IOException;
 
 //! TODO You know what to do
 @Component
-@Transactional
 public class DbRecipeProvider implements RecipeProvider {
     private final RecipeRepository recipes;
     private final IngredientsRepository ingredients;
@@ -29,6 +28,7 @@ public class DbRecipeProvider implements RecipeProvider {
         save(entity);
         recipe.setId(entity.getId());
     }
+    @Transactional
     public void save(RecipeEntity recipe) throws IOException {
         for (var ingredient : recipe.getIngredientsList()) {
             ingredients.save(ingredient);
@@ -44,6 +44,7 @@ public class DbRecipeProvider implements RecipeProvider {
     }
 
     @Override
+    @Transactional
     public Recipe get(int recipeId) throws IOException {
         //noinspection OptionalGetWithoutIsPresent
         return StaticDtoMappers.toDto(recipes.findById(recipeId).get());

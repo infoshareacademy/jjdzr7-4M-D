@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import javax.transaction.Transactional;
 import java.io.IOException;
 @Component
-@Transactional
 public class DbUserProvider implements UserProvider {
     private final UserRepository userRepo;
     private final DbRecipeProvider recipeProvider;
@@ -21,12 +20,14 @@ public class DbUserProvider implements UserProvider {
         this.recipeProvider = recipeProvider;
     }
     @Override
+    @Transactional
     public User get(int userId) throws IOException {
         //noinspection OptionalGetWithoutIsPresent
         return StaticDtoMappers.toDto(userRepo.findById(userId).get());
     }
 
     @Override
+    @Transactional
     public void save(User user) throws IOException {
         var entity = StaticDtoMappers.toEntity(user);
         for (RecipeEntity recipe : entity.getListOfRecipes()) {
