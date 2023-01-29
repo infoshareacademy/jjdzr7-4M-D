@@ -76,13 +76,15 @@
                     <label class="form-label">Name</label>
                     <input class="form-control" type="text" placeholder="Name"
                            th:field="*{ingredientsList[0].name}">
+                    <span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errorclass="error"
+                          th:errors="*{name}"/>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Quantity</label>
-                    <input type="number" step="any" class="form-control" th:placeholder="'Cost'"
+                    <input type="number" step="any" class="form-control" th:placeholder="'Quantity'"
                            th:field="*{ingredientsList[0].quantity}">
                     <span class="text-danger"
-                          th:if="${#fields.hasErrors('ingredientsList[0].quantity')}" th:errorclass="error"
+                          th:if="${#fields.hasErrors('ingredientsList[0].quantity')}"
                           th:errors="*{ingredientsList[0].quantity}"/>
                 </div>
                 <div class="mb-3">
@@ -105,50 +107,11 @@
                           th:errors="*{ingredientsList[0].price}"/>
                 </div>
 
-
-                <!--                <div class="d-none" id="hidden" th:each="i : ${#numbers.sequence( 1, 19)}">-->
-                <!--                    <h4 class="text-center mt-3">Ingredient</h4>-->
-                <!--                    <div class="mb-3">-->
-                <!--                        <label class="form-label">Name</label>-->
-                <!--                        <input class="form-control" type="text" placeholder="Name"-->
-                <!--                               th:field="*{ingredientsList[__${i}__].name}">-->
-                <!--                    </div>-->
-                <!--                    <div class="mb-3">-->
-                <!--                        <label class="form-label">Quantity</label>-->
-                <!--                        <input type="number" step="any" class="form-control" th:placeholder="'Cost'"-->
-                <!--                               th:field="*{ingredientsList[__${i}__].quantity}">-->
-                <!--                        <span class="text-danger"-->
-                <!--                              th:if="${#fields.hasErrors('ingredientsList[__${i}__].quantity')}" th:errorclass="error"-->
-                <!--                              th:errors="*{ingredientsList[__${i}__].quantity}"/>-->
-                <!--                    </div>-->
-                <!--                    <div class="mb-3">-->
-                <!--                        <label class="form-label">Unit</label>-->
-                <!--                        <select class="form-select" required th:field="*{ingredientsList[__${i}__].unit}">-->
-                <!--                            <option selected disabled value="">Choose...</option>-->
-                <!--                            <option th:each="enumName : ${T(com.infoshareacademy.four_md.model.Unit).values()}"-->
-                <!--                                    th:value="${enumName}" , th:text="${enumName}"></option>-->
-                <!--                        </select>-->
-                <!--                    </div>-->
-                <!--                    <div class="mb-3">-->
-                <!--                        <label class="form-label">Price</label>-->
-                <!--                        <div class="input-group">-->
-                <!--                            <input type="number" step="any" class="form-control" th:placeholder="'Cost'"-->
-                <!--                                   th:field="*{ingredientsList[__${i}__].price}" name="price">-->
-                <!--                            <span class="input-group-text">PLN</span>-->
-                <!--                        </div>-->
-                <!--                        <span class="text-danger"-->
-                <!--                              th:if="${#fields.hasErrors('ingredientsList[__${i}__].price')}"-->
-                <!--                              th:errors="*{ingredientsList[__${i}__].price}"/>-->
-                <!--                    </div>-->
-                <!--                </div>-->
-                <!--                <div class="d-grid mt-3 mb-3 col-5">-->
-                <!--                    <a class="btn btn-outline-primary" role="button" onclick="show()">+ Add new Ingredient</a>-->
-                <!--                </div>-->
-
+                <div class="d-grid mt-3 mb-3 col-5">
+                    <a class="btn btn-outline-primary" role="button" id="btn2">+ Add new Ingredient</a>
+                </div>
             </div>
-            <div class="d-grid mt-3 mb-3 col-5">
-                <a class="btn btn-outline-primary" role="button" id="btn2">+ test</a>
-            </div>
+
 
             <div class="d-grid gap-2 col-8 mx-auto mb-2">
                 <button class="btn btn-primary" type="submit">Submit form</button>
@@ -164,11 +127,6 @@
         crossorigin="anonymous">
 </script>
 <script>
-    function show() {
-        document.getElementById('hidden').classList.remove('d-none');
-        document.getElementById("hidden").removeAttribute('id');
-        window.scrollTo(0, document.body.scrollHeight);
-    }
 
     $(document).ready(function () {
         var counter = 0;
@@ -196,8 +154,6 @@
                 '                        <option selected disabled value="">Choose...</option>\n' +
                 '<option value="GRAM">GRAM</option>' +
                 '<option value="MILLILITERS">MILLILITERS</option>' +
-                '                        <option th:each="enumName : ${T(com.infoshareacademy.four_md.model.Unit).values()}"\n' +
-                '                                th:value="${enumName}" , th:text="${enumName}"></option>\n' +
                 '                    </select>\n' +
                 '                </div>\n' +
                 '                <div class="mb-3">\n' +
