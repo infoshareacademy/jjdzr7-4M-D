@@ -1,6 +1,6 @@
 package com.infoshareacademy.four_md.service.interfaces;
 
-import com.infoshareacademy.four_md.model.User;
+import com.infoshareacademy.four_md.model.dto.User;
 
 import java.io.IOException;
 

@@ -1,4 +1,4 @@
-package com.infoshareacademy.four_md.service;
+package com.infoshareacademy.four_md.service.providers;
 
 import com.google.gson.Gson;
 import com.infoshareacademy.four_md.model.Planner;

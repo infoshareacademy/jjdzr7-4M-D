@@ -1,6 +1,16 @@
-package com.infoshareacademy.four_md.model;
+package com.infoshareacademy.four_md.model.dto;
 
+import com.infoshareacademy.four_md.model.Unit;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
 public class Ingredients {
+
+    private int id;
     private String name;
     private double quantity;
     private Unit unit;
@@ -10,41 +20,6 @@ public class Ingredients {
         this.name = name;
         this.quantity = quantity;
         this.unit = unit;
-        this.price = price;
-    }
-
-    public Ingredients() {
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public double getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(double quantity) {
-        this.quantity = quantity;
-    }
-
-    public Unit getUnit() {
-        return unit;
-    }
-
-    public void setUnit(Unit unit) {
-        this.unit = unit;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
         this.price = price;
     }
 
