@@ -137,12 +137,12 @@
                 '                <h4 class="text-center mt-5">Ingredient</h4>\n' +
                 '                <div class="mb-3">\n' +
                 '                    <label class="form-label">Name</label>\n' +
-                '                    <input class="form-control" type="text" placeholder="Name"\n' +
+                '                    <input class="form-control" required type="text" placeholder="Name"\n' +
                 '                           name="ingredientsList[' + counter + '].name" id="ingredientsList' + counter + '.name">\n' +
                 '                </div>\n' +
                 '                <div class="mb-3">\n' +
                 '                    <label class="form-label">Quantity</label>\n' +
-                '                    <input type="number" step="any" class="form-control"\n' +
+                '                    <input type="number" step="any" required class="form-control"\n' +
                 '                           name="ingredientsList[' + counter + '].quantity" id="ingredientsList' + counter + '.quantity" value="0">\n' +
                 '                    <span class="text-danger"\n' +
                 '                          th:if="${#fields.hasErrors(\'ingredientsList[' + counter + '].quantity\')}" th:errorclass="error"\n' +
@@ -159,7 +159,7 @@
                 '                <div class="mb-3">\n' +
                 '                    <label class="form-label">Price</label>\n' +
                 '                    <div class="input-group">\n' +
-                '                        <input type="number" step="any" class="form-control" value="0" \n' +
+                '                        <input type="number" step="any" required class="form-control" value="0" \n' +
                 '                               name="ingredientsList[' + counter + '].price" id="ingredientsList' + counter + '.price">\n' +
                 '                        <span class="input-group-text">PLN</span>\n' +
                 '                    </div>\n' +

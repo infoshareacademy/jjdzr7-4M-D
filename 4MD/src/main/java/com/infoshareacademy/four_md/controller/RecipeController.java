@@ -30,8 +30,9 @@ public class RecipeController {
         }
         deleteBlankIngredients(recipe);
         RecipeFileHandler recipeFileHandler = new RecipeFileHandler();
-        recipeFileHandler.save(recipe);
+//        recipeFileHandler.save(recipe);
         model.addAttribute("recipe", recipe);
+        System.out.println(recipe);
         return "confirmation";
     }
 
