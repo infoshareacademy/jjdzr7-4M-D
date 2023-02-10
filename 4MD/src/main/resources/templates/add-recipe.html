@@ -70,22 +70,18 @@
                 </select>
             </div>
 
-            <div class="shadow p-3 bg-body rounded" id="ingredientToCopy">
+            <div class="shadow p-3 bg-body rounded" >
+            <div id="ingredientToCopy">
                 <h4 class="text-center mt-3">Ingredient</h4>
                 <div class="mb-3">
                     <label class="form-label">Name</label>
-                    <input class="form-control" type="text" placeholder="Name"
+                    <input class="form-control" required type="text" placeholder="Name"
                            th:field="*{ingredientsList[0].name}">
-                    <span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errorclass="error"
-                          th:errors="*{name}"/>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Quantity</label>
-                    <input type="number" step="any" class="form-control" th:placeholder="'Quantity'"
+                    <input type="number" step="any" class="form-control" required th:placeholder="'Quantity'"
                            th:field="*{ingredientsList[0].quantity}">
-                    <span class="text-danger"
-                          th:if="${#fields.hasErrors('ingredientsList[0].quantity')}"
-                          th:errors="*{ingredientsList[0].quantity}"/>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Unit</label>
@@ -98,20 +94,18 @@
                 <div class="mb-3">
                     <label class="form-label">Price</label>
                     <div class="input-group">
-                        <input type="number" step="any" class="form-control" th:placeholder="'Cost'"
+                        <input type="number" step="any" class="form-control" required th:placeholder="'Cost'"
                                th:field="*{ingredientsList[0].price}" name="price">
                         <span class="input-group-text">PLN</span>
                     </div>
-                    <span class="text-danger"
-                          th:if="${#fields.hasErrors('ingredientsList[0].price')}"
-                          th:errors="*{ingredientsList[0].price}"/>
                 </div>
+            </div>
 
                 <div class="d-grid mt-3 mb-3 col-5">
                     <a class="btn btn-outline-primary" role="button" id="btn2">+ Add new Ingredient</a>
                 </div>
-            </div>
 
+            </div>
 
             <div class="d-grid gap-2 col-8 mx-auto mb-2">
                 <button class="btn btn-primary" type="submit">Submit form</button>
@@ -144,16 +138,13 @@
                 '                    <label class="form-label">Quantity</label>\n' +
                 '                    <input type="number" step="any" required class="form-control"\n' +
                 '                           name="ingredientsList[' + counter + '].quantity" id="ingredientsList' + counter + '.quantity" value="0">\n' +
-                '                    <span class="text-danger"\n' +
-                '                          th:if="${#fields.hasErrors(\'ingredientsList[' + counter + '].quantity\')}" th:errorclass="error"\n' +
-                '                          th:errors="*{ingredientsList[' + counter + '].quantity}"/>\n' +
                 '                </div>\n' +
                 '                <div class="mb-3">\n' +
                 '                    <label class="form-label">Unit</label>\n' +
                 '                    <select class="form-select" required name="ingredientsList[' + counter + '].unit" id="ingredientsList' + counter + '.unit">\n' +
                 '                        <option selected disabled value="">Choose...</option>\n' +
-                '<option value="GRAM">GRAM</option>' +
-                '<option value="MILLILITERS">MILLILITERS</option>' +
+                '                        <option value="GRAM">GRAM</option>' +
+                '                        <option value="MILLILITERS">MILLILITERS</option>' +
                 '                    </select>\n' +
                 '                </div>\n' +
                 '                <div class="mb-3">\n' +
@@ -163,9 +154,6 @@
                 '                               name="ingredientsList[' + counter + '].price" id="ingredientsList' + counter + '.price">\n' +
                 '                        <span class="input-group-text">PLN</span>\n' +
                 '                    </div>\n' +
-                '                    <span class="text-danger"\n' +
-                '                          th:if="${#fields.hasErrors(\'ingredientsList[' + counter + '].price\')}"\n' +
-                '                          th:errors="*{ingredientsList[0].price}"/>\n' +
                 '                </div>\n'
             );
             jQuery('#ingredientToCopy').append(newRow);
