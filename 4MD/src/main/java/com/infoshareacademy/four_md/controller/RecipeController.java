@@ -1,43 +1,43 @@
 package com.infoshareacademy.four_md.controller;
 
-import com.infoshareacademy.four_md.model.Recipe;
-import com.infoshareacademy.four_md.service.RecipeFileHandler;
+import com.infoshareacademy.four_md.model.entitiy.RecipeEntity;
+import com.infoshareacademy.four_md.service.jpaRepos.RecipeRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
 import java.io.IOException;
 
 @Controller
 public class RecipeController {
+    private RecipeRepository recipeRepository;
+
+    public RecipeController(RecipeRepository recipeRepository) {
+        this.recipeRepository = recipeRepository;
+    }
 
     @GetMapping("/add-recipe")
     public String newRecipe(Model model) {
-        Recipe recipe = new Recipe();
-        model.addAttribute("recipe", recipe);
+        RecipeEntity recipeEntity = new RecipeEntity();
+        model.addAttribute("recipe", recipeEntity);
         return "add-recipe";
     }
 
     @PostMapping("/saveRecipe")
-    public String saveTask(@Valid @ModelAttribute Recipe recipe, BindingResult bindResult, Model model) throws IOException {
+    public String saveTask(@RequestBody @Valid @ModelAttribute RecipeEntity recipeEntity, BindingResult bindResult, Model model) throws IOException {
 
         if (bindResult.hasErrors()) {
             return "add-recipe";
         }
-        deleteBlankIngredients(recipe);
-        RecipeFileHandler recipeFileHandler = new RecipeFileHandler();
-//        recipeFileHandler.save(recipe);
-        model.addAttribute("recipe", recipe);
-        System.out.println(recipe);
-        return "confirmation";
-    }
+        recipeRepository.save(recipeEntity);
+        model.addAttribute("recipe", recipeEntity);
 
-    private void deleteBlankIngredients(Recipe recipe) {
-        recipe.getIngredientsList().removeIf(ingredients -> ingredients.getName().equals(""));
+        return "confirmation";
     }
 
 }
