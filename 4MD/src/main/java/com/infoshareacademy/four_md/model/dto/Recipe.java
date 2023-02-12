@@ -3,6 +3,7 @@ package com.infoshareacademy.four_md.model.dto;
 import com.infoshareacademy.four_md.model.Difficulty;
 import com.infoshareacademy.four_md.model.DishType;
 import com.infoshareacademy.four_md.model.Ratings;
+import com.infoshareacademy.four_md.model.entitiy.IngredientsEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
