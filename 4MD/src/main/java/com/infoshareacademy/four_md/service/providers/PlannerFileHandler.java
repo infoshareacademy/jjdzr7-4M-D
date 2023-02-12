@@ -1,4 +1,4 @@
-package com.infoshareacademy.four_md.service;
+package com.infoshareacademy.four_md.service.providers;
 
 import com.google.gson.Gson;
 import com.infoshareacademy.four_md.model.Planner;
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+
 
 @Component
 public class PlannerFileHandler implements PlannerProvider {
