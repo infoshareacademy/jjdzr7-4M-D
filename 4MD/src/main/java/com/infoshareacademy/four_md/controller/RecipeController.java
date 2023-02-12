@@ -3,6 +3,7 @@ package com.infoshareacademy.four_md.controller;
 import com.infoshareacademy.four_md.model.dto.Recipe;
 import com.infoshareacademy.four_md.model.entitiy.IngredientsEntity;
 import com.infoshareacademy.four_md.model.entitiy.RecipeEntity;
+import com.infoshareacademy.four_md.service.jpaRepos.IngredientsRepository;
 import com.infoshareacademy.four_md.service.jpaRepos.RecipeRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -11,15 +12,18 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class RecipeController {
     private RecipeRepository recipeRepository;
+    private IngredientsRepository ingredientsRepository;
 
-    public RecipeController(RecipeRepository recipeRepository) {
+    public RecipeController(RecipeRepository recipeRepository, IngredientsRepository ingredientsRepository) {
         this.recipeRepository = recipeRepository;
+        this.ingredientsRepository = ingredientsRepository;
     }
 
     @GetMapping("/add-recipe")
@@ -60,13 +64,13 @@ public class RecipeController {
         newIngredientsEntity.setPrice(recipeDTO.getIngredientsList().get(0).getPrice());
         newIngredientsEntity.setQuantity(recipeDTO.getIngredientsList().get(0).getQuantity());
         newIngredientsEntity.setUnit(recipeDTO.getIngredientsList().get(0).getUnit());
-        ingredientsList.add(newIngredientsEntity);
 
+        ingredientsRepository.save(newIngredientsEntity);
+        ingredientsList.add(newIngredientsEntity);
         newRecipeEntity.setIngredientsList(ingredientsList);
         recipeRepository.save(newRecipeEntity);
 
         return "confirmation";
-
     }
 
 }
