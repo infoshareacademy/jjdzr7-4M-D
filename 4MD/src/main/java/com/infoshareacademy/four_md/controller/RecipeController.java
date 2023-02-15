@@ -33,44 +33,45 @@ public class RecipeController {
         return "add-recipe";
     }
 
-//    @PostMapping("/saveRecipe")
-//    public String saveTask(@RequestBody @Valid @ModelAttribute RecipeEntity recipeEntity, BindingResult bindResult, Model model) throws IOException {
-//        if (bindResult.hasErrors()) {
-//            return "add-recipe";
-//        }
-//        recipeRepository.save(recipeEntity);
-//        model.addAttribute("recipe", recipeEntity);
-//        return "confirmation";
-//    }
-
-    @PostMapping(value = "/saveRecipe")
+    @PostMapping("/saveRecipe")
     @ResponseStatus(HttpStatus.CREATED)
-    private String saveTask(@RequestBody @Valid @ModelAttribute Recipe recipeDTO, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
+    public String saveTask(@RequestBody @Valid @ModelAttribute RecipeEntity recipeEntity, BindingResult bindResult, Model model) throws IOException {
+        if (bindResult.hasErrors()) {
             return "add-recipe";
         }
-        model.addAttribute("recipe", recipeDTO);
-        RecipeEntity newRecipeEntity = new RecipeEntity();
-        IngredientsEntity newIngredientsEntity = new IngredientsEntity();
-        List<IngredientsEntity> ingredientsList = new ArrayList<>();
-        newRecipeEntity.setName(recipeDTO.getName());
-        newRecipeEntity.setMethod(recipeDTO.getMethod());
-        newRecipeEntity.setEstimatedCookingTime(recipeDTO.getEstimatedCookingTime());
-        newRecipeEntity.setCalories(recipeDTO.getCalories());
-        newRecipeEntity.setDishType(recipeDTO.getDishType());
-        newRecipeEntity.setDifficulty(recipeDTO.getDifficulty());
-
-        newIngredientsEntity.setName(recipeDTO.getIngredientsList().get(0).getName());
-        newIngredientsEntity.setPrice(recipeDTO.getIngredientsList().get(0).getPrice());
-        newIngredientsEntity.setQuantity(recipeDTO.getIngredientsList().get(0).getQuantity());
-        newIngredientsEntity.setUnit(recipeDTO.getIngredientsList().get(0).getUnit());
-
-        ingredientsRepository.save(newIngredientsEntity);
-        ingredientsList.add(newIngredientsEntity);
-        newRecipeEntity.setIngredientsList(ingredientsList);
-        recipeRepository.save(newRecipeEntity);
-
+        recipeRepository.save(recipeEntity);
+        model.addAttribute("recipe", recipeEntity);
         return "confirmation";
     }
+
+//    @PostMapping(value = "/saveRecipe")
+//    @ResponseStatus(HttpStatus.CREATED)
+//    private String saveTask(@RequestBody @Valid @ModelAttribute Recipe recipeDTO, BindingResult bindingResult, Model model) {
+//        if (bindingResult.hasErrors()) {
+//            return "add-recipe";
+//        }
+//        model.addAttribute("recipe", recipeDTO);
+//        RecipeEntity newRecipeEntity = new RecipeEntity();
+//        IngredientsEntity newIngredientsEntity = new IngredientsEntity();
+//        List<IngredientsEntity> ingredientsList = new ArrayList<>();
+//        newRecipeEntity.setName(recipeDTO.getName());
+//        newRecipeEntity.setMethod(recipeDTO.getMethod());
+//        newRecipeEntity.setEstimatedCookingTime(recipeDTO.getEstimatedCookingTime());
+//        newRecipeEntity.setCalories(recipeDTO.getCalories());
+//        newRecipeEntity.setDishType(recipeDTO.getDishType());
+//        newRecipeEntity.setDifficulty(recipeDTO.getDifficulty());
+//
+//        newIngredientsEntity.setName(recipeDTO.getIngredientsList().get(0).getName());
+//        newIngredientsEntity.setPrice(recipeDTO.getIngredientsList().get(0).getPrice());
+//        newIngredientsEntity.setQuantity(recipeDTO.getIngredientsList().get(0).getQuantity());
+//        newIngredientsEntity.setUnit(recipeDTO.getIngredientsList().get(0).getUnit());
+//
+//        ingredientsRepository.save(newIngredientsEntity);
+//        ingredientsList.add(newIngredientsEntity);
+//        newRecipeEntity.setIngredientsList(ingredientsList);
+//        recipeRepository.save(newRecipeEntity);
+//
+//        return "confirmation";
+//    }
 
 }
