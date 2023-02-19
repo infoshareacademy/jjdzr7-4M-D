@@ -1,6 +1,5 @@
 package com.infoshareacademy.four_md.service.mappers;
 
-import com.infoshareacademy.four_md.model.Unit;
 import com.infoshareacademy.four_md.model.dto.Ingredients;
 import com.infoshareacademy.four_md.model.entitiy.IngredientsEntity;
 
