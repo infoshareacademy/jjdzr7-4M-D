@@ -29,7 +29,7 @@ public class StaticDtoMappers {
         return new RecipeEntity(
                 recipe.getId(),
                 recipe.getName(),
-                recipe.getMethod(),
+                recipe.getPreparationMethod(),
                 recipe.getIngredientsList().stream().map(StaticDtoMappers::toEntity).collect(Collectors.toList()),
                 recipe.getEstimatedCookingTime(),
                 recipe.getCalories(),
@@ -41,7 +41,7 @@ public class StaticDtoMappers {
         return new Recipe(
                 recipe.getId(),
                 recipe.getName(),
-                recipe.getMethod(),
+                recipe.getPreparationMethod(),
                 recipe.getIngredientsList().stream().map(StaticDtoMappers::toDto).collect(Collectors.toList()),
                 recipe.getEstimatedCookingTime(),
                 recipe.getCalories(),

@@ -26,8 +26,8 @@
             <div>
                 <label class="form-label">Method</label>
                 <textarea class="form-control" type="text" rows="4" placeholder="Preparation method"
-                          th:field="*{method}"> </textarea>
-                <span class="text-danger" th:if="${#fields.hasErrors('method')}" th:errors="*{method}"/>
+                          th:field="*{preparationMethod}"> </textarea>
+                <span class="text-danger" th:if="${#fields.hasErrors('preparationMethod')}" th:errors="*{preparationMethod}"/>
             </div>
 
             <div>
@@ -80,7 +80,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Quantity</label>
-                    <input type="number" step="any" class="form-control" required th:placeholder="'Quantity'"
+                    <input type="number" step="any" class="form-control"  min="0"  required th:placeholder="'Quantity'"
                            th:field="*{ingredientsList[0].quantity}">
                 </div>
                 <div class="mb-3">
@@ -94,7 +94,7 @@
                 <div class="mb-3">
                     <label class="form-label">Price</label>
                     <div class="input-group">
-                        <input type="number" step="any" class="form-control" required th:placeholder="'Cost'"
+                        <input type="number" class="form-control" step="0.01" min="0"  required th:placeholder="'Cost'"
                                th:field="*{ingredientsList[0].price}" name="price">
                         <span class="input-group-text">PLN</span>
                     </div>
@@ -103,6 +103,9 @@
 
                 <div class="d-grid mt-3 mb-3 col-5">
                     <a class="btn btn-outline-primary" role="button" id="btn2">+ Add new Ingredient</a>
+                </div>
+                <div class="d-grid mt-3 mb-3 col-5">
+                    <a class="btn btn-outline-danger" role="button" id="btn3">- Del last Ingredient</a>
                 </div>
 
             </div>
@@ -128,6 +131,7 @@
             event.preventDefault();
             counter++;
             var newRow = jQuery(
+                '<div id="ingredientJQ">' +
                 '                <h4 class="text-center mt-5">Ingredient</h4>\n' +
                 '                <div class="mb-3">\n' +
                 '                    <label class="form-label">Name</label>\n' +
@@ -136,7 +140,7 @@
                 '                </div>\n' +
                 '                <div class="mb-3">\n' +
                 '                    <label class="form-label">Quantity</label>\n' +
-                '                    <input type="number" step="any" required class="form-control"\n' +
+                '                    <input type="number" step="any" min="0"  required class="form-control"\n' +
                 '                           name="ingredientsList[' + counter + '].quantity" id="ingredientsList' + counter + '.quantity" value="0">\n' +
                 '                </div>\n' +
                 '                <div class="mb-3">\n' +
@@ -150,15 +154,20 @@
                 '                <div class="mb-3">\n' +
                 '                    <label class="form-label">Price</label>\n' +
                 '                    <div class="input-group">\n' +
-                '                        <input type="number" step="any" required class="form-control" value="0" \n' +
+                '                        <input type="number" step="any" step="0.01" min="0" required  class="form-control" value="0" \n' +
                 '                               name="ingredientsList[' + counter + '].price" id="ingredientsList' + counter + '.price">\n' +
                 '                        <span class="input-group-text">PLN</span>\n' +
                 '                    </div>\n' +
-                '                </div>\n'
+                '                </div>\n' +
+                '</div>'
             );
             jQuery('#ingredientToCopy').append(newRow);
 
         });
+    });
+
+    $( '#btn3' ).click(function() {
+        $( '#ingredientToCopy' ).children('#ingredientJQ').last().remove();
     });
 
 </script>

@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -26,14 +27,16 @@ public class Recipe {
     private String name;
     @NotNull(message = "{validation.empty}")
     @NotEmpty(message = "{validation.empty}")
-    private String method;
+    private String preparationMethod;
 
     private List<Ingredients> ingredientsList = new ArrayList<>();
     @NotNull(message = "{validation.empty}")
     @Min(value = 0, message = "{validation.number}")
+    @Digits(integer = Integer.MAX_VALUE, fraction = 0)
     private int estimatedCookingTime;
     @NotNull(message = "{validation.empty}")
     @Min(value = 0, message = "{validation.number}")
+    @Digits(integer = Integer.MAX_VALUE, fraction = 0)
     private int calories;
 
 

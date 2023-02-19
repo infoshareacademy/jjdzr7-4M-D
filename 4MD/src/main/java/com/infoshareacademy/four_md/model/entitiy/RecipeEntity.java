@@ -24,7 +24,7 @@ public class RecipeEntity {
     private int id;
 
     private String name;
-    private String method;
+    private String preparationMethod;
     @OneToMany
     @JoinColumn
     private List<IngredientsEntity> ingredientsList = new ArrayList<>();
