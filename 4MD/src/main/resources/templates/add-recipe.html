@@ -104,9 +104,6 @@
                 <div class="d-grid mt-3 mb-3 col-5">
                     <a class="btn btn-outline-primary" role="button" id="btn2">+ Add new Ingredient</a>
                 </div>
-                <div class="d-grid mt-3 mb-3 col-5">
-                    <a class="btn btn-outline-danger" role="button" id="btn3">- Del last Ingredient</a>
-                </div>
 
             </div>
 
@@ -159,6 +156,7 @@
                 '                        <span class="input-group-text">PLN</span>\n' +
                 '                    </div>\n' +
                 '                </div>\n' +
+                '<button type="button" class="btn btn-outline-danger" id="removeIngredient">Remove ingredient</button>'+
                 '</div>'
             );
             jQuery('#ingredientToCopy').append(newRow);
@@ -168,6 +166,12 @@
 
     $( '#btn3' ).click(function() {
         $( '#ingredientToCopy' ).children('#ingredientJQ').last().remove();
+    });
+
+    $(document).ready(function () {
+        $(document).on("click", "#removeIngredient", function() {
+            $(this).closest("#ingredientJQ").remove();
+        });
     });
 
 </script>
