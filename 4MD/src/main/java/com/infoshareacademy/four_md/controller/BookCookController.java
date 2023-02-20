@@ -27,5 +27,11 @@ public class BookCookController {
         return ResponseEntity.of(recipeRepository.findById(id));
     }
 
+    @DeleteMapping("/recipes/{id}")
+    public void deleteRecipe(@PathVariable int id) {
+        recipeRepository
+                .findById(id)
+                .ifPresent(recipeRepository::delete);
+    }
 
 }
