@@ -26,7 +26,7 @@ public class BookCookController {
     public ResponseEntity<RecipeEntity> getRecipeById(@PathVariable int id) {
         return ResponseEntity.of(recipeRepository.findById(id));
     }
-/*
+
     @PostMapping(value = "/recipes")
     public RecipeEntity createNewRecipe(@RequestBody Recipe recipe) {
         Recipe newRecipe = new Recipe();
@@ -57,7 +57,7 @@ public class BookCookController {
                 .map(recipeRepository::save);
         return ResponseEntity.of(optionalRecipeEntity);
     }
-*/
+
 
     @DeleteMapping("/recipes/{id}")
     public void deleteRecipe(@PathVariable int id) {
