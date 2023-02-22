@@ -9,5 +9,4 @@ public interface SearchEngineRepository extends JpaRepository<RecipeEntity, Inte
 
     List<RecipeEntity> findByNameContains(String name);
     List<RecipeEntity> findByCaloriesBetween(Integer calMin, Integer calMax);
-    //List<RecipeEntity> findByPriceBetween(Double priceMin, Double priceMax);
 }
