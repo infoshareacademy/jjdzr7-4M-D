@@ -22,8 +22,8 @@ public class BookCookController {
         return recipeRepository.findAll();
     }
 
-    @GetMapping("/recipes/{id}")
-    public ResponseEntity<RecipeEntity> getRecipeById(@PathVariable int id) {
+    @GetMapping("/recipes")
+    public ResponseEntity<RecipeEntity> getRecipeById(@RequestParam int id) {
         return ResponseEntity.of(recipeRepository.findById(id));
     }
 
@@ -41,8 +41,8 @@ public class BookCookController {
         return recipeRepository.save(newRecipe);
     }
 
-    @PutMapping("/recipes/{id}")
-    public ResponseEntity<RecipeEntity> updateRecipe(@PathVariable int id, @RequestBody Recipe recipe) {
+    @PutMapping("/recipes")
+    public ResponseEntity<RecipeEntity> updateRecipe(@RequestParam int id, @RequestBody Recipe recipe) {
         Optional<RecipeEntity> optionalRecipeEntity = recipeRepository.findById(id)
                 .map(recipeEntity -> {
                     recipeEntity.setName(recipe.getName());
@@ -59,8 +59,8 @@ public class BookCookController {
     }
 
 
-    @DeleteMapping("/recipes/{id}")
-    public void deleteRecipe(@PathVariable int id) {
+    @DeleteMapping("/recipes")
+    public void deleteRecipe(@RequestParam int id) {
         recipeRepository
                 .findById(id)
                 .ifPresent(recipeRepository::delete);
