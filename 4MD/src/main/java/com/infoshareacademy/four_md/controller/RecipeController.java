@@ -4,6 +4,7 @@ import com.infoshareacademy.four_md.model.dto.Recipe;
 import com.infoshareacademy.four_md.model.entitiy.RecipeEntity;
 import com.infoshareacademy.four_md.service.StaticDtoMappers;
 import com.infoshareacademy.four_md.service.jpaRepos.RecipeRepository;
+import com.infoshareacademy.four_md.service.providers.DbRecipeProvider;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,11 +15,12 @@ import javax.validation.Valid;
 import java.io.IOException;
 
 @Controller
+@RequestMapping("recipes")
 public class RecipeController {
-    private RecipeRepository recipeRepository;
+    private DbRecipeProvider dbRecipeRepository;
 
-    public RecipeController(RecipeRepository recipeRepository) {
-        this.recipeRepository = recipeRepository;
+    public RecipeController(DbRecipeProvider dbRecipeRepository) {
+        this.dbRecipeRepository = dbRecipeRepository;
     }
 
     @GetMapping("/add-recipe")
@@ -34,9 +36,8 @@ public class RecipeController {
         if (bindResult.hasErrors()) {
             return "add-recipe";
         }
-        RecipeEntity recipeEntity = StaticDtoMappers.toEntity(recipe);
-        recipeRepository.save(recipeEntity);
-        model.addAttribute("recipe", recipeEntity);
+        dbRecipeRepository.save(recipe);
+        model.addAttribute("recipeName", recipe.getName());
         return "confirmation";
     }
 
