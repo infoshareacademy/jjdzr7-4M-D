@@ -12,8 +12,8 @@
 <body>
 <h1>Please login or register</h1>
 <form name="welcome" th:action="@{/welcome}" method="post">
-    <div th:if="${param.error}" class="alert alert-error">
-        Invalid username and password!
+    <div th:if="${param.error}" th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}" class="alert alert-error">
+
     </div>
     <!-- Username input -->
     <div class="form-outline mb-4">
