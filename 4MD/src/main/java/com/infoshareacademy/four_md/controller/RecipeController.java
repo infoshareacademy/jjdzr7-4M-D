@@ -1,9 +1,6 @@
 package com.infoshareacademy.four_md.controller;
 
 import com.infoshareacademy.four_md.model.dto.Recipe;
-import com.infoshareacademy.four_md.model.entitiy.RecipeEntity;
-import com.infoshareacademy.four_md.service.StaticDtoMappers;
-import com.infoshareacademy.four_md.service.jpaRepos.RecipeRepository;
 import com.infoshareacademy.four_md.service.providers.DbRecipeProvider;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -15,12 +12,18 @@ import javax.validation.Valid;
 import java.io.IOException;
 
 @Controller
-@RequestMapping("recipes")
+@RequestMapping("/recipes")
 public class RecipeController {
     private DbRecipeProvider dbRecipeRepository;
 
     public RecipeController(DbRecipeProvider dbRecipeRepository) {
         this.dbRecipeRepository = dbRecipeRepository;
+    }
+
+    @GetMapping("/list")
+    public String show(Model model) throws IOException {
+        model.addAttribute("recipeList", dbRecipeRepository.getAll());
+        return "recipes-list";
     }
 
     @GetMapping("/add-recipe")
@@ -32,13 +35,20 @@ public class RecipeController {
 
     @PostMapping("/saveRecipe")
     @ResponseStatus(HttpStatus.CREATED)
-    public String saveTask(@RequestBody @Valid @ModelAttribute Recipe recipe, BindingResult bindResult, Model model) throws IOException {
+    public String saveRecipe(@RequestBody @Valid @ModelAttribute Recipe recipe, BindingResult bindResult, Model model) throws IOException {
         if (bindResult.hasErrors()) {
             return "add-recipe";
         }
         dbRecipeRepository.save(recipe);
         model.addAttribute("recipeName", recipe.getName());
         return "confirmation";
+    }
+
+    @PutMapping("/edit/{id}")
+    public String updateRecipeFromMyList(@PathVariable int id, @RequestBody @ModelAttribute Recipe recipe, Model model ) throws IOException {
+       recipe.setId(id);
+       dbRecipeRepository.update(recipe);
+       return "recipes-list";
     }
 
 }
