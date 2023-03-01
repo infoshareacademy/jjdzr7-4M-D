@@ -12,7 +12,6 @@ import javax.validation.Valid;
 import java.io.IOException;
 
 @Controller
-@RequestMapping("/recipes")
 public class RecipeController {
     private DbRecipeProvider dbRecipeRepository;
 
