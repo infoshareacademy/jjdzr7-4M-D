@@ -14,7 +14,7 @@ public class BookCookController {
 
     private final SearchEngineRepository searchEngineRepository;
 
-    @GetMapping("/recipes/search")
+    @GetMapping(value = "/recipes/search/", params = {"name"})
     public List<RecipeEntity> findByNameContains(@RequestParam String name) {
         return searchEngineRepository.findByNameContains(name);
     }
