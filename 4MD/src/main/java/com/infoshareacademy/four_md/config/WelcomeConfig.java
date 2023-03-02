@@ -35,7 +35,6 @@ public class WelcomeConfig{
                 .formLogin()
                 .loginPage("/welcome")
                 .permitAll()
-                .successForwardUrl("/BookCook")
         ;
         return http.build();
     }

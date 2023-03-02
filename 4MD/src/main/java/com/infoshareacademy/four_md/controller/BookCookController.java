@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/BookCook")
+@RequestMapping()
 public class BookCookController {
 
     @GetMapping()
