@@ -20,6 +20,7 @@
             <th scope="col">CALORIES</th>
             <th scope="col">DISH TYPE</th>
             <th scope="col">DIFFICULTY</th>
+            <th scope="col">ACTIONS</th>
         </tr>
         </thead>
         <tbody>
@@ -29,7 +30,12 @@
             <th class="text-center" scope="col" th:text="${recipe.getCalories()}"></th>
             <th class="text-center" scope="col" th:text="${recipe.getDishType()}"></th>
             <th class="text-center" scope="col" th:text="${recipe.getDifficulty()}"></th>
-            <th scope="col"><button class="btn btn-primary w-100" th:href="@{/recipes/{id}(id=${recipe.id})}">Edit</button></th>
+            <th scope="col">
+                <form action="#" th:action="@{'/delete/{id}'(id=${recipe.id})}" method="delete">
+                    <input type="hidden" name="_method" value="delete" />
+                    <button class="btn btn-primary w-100" onclick="return confirm('Are you sure you want to delete this recipe?')" type="submit">Delete</button>
+                </form>
+            </th>
         </tr>
         </tbody>
     </table>

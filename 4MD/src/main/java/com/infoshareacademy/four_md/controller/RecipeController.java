@@ -47,7 +47,13 @@ public class RecipeController {
     public String updateRecipeFromMyList(@PathVariable int id, @RequestBody @ModelAttribute Recipe recipe, Model model ) throws IOException {
        recipe.setId(id);
        dbRecipeRepository.update(recipe);
-       return "recipes-list";
+       return "redirect:/list";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteRecipe(@PathVariable int id) throws IOException {
+        dbRecipeRepository.remove(id);
+        return "redirect:/list";
     }
 
 }
