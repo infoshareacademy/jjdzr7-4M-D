@@ -43,17 +43,26 @@ public class RecipeController {
         return "confirmation";
     }
 
-    @PutMapping("/edit/{id}")
-    public String updateRecipeFromMyList(@PathVariable int id, @RequestBody @ModelAttribute Recipe recipe, Model model ) throws IOException {
-       recipe.setId(id);
-       dbRecipeRepository.update(recipe);
-       return "redirect:/list";
-    }
-
     @GetMapping("/delete/{id}")
     public String deleteRecipe(@PathVariable int id) throws IOException {
         dbRecipeRepository.remove(id);
         return "redirect:/list";
     }
+
+    @GetMapping("/edit/{id}")
+    public String editRecipe(@PathVariable int id, Model model) throws IOException {
+        Recipe recipe = dbRecipeRepository.get(id);
+        model.addAttribute("recipe", recipe);
+        return "edit-recipe";
+    }
+
+    @PostMapping("/updateRecipe/{id}")
+    public String updateRecipe(@PathVariable int id, @ModelAttribute Recipe recipe, Model model) throws IOException {
+        recipe.setId(id);
+        dbRecipeRepository.save(recipe);
+        model.addAttribute("recipeName", recipe.getName());
+        return "confirmation";
+    }
+
 
 }
