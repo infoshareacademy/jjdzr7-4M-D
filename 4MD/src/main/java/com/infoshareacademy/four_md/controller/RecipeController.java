@@ -25,6 +25,13 @@ public class RecipeController {
         return "recipes-list";
     }
 
+    @GetMapping("/recipe/{id}")
+    public String showRecipe(@PathVariable int id, Model model) throws IOException {
+        Recipe recipe = dbRecipeRepository.get(id);
+        model.addAttribute("recipe", recipe);
+        return "recipe-details";
+    }
+
     @GetMapping("/add-recipe")
     public String newRecipe(Model model) {
         Recipe recipe = new Recipe();
