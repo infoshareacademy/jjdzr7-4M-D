@@ -126,12 +126,16 @@
         for (let i = 0; i < nameInputs.length; i++) {
             const currentIdx = parseInt(nameInputs[i].getAttribute("name").match(/\d+/)[0]);
             nameInputs[i].setAttribute("name", `ingredientsList[${i}].name`);
+            nameInputs[i].setAttribute("id", `ingredientsList${i}.name`);
             const quantityInput = document.querySelector(`[name="ingredientsList[${currentIdx}].quantity"]`);
             quantityInput.setAttribute("name", `ingredientsList[${i}].quantity`);
+            quantityInput.setAttribute("id", `ingredientsList${i}.name`);
             const unitInput = document.querySelector(`[name="ingredientsList[${currentIdx}].unit"]`);
             unitInput.setAttribute("name", `ingredientsList[${i}].unit`);
+            unitInput.setAttribute("id", `ingredientsList${i}.unit`);
             const priceInput = document.querySelector(`[name="ingredientsList[${currentIdx}].price"]`);
             priceInput.setAttribute("name", `ingredientsList[${i}].price`);
+            priceInput.setAttribute("id", `ingredientsList${i}.price`);
         }
     }
 

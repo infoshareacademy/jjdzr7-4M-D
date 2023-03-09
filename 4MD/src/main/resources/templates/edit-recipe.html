@@ -27,8 +27,7 @@
                 <label class="form-label">Method</label>
                 <textarea class="form-control" type="text" rows="4" placeholder="Preparation method"
                           th:field="*{preparationMethod}"> </textarea>
-                <span class="text-danger" th:if="${#fields.hasErrors('preparationMethod')}"
-                      th:errors="*{preparationMethod}"/>
+                <span class="text-danger" th:if="${#fields.hasErrors('preparationMethod')}" th:errors="*{preparationMethod}"/>
             </div>
 
             <div>
@@ -131,9 +130,6 @@
                                        th:placeholder="'Cost'"
                                        th:field="*{ingredientsList[__${ingredientStat.index}__].price}">
                             </div>
-<!--                             Register buttons (TODO ) -->
-<!--                            if you delete a component in the middle of the list, -->
-<!--                            it will not be visible but will be stored as null-->
                             <button type="button" class="btn btn-outline-danger" id="removeIngredient">Remove
                                 ingredient
                             </button>
@@ -161,6 +157,22 @@
         crossorigin="anonymous">
 </script>
 <script>
+    function updateIngredientsListIndexes(nameInputs) {
+        for (let i = 0; i < nameInputs.length; i++) {
+            const currentIdx = parseInt(nameInputs[i].getAttribute("name").match(/\d+/)[0]);
+            nameInputs[i].setAttribute("name", `ingredientsList[${i}].name`);
+            nameInputs[i].setAttribute("id", `ingredientsList${i}.name`);
+            const quantityInput = document.querySelector(`[name="ingredientsList[${currentIdx}].quantity"]`);
+            quantityInput.setAttribute("name", `ingredientsList[${i}].quantity`);
+            quantityInput.setAttribute("id", `ingredientsList${i}.name`);
+            const unitInput = document.querySelector(`[name="ingredientsList[${currentIdx}].unit"]`);
+            unitInput.setAttribute("name", `ingredientsList[${i}].unit`);
+            unitInput.setAttribute("id", `ingredientsList${i}.unit`);
+            const priceInput = document.querySelector(`[name="ingredientsList[${currentIdx}].price"]`);
+            priceInput.setAttribute("name", `ingredientsList[${i}].price`);
+            priceInput.setAttribute("id", `ingredientsList${i}.price`);
+        }
+    }
 
     $(document).ready(function () {
         var counter = 0;
@@ -200,7 +212,8 @@
                 '</div>'
             );
             jQuery('#ingredientToCopy').append(newRow);
-
+            const nameInputs = document.querySelectorAll('[name^="ingredientsList"][name$=".name"]');
+            updateIngredientsListIndexes(nameInputs);
         });
     });
 
@@ -211,6 +224,8 @@
     $(document).ready(function () {
         $(document).on("click", "#removeIngredient", function () {
             $(this).closest("#ingredientJQ").remove();
+            const nameInputs = document.querySelectorAll('[name^="ingredientsList"][name$=".name"]');
+            updateIngredientsListIndexes(nameInputs);
         });
     });
 

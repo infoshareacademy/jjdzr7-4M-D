@@ -64,7 +64,10 @@ public class RecipeController {
     }
 
     @PostMapping("/updateRecipe/{id}")
-    public String updateRecipe(@PathVariable int id, @ModelAttribute Recipe recipe, Model model) throws IOException {
+    public String updateRecipe(@PathVariable int id, @RequestBody @Valid @ModelAttribute Recipe recipe, BindingResult bindResult, Model model) throws IOException {
+        if (bindResult.hasErrors()) {
+            return "edit-recipe";
+        }
         recipe.setId(id);
         dbRecipeRepository.save(recipe);
         model.addAttribute("recipeName", recipe.getName());
