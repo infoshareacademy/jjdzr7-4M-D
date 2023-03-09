@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <title>Edit recipe</title>
+</head>
+
+<body>
+
+<h1 class="text-center text-white py-3 bg-primary bg-gradient">EDIT RECIPE</h1>
+<div class="container d-flex justify-content-center ">
+    <div style="max-width: 500px;">
+        <form class="row g-3" th:object="${recipe}" th:action="@{'/updateRecipe/' + ${recipe.id}}" method="post">
+            <div>
+                <label class="form-label">Name</label>
+                <input class="form-control" type="text" placeholder="Name" th:field="*{name}">
+                <span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"/>
+            </div>
+
+            <div>
+                <label class="form-label">Method</label>
+                <textarea class="form-control" type="text" rows="4" placeholder="Preparation method"
+                          th:field="*{preparationMethod}"> </textarea>
+                <span class="text-danger" th:if="${#fields.hasErrors('preparationMethod')}"
+                      th:errors="*{preparationMethod}"/>
+            </div>
+
+            <div>
+                <label class="form-label">Estimated Cooking Time</label>
+                <div class="input-group">
+                    <input type="number" step="any" class="form-control" th:placeholder="'Estimated Cooking Time'"
+                           th:field="*{estimatedCookingTime}">
+                    <span class="input-group-text">minutes</span>
+                </div>
+                <span class="text-danger"
+                      th:if="${#fields.hasErrors('estimatedCookingTime')}"
+                      th:errors="*{estimatedCookingTime}"/>
+            </div>
+
+            <div>
+                <label class="form-label">Calories</label>
+                <div class="input-group">
+                    <input type="number" step="any" class="form-control" th:placeholder="'Calories'"
+                           th:field="*{calories}" name="calories">
+                    <span class="input-group-text">calories</span>
+                </div>
+                <span class="text-danger"
+                      th:if="${#fields.hasErrors('calories')}" th:errors="${recipe.calories}"/>
+            </div>
+            <div>
+                <label class="form-label">Dish Type</label>
+                <select class="form-select" required th:field="*{dishType}" name="dishType">
+                    <option selected disabled value="">Choose...</option>
+                    <option th:each="enumName : ${T(com.infoshareacademy.four_md.model.DishType).values()}"
+                            th:value="${enumName}" , th:text="${enumName}"></option>
+                </select>
+            </div>
+
+            <div>
+                <label class="form-label">Difficulty</label>
+                <select class="form-select" required th:field="*{difficulty}" name="difficulty">
+                    <option selected disabled value="">Choose...</option>
+                    <option th:each="enumName : ${T(com.infoshareacademy.four_md.model.Difficulty).values()}"
+                            th:value="${enumName}" , th:text="${enumName}"></option>
+                </select>
+            </div>
+
+            <div class="shadow p-3 bg-body rounded">
+                <h4 class="text-center mt-3">Ingredient</h4>
+                <div id="ingredientToCopy">
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input class="form-control" required type="text" placeholder="Name"
+                               th:field="*{ingredientsList[0].name}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Quantity</label>
+                        <input type="number" step="any" class="form-control" min="0" required
+                               th:placeholder="'Quantity'"
+                               th:field="*{ingredientsList[0].quantity}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Unit</label>
+                        <select class="form-select" required th:field="*{ingredientsList[0].unit}">
+                            <option selected disabled value="">Choose...</option>
+                            <option th:each="enumName : ${T(com.infoshareacademy.four_md.model.Unit).values()}"
+                                    th:value="${enumName}" , th:text="${enumName}"></option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Price</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" step="0.01" min="0" required
+                                   th:placeholder="'Cost'"
+                                   th:field="*{ingredientsList[0].price}" name="price">
+                            <span class="input-group-text">PLN</span>
+                        </div>
+                    </div>
+                    <div th:each="ingredient, ingredientStat : *{ingredientsList}" th:if="${!ingredientStat.first}">
+                        <div id="ingredientJQ">
+                            <h4 class="text-center mt-5">Ingredient</h4>
+                            <div class="mb-3">
+                                <label class="form-label">Name</label>
+                                <input class="form-control" required type="text" placeholder="Name"
+                                       th:field="*{ingredientsList[__${ingredientStat.index}__].name}">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Quantity</label>
+                                <input type="number" step="any" class="form-control" min="0" required
+                                       th:placeholder="'Quantity'"
+                                       th:field="*{ingredientsList[__${ingredientStat.index}__].quantity}">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Unit</label>
+                                <select class="form-select" required
+                                        th:field="*{ingredientsList[__${ingredientStat.index}__].unit}">
+                                    <option selected disabled value="">Choose...</option>
+                                    <option th:each="enumName : ${T(com.infoshareacademy.four_md.model.Unit).values()}"
+                                            th:value="${enumName}" th:text="${enumName}"></option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Price</label>
+                                <input type="number" step="0.01" class="form-control" min="0" required
+                                       th:placeholder="'Cost'"
+                                       th:field="*{ingredientsList[__${ingredientStat.index}__].price}">
+                            </div>
+<!--                             Register buttons (TODO ) -->
+<!--                            if you delete a component in the middle of the list, -->
+<!--                            it will not be visible but will be stored as null-->
+                            <button type="button" class="btn btn-outline-danger" id="removeIngredient">Remove
+                                ingredient
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-grid mt-3 mb-3 col-5">
+                    <a class="btn btn-outline-primary" role="button" id="btn2">+ Add new Ingredient</a>
+                </div>
+
+            </div>
+
+            <div class="d-grid gap-2 col-8 mx-auto mb-2">
+                <button class="btn btn-primary" type="submit">Submit form</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous">
+</script>
+<script>
+
+    $(document).ready(function () {
+        var counter = 0;
+        $("#btn2").click(function (event) {
+            event.preventDefault();
+            counter++;
+            var newRow = jQuery(
+                '<div id="ingredientJQ">' +
+                '                <h4 class="text-center mt-5">Ingredient</h4>\n' +
+                '                <div class="mb-3">\n' +
+                '                    <label class="form-label">Name</label>\n' +
+                '                    <input class="form-control" required type="text" placeholder="Name"\n' +
+                '                           name="ingredientsList[' + counter + '].name" id="ingredientsList' + counter + '.name">\n' +
+                '                </div>\n' +
+                '                <div class="mb-3">\n' +
+                '                    <label class="form-label">Quantity</label>\n' +
+                '                    <input type="number" step="any" min="0"  required class="form-control"\n' +
+                '                           name="ingredientsList[' + counter + '].quantity" id="ingredientsList' + counter + '.quantity" value="0">\n' +
+                '                </div>\n' +
+                '                <div class="mb-3">\n' +
+                '                    <label class="form-label">Unit</label>\n' +
+                '                    <select class="form-select" required name="ingredientsList[' + counter + '].unit" id="ingredientsList' + counter + '.unit">\n' +
+                '                        <option selected disabled value="">Choose...</option>\n' +
+                '                        <option value="GRAM">GRAM</option>' +
+                '                        <option value="MILLILITERS">MILLILITERS</option>' +
+                '                    </select>\n' +
+                '                </div>\n' +
+                '                <div class="mb-3">\n' +
+                '                    <label class="form-label">Price</label>\n' +
+                '                    <div class="input-group">\n' +
+                '                        <input type="number" step="any" step="0.01" min="0" required  class="form-control" value="0" \n' +
+                '                               name="ingredientsList[' + counter + '].price" id="ingredientsList' + counter + '.price">\n' +
+                '                        <span class="input-group-text">PLN</span>\n' +
+                '                    </div>\n' +
+                '                </div>\n' +
+                '<button type="button" class="btn btn-outline-danger" id="removeIngredient">Remove ingredient</button>' +
+                '</div>'
+            );
+            jQuery('#ingredientToCopy').append(newRow);
+
+        });
+    });
+
+    $('#btn3').click(function () {
+        $('#ingredientToCopy').children('#ingredientJQ').last().remove();
+    });
+
+    $(document).ready(function () {
+        $(document).on("click", "#removeIngredient", function () {
+            $(this).closest("#ingredientJQ").remove();
+        });
+    });
+
+</script>
+
+</body>
+
+</html>

@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 //! TODO You know what to do
 @Component
@@ -48,5 +50,20 @@ public class DbRecipeProvider implements RecipeProvider {
     public Recipe get(int recipeId) throws IOException {
         //noinspection OptionalGetWithoutIsPresent
         return StaticDtoMappers.toDto(recipes.findById(recipeId).get());
+    }
+
+    @Transactional
+    public List<Recipe> getAll() throws IOException {
+        //noinspection OptionalGetWithoutIsPresent
+        return recipes.findAll().stream()
+                .map(s -> StaticDtoMappers.toDto(s))
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public Recipe update(Recipe recipe) {
+        RecipeEntity entityToUpdate = recipes.findById(recipe.getId())
+                .orElseThrow(() -> new RuntimeException("Cannot find"));
+        return StaticDtoMappers.toDto(entityToUpdate);
     }
 }
