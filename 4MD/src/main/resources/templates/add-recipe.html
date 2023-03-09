@@ -122,6 +122,19 @@
 </script>
 <script>
 
+    function updateIngredientsListIndexes(nameInputs) {
+        for (let i = 0; i < nameInputs.length; i++) {
+            const currentIdx = parseInt(nameInputs[i].getAttribute("name").match(/\d+/)[0]);
+            nameInputs[i].setAttribute("name", `ingredientsList[${i}].name`);
+            const quantityInput = document.querySelector(`[name="ingredientsList[${currentIdx}].quantity"]`);
+            quantityInput.setAttribute("name", `ingredientsList[${i}].quantity`);
+            const unitInput = document.querySelector(`[name="ingredientsList[${currentIdx}].unit"]`);
+            unitInput.setAttribute("name", `ingredientsList[${i}].unit`);
+            const priceInput = document.querySelector(`[name="ingredientsList[${currentIdx}].price"]`);
+            priceInput.setAttribute("name", `ingredientsList[${i}].price`);
+        }
+    }
+
     $(document).ready(function () {
         var counter = 0;
         $("#btn2").click(function (event) {
@@ -160,7 +173,8 @@
                 '</div>'
             );
             jQuery('#ingredientToCopy').append(newRow);
-
+            const nameInputs = document.querySelectorAll('[name^="ingredientsList"][name$=".name"]');
+            updateIngredientsListIndexes(nameInputs);
         });
     });
 
@@ -171,8 +185,12 @@
     $(document).ready(function () {
         $(document).on("click", "#removeIngredient", function() {
             $(this).closest("#ingredientJQ").remove();
+            const nameInputs = document.querySelectorAll('[name^="ingredientsList"][name$=".name"]');
+            updateIngredientsListIndexes(nameInputs);
         });
     });
+
+
 
 </script>
 
