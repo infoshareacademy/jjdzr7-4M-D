@@ -34,4 +34,5 @@ public class PageController {
         userRepository.save(user);
         return "register_success";
     }
+
 }
