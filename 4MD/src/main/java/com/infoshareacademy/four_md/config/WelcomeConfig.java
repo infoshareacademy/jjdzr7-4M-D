@@ -30,11 +30,15 @@ public class WelcomeConfig{
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .anyRequest().authenticated()
+                .antMatchers("/").authenticated()
+                .anyRequest().permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/welcome")
+                .defaultSuccessUrl("/")
                 .permitAll()
+                .and()
+                .logout().logoutSuccessUrl("/welcome").permitAll()
         ;
         return http.build();
     }
