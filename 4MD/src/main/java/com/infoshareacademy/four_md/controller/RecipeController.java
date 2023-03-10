@@ -13,7 +13,7 @@ import java.io.IOException;
 
 @Controller
 public class RecipeController {
-    private DbRecipeProvider dbRecipeRepository;
+    private final DbRecipeProvider dbRecipeRepository;
 
     public RecipeController(DbRecipeProvider dbRecipeRepository) {
         this.dbRecipeRepository = dbRecipeRepository;
