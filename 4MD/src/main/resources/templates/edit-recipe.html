@@ -16,7 +16,8 @@
 <h1 class="text-center text-white py-3 bg-primary bg-gradient">EDIT RECIPE</h1>
 <div class="container d-flex justify-content-center ">
     <div style="max-width: 500px;">
-        <form class="row g-3" th:object="${recipe}" th:action="@{'/updateRecipe/' + ${recipe.id}}" method="post">
+        <form class="row g-3" th:object="${recipe}" th:action="@{'/recipes/edit/update-recipe/' + ${recipe.id}}"
+              method="post">
             <div>
                 <label class="form-label">Name</label>
                 <input class="form-control" type="text" placeholder="Name" th:field="*{name}">
@@ -27,7 +28,8 @@
                 <label class="form-label">Method</label>
                 <textarea class="form-control" type="text" rows="4" placeholder="Preparation method"
                           th:field="*{preparationMethod}"> </textarea>
-                <span class="text-danger" th:if="${#fields.hasErrors('preparationMethod')}" th:errors="*{preparationMethod}"/>
+                <span class="text-danger" th:if="${#fields.hasErrors('preparationMethod')}"
+                      th:errors="*{preparationMethod}"/>
             </div>
 
             <div>
@@ -144,7 +146,7 @@
             </div>
 
             <div class="d-flex gap-3 justify-content-end mb-5">
-                <a href="/list" class="btn btn-outline-primary flex-grow-1 me-2" role="button">Return</a>
+                <a href="/recipes/list" class="btn btn-outline-primary flex-grow-1 me-2" role="button">Return</a>
                 <button class="btn btn-primary flex-grow-1" type="submit">Submit form</button>
             </div>
         </form>
@@ -218,9 +220,6 @@
         });
     });
 
-    $('#btn3').click(function () {
-        $('#ingredientToCopy').children('#ingredientJQ').last().remove();
-    });
 
     $(document).ready(function () {
         $(document).on("click", "#removeIngredient", function () {

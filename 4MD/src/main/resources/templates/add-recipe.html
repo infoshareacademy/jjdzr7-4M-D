@@ -16,7 +16,7 @@
 <h1 class="text-center text-white py-3 bg-primary bg-gradient">ADD NEW RECIPE</h1>
 <div class="container d-flex justify-content-center ">
     <div style="max-width: 500px;">
-        <form class="row g-3" th:action="@{/saveRecipe}" th:object="${recipe}" method="post">
+        <form class="row g-3" th:action="@{/recipes/save-recipe}" th:object="${recipe}" method="post">
             <div>
                 <label class="form-label">Name</label>
                 <input class="form-control" type="text" placeholder="Name" th:field="*{name}">
@@ -27,7 +27,8 @@
                 <label class="form-label">Method</label>
                 <textarea class="form-control" type="text" rows="4" placeholder="Preparation method"
                           th:field="*{preparationMethod}"> </textarea>
-                <span class="text-danger" th:if="${#fields.hasErrors('preparationMethod')}" th:errors="*{preparationMethod}"/>
+                <span class="text-danger" th:if="${#fields.hasErrors('preparationMethod')}"
+                      th:errors="*{preparationMethod}"/>
             </div>
 
             <div>
@@ -70,36 +71,38 @@
                 </select>
             </div>
 
-            <div class="shadow p-3 bg-body rounded" >
-            <div id="ingredientToCopy">
-                <h4 class="text-center mt-3">Ingredient</h4>
-                <div class="mb-3">
-                    <label class="form-label">Name</label>
-                    <input class="form-control" required type="text" placeholder="Name"
-                           th:field="*{ingredientsList[0].name}">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Quantity</label>
-                    <input type="number" step="any" class="form-control"  min="0"  required th:placeholder="'Quantity'"
-                           th:field="*{ingredientsList[0].quantity}">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Unit</label>
-                    <select class="form-select" required th:field="*{ingredientsList[0].unit}">
-                        <option selected disabled value="">Choose...</option>
-                        <option th:each="enumName : ${T(com.infoshareacademy.four_md.model.Unit).values()}"
-                                th:value="${enumName}" , th:text="${enumName}"></option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Price</label>
-                    <div class="input-group">
-                        <input type="number" class="form-control" step="0.01" min="0"  required th:placeholder="'Cost'"
-                               th:field="*{ingredientsList[0].price}" name="price">
-                        <span class="input-group-text">PLN</span>
+            <div class="shadow p-3 bg-body rounded">
+                <div id="ingredientToCopy">
+                    <h4 class="text-center mt-3">Ingredient</h4>
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input class="form-control" required type="text" placeholder="Name"
+                               th:field="*{ingredientsList[0].name}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Quantity</label>
+                        <input type="number" step="any" class="form-control" min="0" required
+                               th:placeholder="'Quantity'"
+                               th:field="*{ingredientsList[0].quantity}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Unit</label>
+                        <select class="form-select" required th:field="*{ingredientsList[0].unit}">
+                            <option selected disabled value="">Choose...</option>
+                            <option th:each="enumName : ${T(com.infoshareacademy.four_md.model.Unit).values()}"
+                                    th:value="${enumName}" , th:text="${enumName}"></option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Price</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" step="0.01" min="0" required
+                                   th:placeholder="'Cost'"
+                                   th:field="*{ingredientsList[0].price}" name="price">
+                            <span class="input-group-text">PLN</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
                 <div class="d-grid mt-3 mb-3 col-5">
                     <a class="btn btn-outline-primary" role="button" id="btn2">+ Add new Ingredient</a>
@@ -108,7 +111,7 @@
             </div>
 
             <div class="d-flex gap-3 justify-content-end mb-5">
-                <a href="/list" class="btn btn-outline-primary flex-grow-1 me-2" role="button">Return</a>
+                <a href="/recipes/list" class="btn btn-outline-primary flex-grow-1 me-2" role="button">Return</a>
                 <button class="btn btn-primary flex-grow-1" type="submit">Submit form</button>
             </div>
         </form>
@@ -174,7 +177,7 @@
                 '                        <span class="input-group-text">PLN</span>\n' +
                 '                    </div>\n' +
                 '                </div>\n' +
-                '<button type="button" class="btn btn-outline-danger" id="removeIngredient">Remove ingredient</button>'+
+                '<button type="button" class="btn btn-outline-danger" id="removeIngredient">Remove ingredient</button>' +
                 '</div>'
             );
             jQuery('#ingredientToCopy').append(newRow);
@@ -183,18 +186,14 @@
         });
     });
 
-    $( '#btn3' ).click(function() {
-        $( '#ingredientToCopy' ).children('#ingredientJQ').last().remove();
-    });
 
     $(document).ready(function () {
-        $(document).on("click", "#removeIngredient", function() {
+        $(document).on("click", "#removeIngredient", function () {
             $(this).closest("#ingredientJQ").remove();
             const nameInputs = document.querySelectorAll('[name^="ingredientsList"][name$=".name"]');
             updateIngredientsListIndexes(nameInputs);
         });
     });
-
 
 
 </script>

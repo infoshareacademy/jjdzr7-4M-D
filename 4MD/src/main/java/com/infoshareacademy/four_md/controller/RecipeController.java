@@ -12,6 +12,7 @@ import javax.validation.Valid;
 import java.io.IOException;
 
 @Controller
+@RequestMapping("/recipes")
 public class RecipeController {
     private final DbRecipeProvider dbRecipeRepository;
 
@@ -39,7 +40,7 @@ public class RecipeController {
         return "add-recipe";
     }
 
-    @PostMapping("/saveRecipe")
+    @PostMapping("save-recipe")
     @ResponseStatus(HttpStatus.CREATED)
     public String saveRecipe(@RequestBody @Valid @ModelAttribute Recipe recipe, BindingResult bindResult, Model model) throws IOException {
         if (bindResult.hasErrors()) {
@@ -53,7 +54,7 @@ public class RecipeController {
     @GetMapping("/delete/{id}")
     public String deleteRecipe(@PathVariable int id) throws IOException {
         dbRecipeRepository.remove(id);
-        return "redirect:/list";
+        return "redirect:/recipes/list";
     }
 
     @GetMapping("/edit/{id}")
@@ -63,7 +64,7 @@ public class RecipeController {
         return "edit-recipe";
     }
 
-    @PostMapping("/updateRecipe/{id}")
+    @PostMapping("edit/update-recipe/{id}")
     public String updateRecipe(@PathVariable int id, @RequestBody @Valid @ModelAttribute Recipe recipe, BindingResult bindResult, Model model) throws IOException {
         if (bindResult.hasErrors()) {
             return "edit-recipe";
