@@ -15,6 +15,8 @@ public class StaticDtoMappers {
         return new UserEntity(
                 user.getId(),
                 user.getName(),
+                user.getUsername(),
+                user.getPassword(),
                 user.getSurname(),
                 user.getListOfRecipes().stream().map(StaticDtoMappers::toEntity).collect(Collectors.toList()));
     }
@@ -22,6 +24,8 @@ public class StaticDtoMappers {
         return new User(
                 user.getId(),
                 user.getName(),
+                user.getUsername(),
+                user.getPassword(),
                 user.getSurname(),
                 user.getListOfRecipes().stream().map(StaticDtoMappers::toDto).collect(Collectors.toList()));
     }

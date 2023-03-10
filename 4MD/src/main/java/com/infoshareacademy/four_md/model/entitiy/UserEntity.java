@@ -24,6 +24,10 @@ public class UserEntity  {
     private String name;
     @Column
     private String surname;
+    @Column
+    private String username;
+    @Column
+    private String password;
     @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn
     private List<RecipeEntity> listOfRecipes = new ArrayList<>();
