@@ -24,6 +24,7 @@ public class RecipeEntity {
     private int id;
 
     private String name;
+    @Column(length = 5000)
     private String preparationMethod;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn

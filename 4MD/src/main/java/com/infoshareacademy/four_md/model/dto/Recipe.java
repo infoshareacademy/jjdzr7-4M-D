@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Column;
 import javax.validation.constraints.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +23,10 @@ public class Recipe {
     @NotBlank(message = "{validation.empty}")
     @NotNull(message = "{validation.empty}")
     private String name;
+
     @NotBlank(message = "{validation.empty}")
     @NotNull(message = "{validation.empty}")
+    @Size(max = 5000, message = "{validation.maxlength}")
     private String preparationMethod;
 
     private List<Ingredients> ingredientsList = new ArrayList<>();
