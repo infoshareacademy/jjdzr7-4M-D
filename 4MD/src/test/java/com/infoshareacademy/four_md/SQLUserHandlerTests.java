@@ -23,20 +23,20 @@ public class SQLUserHandlerTests {
     @Test
     public void testAddingUserToDB() throws IOException {
         var user = new User();
-        user.setName("Janusz");
+        user.setUsername("Janusz");
         user.setSurname("Kowalski");
 
         users.save(user);
         User userFromDb = users.get(user.getId());
 
-        Assertions.assertEquals(user.getName(),userFromDb.getName());
+        Assertions.assertEquals(user.getUsername(),userFromDb.getUsername());
         Assertions.assertEquals(user.getSurname(),userFromDb.getSurname());
 
     }
     @Test
     public void testAddingUserWithRecipesToDB() throws IOException {
         var user = new User();
-        user.setName("Janusz");
+        user.setUsername("Janusz");
         user.setSurname("Kowalski");
         user.setListOfRecipes(new ArrayList<>());
         //
@@ -54,7 +54,7 @@ public class SQLUserHandlerTests {
     @Test
     public void testAddingRatedRecipesToDB() throws IOException {
         var user = new User();
-        user.setName("Janusz");
+        user.setUsername("Janusz");
         user.setSurname("Kowalski");
         user.setListOfRecipes(new ArrayList<>());
         //
@@ -71,7 +71,7 @@ public class SQLUserHandlerTests {
     @Test
     public void testAddingUserWithRecipesAndIngredientsToDB() throws IOException {
         var user = new User();
-        user.setName("Janusz");
+        user.setUsername("Janusz");
         user.setListOfRecipes(new ArrayList<>());
         //
         user.getListOfRecipes().add(getNewRecipe("Koktail",100));
@@ -90,7 +90,7 @@ public class SQLUserHandlerTests {
     @Test
     public void testEditingUserWithRecipesToDB() throws IOException {
         var user = new User();
-        user.setName("Janusz");
+        user.setUsername("Janusz");
         user.setListOfRecipes(new ArrayList<>());
         user.getListOfRecipes().add(getNewRecipe("Koktail",100));
 

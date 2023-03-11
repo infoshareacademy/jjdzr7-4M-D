@@ -12,10 +12,12 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User  {
+public class User {
 
     private int id;
-    private String name;
+    private String username;
+    private String password;
     private String surname;
     private List<Recipe> listOfRecipes = new ArrayList<>();
+    // our app won't support authorities, so we can mock it here
 }

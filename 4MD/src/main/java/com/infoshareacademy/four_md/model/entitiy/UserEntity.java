@@ -21,7 +21,9 @@ public class UserEntity  {
     @SequenceGenerator(name = "Users_seq",allocationSize = 1,sequenceName = "Users_seq")
     private int id;
     @Column
-    private String name;
+    private String username;
+    @Column
+    private String password;
     @Column
     private String surname;
     @OneToMany(cascade = CascadeType.PERSIST)
