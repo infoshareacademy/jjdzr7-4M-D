@@ -8,15 +8,16 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    <title>Add_recipe</title>
+    <title>Edit recipe</title>
 </head>
 
 <body>
 
-<h1 class="text-center text-white py-3 bg-primary bg-gradient">ADD NEW RECIPE</h1>
+<h1 class="text-center text-white py-3 bg-primary bg-gradient">EDIT RECIPE</h1>
 <div class="container d-flex justify-content-center ">
     <div style="max-width: 500px;">
-        <form class="row g-3" th:action="@{/recipes/save-recipe}" th:object="${recipe}" method="post">
+        <form class="row g-3" th:object="${recipe}" th:action="@{'/recipes/edit/update-recipe/' + ${recipe.id}}"
+              method="post">
             <div>
                 <label class="form-label">Name</label>
                 <input class="form-control" type="text" placeholder="Name" th:field="*{name}">
@@ -72,8 +73,8 @@
             </div>
 
             <div class="shadow p-3 bg-body rounded">
+                <h4 class="text-center mt-3">Ingredient</h4>
                 <div id="ingredientToCopy">
-                    <h4 class="text-center mt-3">Ingredient</h4>
                     <div class="mb-3">
                         <label class="form-label">Name</label>
                         <input class="form-control" required type="text" placeholder="Name"
@@ -102,6 +103,40 @@
                             <span class="input-group-text">PLN</span>
                         </div>
                     </div>
+                    <div th:each="ingredient, ingredientStat : *{ingredientsList}" th:if="${!ingredientStat.first}">
+                        <div id="ingredientJQ">
+                            <h4 class="text-center mt-5">Ingredient</h4>
+                            <div class="mb-3">
+                                <label class="form-label">Name</label>
+                                <input class="form-control" required type="text" placeholder="Name"
+                                       th:field="*{ingredientsList[__${ingredientStat.index}__].name}">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Quantity</label>
+                                <input type="number" step="any" class="form-control" min="0" required
+                                       th:placeholder="'Quantity'"
+                                       th:field="*{ingredientsList[__${ingredientStat.index}__].quantity}">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Unit</label>
+                                <select class="form-select" required
+                                        th:field="*{ingredientsList[__${ingredientStat.index}__].unit}">
+                                    <option selected disabled value="">Choose...</option>
+                                    <option th:each="enumName : ${T(com.infoshareacademy.four_md.model.Unit).values()}"
+                                            th:value="${enumName}" th:text="${enumName}"></option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Price</label>
+                                <input type="number" step="0.01" class="form-control" min="0" required
+                                       th:placeholder="'Cost'"
+                                       th:field="*{ingredientsList[__${ingredientStat.index}__].price}">
+                            </div>
+                            <button type="button" class="btn btn-outline-danger" id="removeIngredient">Remove
+                                ingredient
+                            </button>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="d-grid mt-3 mb-3 col-5">
@@ -125,7 +160,6 @@
         crossorigin="anonymous">
 </script>
 <script>
-
     function updateIngredientsListIndexes(nameInputs) {
         for (let i = 0; i < nameInputs.length; i++) {
             const currentIdx = parseInt(nameInputs[i].getAttribute("name").match(/\d+/)[0]);
@@ -194,7 +228,6 @@
             updateIngredientsListIndexes(nameInputs);
         });
     });
-
 
 </script>
 
