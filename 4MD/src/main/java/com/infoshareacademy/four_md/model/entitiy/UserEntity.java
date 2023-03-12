@@ -26,7 +26,7 @@ public class UserEntity  {
     private String password;
     @Column
     private String surname;
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
     @JoinColumn
     private List<RecipeEntity> listOfRecipes = new ArrayList<>();
 }

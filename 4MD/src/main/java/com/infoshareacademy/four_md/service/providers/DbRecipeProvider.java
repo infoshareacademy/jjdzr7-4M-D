@@ -36,6 +36,7 @@ public class DbRecipeProvider implements RecipeProvider {
     }
 
     @Override
+    @Transactional
     public void remove(int recipeId) {
         recipes.deleteById(recipeId);
         recipes.flush(); //do I need to flush here ?

@@ -2,6 +2,7 @@ package com.infoshareacademy.four_md.controller;
 
 import com.infoshareacademy.four_md.model.dto.Recipe;
 import com.infoshareacademy.four_md.model.dto.User;
+import com.infoshareacademy.four_md.service.interfaces.RecipeProvider;
 import com.infoshareacademy.four_md.service.interfaces.UserProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,6 +22,7 @@ import java.util.Optional;
 @RequestMapping("/recipes")
 public class RecipeController {
     private final UserProvider userProvider;
+    private final RecipeProvider recipeProvider;
     @GetMapping("/list")
     public String show(Model model) {
         model.addAttribute("recipeList", getCurrentUser().getListOfRecipes());
@@ -63,21 +65,35 @@ public class RecipeController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteRecipe(@PathVariable int id) throws IOException {
+    public String deleteRecipe(@PathVariable int id, HttpServletResponse response) throws IOException {
         User currentUser = getCurrentUser();
 
-        currentUser.getListOfRecipes().removeIf(s -> s.getId() == id);
-        userProvider.save(currentUser);
+        Optional<Recipe> recipeToRemove = currentUser.getListOfRecipes().stream().filter(s -> s.getId() == id).findFirst();
+        if(recipeToRemove.isPresent()){
+            Recipe recipe = recipeToRemove.get();
+            currentUser.getListOfRecipes().remove(recipe);
+            userProvider.save(currentUser);
+            return "redirect:/recipes/list";
+        }
+        else {
+            response.setStatus(404);
+            return null;
+        }
 
-
-        return "redirect:/recipes/list";
     }
 
     @GetMapping("/edit/{id}")
-    public String editRecipe(@PathVariable int id, Model model) {
-        Recipe recipe = getCurrentUser().getListOfRecipes().get(id);
-        model.addAttribute("recipe", recipe);
-        return "edit-recipe";
+    public String editRecipe(@PathVariable int id, Model model, HttpServletResponse response) {
+        Optional<Recipe> recipe = getCurrentUser().getListOfRecipes().stream().filter(s -> s.getId() == id).findFirst();
+        if(recipe.isPresent()){
+            model.addAttribute("recipe", recipe);
+            return "edit-recipe";
+        }
+        else {
+            response.setStatus(404);
+            return null;
+        }
+
     }
 
     @PostMapping("edit/update-recipe/{id}")
@@ -90,6 +106,7 @@ public class RecipeController {
         currentUser.getListOfRecipes().removeIf(s -> s.getId() == id);
         currentUser.getListOfRecipes().add(recipe);
         userProvider.save(currentUser);
+
         model.addAttribute("recipeName", recipe.getName());
         return "confirmation";
     }
