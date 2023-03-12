@@ -5,14 +5,13 @@ import com.infoshareacademy.four_md.model.dto.User;
 import com.infoshareacademy.four_md.service.interfaces.UserProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.Optional;
@@ -23,21 +22,21 @@ import java.util.Optional;
 public class RecipeController {
     private final UserProvider userProvider;
     @GetMapping("/list")
-    public String show(Model model) throws IOException {
+    public String show(Model model) {
         model.addAttribute("recipeList", getCurrentUser().getListOfRecipes());
         return "recipes-list";
     }
 
     @GetMapping("/recipe/{id}")
-    public ResponseEntity<ModelAndView> showRecipe(@PathVariable int id, Model model) throws IOException {
+    public String showRecipe(@PathVariable int id, Model model, HttpServletResponse response) {
         Optional<Recipe> recipe = getCurrentUser().getListOfRecipes().stream().filter(s -> s.getId() == id).findFirst();
         if(recipe.isPresent()){
-            ModelAndView view = new ModelAndView("recipe-details");
-            view.addObject("recipe", recipe.get());
-            return ResponseEntity.ok(view);
+            model.addAttribute("recipe", recipe.get());
+            return "recipe-details";
         }
         else {
-            return ResponseEntity.notFound().build();
+            response.setStatus(404);
+            return null;
         }
     }
 
@@ -66,14 +65,16 @@ public class RecipeController {
     @GetMapping("/delete/{id}")
     public String deleteRecipe(@PathVariable int id) throws IOException {
         User currentUser = getCurrentUser();
+
         currentUser.getListOfRecipes().removeIf(s -> s.getId() == id);
         userProvider.save(currentUser);
+
 
         return "redirect:/recipes/list";
     }
 
     @GetMapping("/edit/{id}")
-    public String editRecipe(@PathVariable int id, Model model) throws IOException {
+    public String editRecipe(@PathVariable int id, Model model) {
         Recipe recipe = getCurrentUser().getListOfRecipes().get(id);
         model.addAttribute("recipe", recipe);
         return "edit-recipe";
