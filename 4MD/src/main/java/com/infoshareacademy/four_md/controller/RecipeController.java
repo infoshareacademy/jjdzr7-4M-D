@@ -64,8 +64,8 @@ public class RecipeController {
         return "confirmation";
     }
 
-    @GetMapping("/delete/{id}")
-    public String deleteRecipe(@PathVariable int id, HttpServletResponse response) throws IOException {
+    @PostMapping("/delete/{id}")
+    public String deleteRecipe(@RequestBody @PathVariable int id, HttpServletResponse response) throws IOException {
         User currentUser = getCurrentUser();
 
         Optional<Recipe> recipeToRemove = currentUser.getListOfRecipes().stream().filter(s -> s.getId() == id).findFirst();
