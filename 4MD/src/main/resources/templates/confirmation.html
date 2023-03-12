@@ -10,10 +10,15 @@
 </head>
 
 <body>
-<h3 class="text-center">Form successfully completed</h3>
-<div class="container mt-5">
-    <div class="m-3 d-grid">
-        <a href="my-list" class="btn btn-outline-primary" tabindex="-1" role="button" aria-disabled="true">Back to the website</a>
+<h1 class="text-center text-white py-3 bg-primary bg-gradient">CONFIRMATION</h1>
+<div class="container d-flex justify-content-center ">
+    <div style="max-width: 500px">
+        <div class="shadow p-3 mt-5 bg-body rounded">
+            <h3 class="text-center mt-1">Form successfully completed</h3>
+            <h5 class="card-title mt-5 mb-5">The recipe <span th:text="${recipeName}"></span> has been saved.</h5>
+            <a href="/recipes/list" class="btn btn-outline-primary w-100" tabindex="-1" role="button"
+               aria-disabled="true">Back to the website</a>
+        </div>
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"

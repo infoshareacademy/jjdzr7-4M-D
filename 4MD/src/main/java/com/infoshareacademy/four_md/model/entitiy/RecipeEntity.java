@@ -24,8 +24,9 @@ public class RecipeEntity {
     private int id;
 
     private String name;
+    @Column(length = 5000)
     private String preparationMethod;
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn
     private List<IngredientsEntity> ingredientsList = new ArrayList<>();
 
