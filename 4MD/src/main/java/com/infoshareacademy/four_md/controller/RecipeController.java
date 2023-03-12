@@ -86,7 +86,7 @@ public class RecipeController {
     public String editRecipe(@PathVariable int id, Model model, HttpServletResponse response) {
         Optional<Recipe> recipe = getCurrentUser().getListOfRecipes().stream().filter(s -> s.getId() == id).findFirst();
         if(recipe.isPresent()){
-            model.addAttribute("recipe", recipe);
+            model.addAttribute("recipe", recipe.get());
             return "edit-recipe";
         }
         else {
