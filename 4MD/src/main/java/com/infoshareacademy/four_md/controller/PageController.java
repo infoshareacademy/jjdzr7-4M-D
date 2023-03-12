@@ -10,10 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 @Controller
 @Data
@@ -35,12 +33,9 @@ public class PageController {
     }
 
     @PostMapping("/register_success")
-    public String processRegister(@ModelAttribute @RequestBody User user) throws IOException {
+    public String processRegister(@ModelAttribute("user") User user) throws IOException {
         System.out.println(user);
-        User user1 = new User(5,"Ddd","Ddd","Ddd","Ddd",new ArrayList<>());
-        System.out.println(user1);
         dbUserProvider.save(user);
-        dbUserProvider.save(user1);
         return "register_success";
     }
 
