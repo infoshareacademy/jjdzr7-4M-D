@@ -14,14 +14,16 @@ public class StaticDtoMappers {
     public static UserEntity toEntity(User user){
         return new UserEntity(
                 user.getId(),
-                user.getName(),
+                user.getUsername(),
+                user.getPassword(),
                 user.getSurname(),
                 user.getListOfRecipes().stream().map(StaticDtoMappers::toEntity).collect(Collectors.toList()));
     }
     public static User toDto(UserEntity user){
         return new User(
                 user.getId(),
-                user.getName(),
+                user.getUsername(),
+                user.getPassword(),
                 user.getSurname(),
                 user.getListOfRecipes().stream().map(StaticDtoMappers::toDto).collect(Collectors.toList()));
     }
